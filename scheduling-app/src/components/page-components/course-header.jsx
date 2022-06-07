@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import img from "../images/Logo.png";
+import img from "../../images/Logo.png";
 
 class CourseHeader extends Component {
   constructor(props) {
@@ -10,11 +10,10 @@ class CourseHeader extends Component {
     return {
       width: 110,
       height: 45,
-    //   align: "middle",
-    //   justifyContent: "middle",
-    //   alignSelf: "middle" //none of these works
-      
-       };
+      //   align: "middle",
+      //   justifyContent: "middle",
+      //   alignSelf: "middle" //none of these works
+    };
   }
   render() {
     return (
