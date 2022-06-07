@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import CourseHeader from "./course-header";
-import CourseTable from "./course-table";
-import { getCourses } from "./../course-info/course-info";
+import CourseHeader from "../page-components/course-header";
+import CourseTable from "../page-components/course-table";
+import { getCourses } from "../../course-info/course-info";
 
 class CoursePage extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class CoursePage extends Component {
     this.state = {
       courses: [],
       ta: "",
-      teachers: ""
+      teachers: "",
     };
   }
   componentDidMount() {
