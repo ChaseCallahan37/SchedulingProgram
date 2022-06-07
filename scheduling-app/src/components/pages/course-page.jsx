@@ -21,8 +21,11 @@ class CoursePage extends Component {
   render() {
     return (
       <div>
+        <h1>This is a test</h1>
         <CourseHeader></CourseHeader>
+        <h1>To see what happens when i merge</h1>
         <CourseTable courses={this.state.courses} names={"Luke"}></CourseTable>
+        <h2>With conflicts</h2>
       </div>
     );
   }
