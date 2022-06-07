@@ -6,11 +6,16 @@ import { getCourses } from "../../course-info/course-info";
 class CoursePage extends Component {
   constructor(props) {
     super(props);
+    this.addClass = this.addClass.bind(this)
     this.state = {
       courses: [],
       ta: "",
       teachers: "",
     };
+  }
+  addClass(){
+    //runs blank card and adds a blank card to the div
+
   }
   componentDidMount() {
     const newCourses = getCourses();
@@ -22,7 +27,7 @@ class CoursePage extends Component {
     return (
       <div>
         <CourseHeader></CourseHeader>
-        <CourseTable courses={this.state.courses} names={"Luke"}></CourseTable>
+        <CourseTable courses={this.state.courses} names={"Luke"} addClass={this.addClass}></CourseTable>
       </div>
     );
   }

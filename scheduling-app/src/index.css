@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.button {
+  color: red
+}
+
+
+.card-header{
+  color: white;
+  background-color: #B20837;
+  font-family: Georgia, serif !important;
+}
+
+.card-footer{
+  border-radius: 0px 0px 15px 15px;
+}

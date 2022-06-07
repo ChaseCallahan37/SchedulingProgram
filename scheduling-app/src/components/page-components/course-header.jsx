@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import img from "../../images/Logo.png";
 
+//Header, always visible
+
 class CourseHeader extends Component {
   constructor(props) {
     super(props);
@@ -10,9 +12,8 @@ class CourseHeader extends Component {
     return {
       width: 110,
       height: 45,
-      //   align: "middle",
-      //   justifyContent: "middle",
-      //   alignSelf: "middle" //none of these works
+      class: "mx-auto d-block img-fluid",
+
     };
   }
   render() {
@@ -20,9 +21,10 @@ class CourseHeader extends Component {
       <div>
         <nav
           className="navbar navbar-expand-lg navbar-light"
-          style={{ color: "white", backgroundColor: "#B20837" }}
+          style={{ color: "white", backgroundColor: "#B20837"  }}
         >
           <img
+           
             src={img}
             style={this.styleImg()}
             alt="University of Alabama Logo"
