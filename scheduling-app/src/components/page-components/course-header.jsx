@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import img from "../../images/Logo.png";
+import NavBar from "../common/navbar";
 
 //Header, always visible
 
@@ -13,7 +14,6 @@ class CourseHeader extends Component {
       width: 110,
       height: 45,
       class: "mx-auto d-block img-fluid",
-
     };
   }
   render() {
@@ -21,15 +21,15 @@ class CourseHeader extends Component {
       <div>
         <nav
           className="navbar navbar-expand-lg navbar-light"
-          style={{ color: "white", backgroundColor: "#B20837"  }}
+          style={{ color: "white", backgroundColor: "#B20837" }}
         >
           <img
-           
             src={img}
             style={this.styleImg()}
             alt="University of Alabama Logo"
           />
           <h1>Scheduling</h1>
+          <NavBar />
         </nav>
       </div>
     );
