@@ -6,18 +6,27 @@ class NavBar extends Component {
   render() {
     return (
       <div>
-        <ul class="nav nav-pills">
-          <li class="nav-item">
+        <ul className="nav nav-pills">
+          <li className="nav-item">
             <NavLink
               activeClassName="active"
               className={"nav-link"}
               to="/"
               exact={true}
             >
+              Home
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink
+              activeClassName="active"
+              className={"nav-link"}
+              to="/courses"
+            >
               Courses
             </NavLink>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             <NavLink
               activeClassName="active"
               className={"nav-link"}

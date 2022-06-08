@@ -13,7 +13,6 @@ class CourseHeader extends Component {
     return {
       width: 110,
       height: 45,
-      class: "mx-auto d-block img-fluid",
     };
   }
   render() {

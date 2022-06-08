@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class ResourcePage extends Component {
+class ResourceTable extends Component {
   state = {};
   render() {
     // Luke and wags do your thing
@@ -8,4 +8,4 @@ class ResourcePage extends Component {
   }
 }
 
-export default ResourcePage;
+export default ResourceTable;

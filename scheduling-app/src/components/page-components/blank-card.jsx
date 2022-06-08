@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { addCourse } from "../../course-info/course-info";
-import CourseTable from "./course-table";
+import { addCourse } from "../../app-info/course-info";
+import CourseTable from "../tables/course-table";
 
 //Shows a blank card in the form and allows user to add course information
 
@@ -23,8 +23,8 @@ class BlankCard extends Component {
             <input className ="col-md-8" placeholder="Class Name" />
           </div>
           <div className="card-body text-wrap">
-            <span class ="input-group-text" >Course info</span>
-            <textarea class="form-control" aria-label="With textarea"></textarea>
+            <span className ="input-group-text" >Course info</span>
+            <textarea className="form-control" aria-label="With textarea"></textarea>
           </div>
           <div className="card-footer">
             <button>Save Course</button>

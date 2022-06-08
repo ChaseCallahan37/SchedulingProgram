@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Switch, Link, NavLink } from "react-router-dom";
-import CoursePage from "../components/pages/course-page";
-import ResourcePage from "../components/pages/resources-page";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import CourseTable from "../components/tables/course-table";
 import CourseHeader from "../components/page-components/course-header";
+import HomeTable from "../components/common/home";
+import ResourceTable from "./../components/tables/resources-table";
 
 class AppRouter extends Component {
   state = {};
@@ -11,10 +12,9 @@ class AppRouter extends Component {
       <BrowserRouter>
         <div>
           <CourseHeader />
-          <Switch>
-            <Route path="/" component={CoursePage} exact={true} />
-            <Route path="/resources" component={ResourcePage}></Route>
-          </Switch>
+          <Route path="/" component={HomeTable} exact={true} />
+          <Route path="/courses" component={CourseTable} />
+          <Route path="/resources" component={ResourceTable}></Route>
         </div>
       </BrowserRouter>
     );
