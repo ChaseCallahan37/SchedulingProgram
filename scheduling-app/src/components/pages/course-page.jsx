@@ -4,30 +4,28 @@ import CourseTable from "../page-components/course-table";
 import { getCourses } from "../../course-info/course-info";
 
 class CoursePage extends Component {
-  constructor(props) {
-    super(props);
-    this.addClass = this.addClass.bind(this)
-    this.state = {
-      courses: [],
-      ta: "",
-      teachers: "",
-    };
-  }
-  addClass(){
-    //runs blank card and adds a blank card to the div
-
-  }
-  componentDidMount() {
-    const newCourses = getCourses();
-    this.setState(() => {
-      return { courses: newCourses };
-    });
-  }
+  state = {
+    courses: [],
+    ta: "",
+    teachers: "",
+  };
+  componentDidMount = () => {
+    const courses = getCourses();
+    this.setState(() => ({ courses }));
+  };
+  addClass = () => {
+    const courses = [...this.state.courses];
+    courses.push({});
+    this.setState(() => ({ courses }));
+  };
   render() {
     return (
       <div>
         <CourseHeader></CourseHeader>
-        <CourseTable courses={this.state.courses} names={"Luke"} addClass={this.addClass}></CourseTable>
+        <CourseTable
+          courses={this.state.courses}
+          addClass={this.addClass}
+        ></CourseTable>
       </div>
     );
   }

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import BlankCard from "./blank-card";
 import CourseBox from "./course-box";
 
 class CourseTable extends Component {
@@ -7,21 +8,23 @@ class CourseTable extends Component {
     this.createClasses = this.createClasses.bind(this);
   }
   createClasses() {
-    return <div className="row row-cols-1 row-cols-md-4 g-4"> {this.props.courses.map((course) => {
-      return <CourseBox course={course} />;
-    })}</div>;
+    return (
+      <div className="row row-cols-1 row-cols-md-4 g-4">
+        {this.props.courses.map((course) => {
+          if (!course.title) {
+            return <BlankCard key={course.title} course={course} />;
+          }
+          return <CourseBox key={course.title} course={course} />;
+        })}
+      </div>
+    );
   }
 
   render() {
     return (
       <div>
         <div>
-          <button
-            className="button"
-            onClick={() => {
-              this.props.addClass("class data");
-            }}
-          >
+          <button className="button" onClick={this.props.addClass}>
             Add Course
           </button>
         </div>

@@ -1,32 +1,34 @@
 let courses = [
   {
     title: "MIS 221",
-    timeAvailable: 10,
+    info: "This course covers coding and such",
     tas: 8,
   },
   {
     title: "MIS 321",
-    timeAvailable: 8,
+    info: "Here we talk about more coding",
     tas: 4,
   },
   {
     title: "MIS 421",
-    timeAvailable: 7,
+    info: "Here we talk about advanced coding ",
     tas: 2,
   },
   {
     title: "MIS 500",
-    timeAvailable: 5,
+    info: "This is a course I made up",
     tas: 1,
-  },{
-    title: "MIS 500",
-    timeAvailable: 5,
+  },
+  {
+    title: "MIS 501",
+    info: "The second course that I made up",
     tas: 1,
-  },{
-    title: "MIS 500",
-    timeAvailable: 5,
+  },
+  {
+    title: "MIS 502",
+    info: "The most fake course there is",
     tas: 1,
-  }
+  },
 ];
 
 export const getCourses = () => {
