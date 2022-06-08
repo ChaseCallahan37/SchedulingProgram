@@ -35,6 +35,14 @@ code {
   border-radius: 0px 0px 15px 15px;
 }
 
+.navlink {
+  color: black
+}
+
+.active-navlink {
+  color: white;
+  font-weight: bold;
+}
 
 .card{
   width: 18rem;
