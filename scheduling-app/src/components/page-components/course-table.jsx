@@ -23,7 +23,7 @@ class CourseTable extends Component {
   render() {
     return (
       <div>
-        <div>
+        <div className="d-md-flex justify-content-md-end">
           <button className="button" onClick={this.props.addClass}>
             Add Course
           </button>
