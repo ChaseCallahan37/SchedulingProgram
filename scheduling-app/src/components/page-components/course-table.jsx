@@ -9,7 +9,7 @@ class CourseTable extends Component {
   }
   createClasses() {
     return (
-      <div className="row row-cols-1 row-cols-md-4 g-4">
+      <div className="row row-cols-1 row-cols-md-4 g-0">
         {this.props.courses.map((course) => {
           if (!course.title) {
             return <BlankCard key={course.title} course={course} />;

@@ -13,7 +13,12 @@ code {
 }
 
 .button {
-  color: red
+  color: white;
+  background-color: #B20837;
+  margin: 5px;
+  border-color:#B20837 ;
+  left:auto; 
+
 }
 
 
@@ -21,8 +26,21 @@ code {
   color: white;
   background-color: #B20837;
   font-family: Georgia, serif !important;
+  width: auto;
+  
+ 
 }
 
 .card-footer{
   border-radius: 0px 0px 15px 15px;
+}
+
+
+.card{
+  width: 18rem;
+  border-radius: 0px 0px 15px 15px;
+  margin-left: 70px;
+  margin-top:15px;
+  margin-bottom: 30px;
+  height: auto;
 }
