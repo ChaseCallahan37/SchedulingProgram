@@ -21,7 +21,6 @@ class CoursePage extends Component {
   render() {
     return (
       <div>
-        <CourseHeader></CourseHeader>
         <CourseTable
           courses={this.state.courses}
           addClass={this.addClass}
