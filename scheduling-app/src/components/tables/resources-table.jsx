@@ -1,51 +1,48 @@
 import React, { Component } from "react";
-import Resource from "../../Classes/resources-class";
 import { getResources } from "../../app-info/resource-info";
-import BlankCard from "../page-components/blank-card";
-import CourseBox from "../page-components/course-box";
+import BlankResourceCard from "../page-components/blank-resource-card";
+import ResourceBox from "../page-components/resources-box";
 
 class ResourceTable extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.createResource = this.createResource.bind(this);
-    this.addResource = this.addResource.bind(this);
+    this.addSomeone = this.addSomeone.bind(this);
     this.state = {
-      type: '',
-      name: '',
-      availability: '',
-      constraints: [],
+      resources: []
     };
   }
   componentDidMount = () => {
     const resources = getResources(); 
-    this.setState(() => ({ resources}));
+    this.setState(() => ({ resources }));
   };
-  addResource = () => {
+  addSomeone = () => {
     const resources = [...this.state.resources];
     resources.push({});
     this.setState(() => ({ resources }));
   };
   createResource() {
     return (
-      console.log('hello1')
+      <div className="row row-cols-1 row-cols-md-4 g-0">
+        {this.state.resources.map((resource) => {
+          if (!resource.name) {
+            return <BlankResourceCard key={resource.name} resource={resource} />;
+          }
+          return <ResourceBox key={resource.name} resource={resource} />;
+        })}
+      </div>
     );
   }
   render() {
     return (
-      <div className="row">
-        <div className="col-md-6">
-        Column1
-          <input className="col-md-2" placeholder="Type"/>
-          <input className="col-md-2" placeholder="Name"/>
-          <input className="col-md-2" placeholder="availability"/>
+        <div>
+          <div className="d-md-flex justify-content-md-end">
+            <button className="button" onClick={this.addSomeone}>
+              Add Resource
+            </button>
+          </div>
+          {this.createResource()}
         </div>
-        <div className="col-md-6">
-        Column2
-          <input className="col-md-2" placeholder="Type"/>
-          <input className="col-md-2" placeholder="Name"/>
-          <input className="col-md-2" placeholder="availability"/>
-        </div>
-      </div>
     );
   }
 }
