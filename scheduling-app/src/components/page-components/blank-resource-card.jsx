@@ -14,18 +14,35 @@ class BlankResourceCard extends Component {
       availability: "",
       constraints: [],
     },
+    content: {
+      constraintBoxes: [],
+    },
   };
   submitForm = (e) => {
     e.preventDefault();
     addResource({ ...this.state.resource });
   };
-  saveInput(e, field) {
+  saveInput(e, field, constraint = null) {
+    const { value } = e.target;
     const resource = { ...this.state.resource };
-    resource[field] = e.target.value;
+    if (!constraint && constraint !== "") {
+      resource[field] = value;
+    } else {
+      let index = resource.constraints.findIndex((c) => c === constraint);
+      resource.constraints[index] = value;
+    }
     this.setState(() => {
       return { resource };
     });
+    console.log(this.state.resource);
   }
+  addConstraints = () => {
+    const resource = { ...this.state.resource };
+    resource.constraints.push("");
+    this.setState(() => ({ resource }));
+    // const constraintBoxes = [...this.state.content.constraintBoxes]
+    // constraintBoxes.push(()=>({ <input/> }))
+  };
   render() {
     return (
       <form
@@ -63,18 +80,21 @@ class BlankResourceCard extends Component {
               placeholder="Availability..."
             />
             <br></br>
-            <input
-              onChange={(e) => {
-                this.saveInput(e, "constraints");
-              }}
-              id="constraints"
-              type="text"
-              placeholder="Constraints..."
-            />
+            <label>Add Constraints</label>
+            <button type="button" onClick={this.addConstraints}>
+              Add
+            </button>
             <ul>
-              <li>
-                <input ></input>
-              </li>
+              {this.state.resource.constraints.map((constraint) => {
+                return (
+                  <input
+                    value={`${constraint}`}
+                    onChange={(e) => {
+                      this.saveInput(e, "constraints", constraint);
+                    }}
+                  />
+                );
+              })}
             </ul>
           </div>
           <div className="card-footer">
