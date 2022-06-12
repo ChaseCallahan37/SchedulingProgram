@@ -9,11 +9,11 @@ class ResourceTable extends Component {
     this.createResource = this.createResource.bind(this);
     this.addSomeone = this.addSomeone.bind(this);
     this.state = {
-      resources: []
+      resources: [],
     };
   }
   componentDidMount = () => {
-    const resources = getResources(); 
+    const resources = getResources();
     this.setState(() => ({ resources }));
   };
   addSomeone = () => {
@@ -26,7 +26,9 @@ class ResourceTable extends Component {
       <div className="row row-cols-1 row-cols-md-4 g-0">
         {this.state.resources.map((resource) => {
           if (!resource.name) {
-            return <BlankResourceCard key={resource.name} resource={resource} />;
+            return (
+              <BlankResourceCard key={resource.name} resource={resource} />
+            );
           }
           return <ResourceBox key={resource.name} resource={resource} />;
         })}
@@ -35,14 +37,14 @@ class ResourceTable extends Component {
   }
   render() {
     return (
-        <div>
-          <div className="d-md-flex justify-content-md-end">
-            <button className="button" onClick={this.addSomeone}>
-              Add Resource
-            </button>
-          </div>
-          {this.createResource()}
+      <div>
+        <div className="d-md-flex justify-content-md-end">
+          <button className="button" onClick={this.addSomeone}>
+            Add Resource
+          </button>
         </div>
+        {this.createResource()}
+      </div>
     );
   }
 }

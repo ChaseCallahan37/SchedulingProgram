@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import BlankCard from "../page-components/blank-card";
 import CourseBox from "../page-components/course-box";
-import { getCourses } from "../../app-info/course-info";
+import {
+  getCourses,
+  saveCourse,
+  createBlankCourse,
+} from "../../app-info/course-info";
 
 class CourseTable extends Component {
   constructor(props) {
@@ -10,8 +14,6 @@ class CourseTable extends Component {
     this.addClass = this.addClass.bind(this);
     this.state = {
       courses: [],
-      ta: "",
-      teachers: "",
     };
   }
   componentDidMount = () => {
@@ -20,17 +22,19 @@ class CourseTable extends Component {
   };
   addClass = () => {
     const courses = [...this.state.courses];
-    courses.push({});
+    const newCourse = createBlankCourse();
+    courses.push(newCourse);
     this.setState(() => ({ courses }));
+    saveCourse(newCourse);
   };
   createClasses() {
     return (
       <div className="row row-cols-1 row-cols-md-4 g-0">
         {this.state.courses.map((course) => {
           if (!course.title) {
-            return <BlankCard key={course.title} course={course} />;
+            return <BlankCard key={course.id} course={course} />;
           }
-          return <CourseBox key={course.title} course={course} />;
+          return <CourseBox key={course.id} course={course} />;
         })}
       </div>
     );

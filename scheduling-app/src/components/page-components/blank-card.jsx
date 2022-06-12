@@ -20,11 +20,14 @@ class BlankCard extends Component {
       >
         <div className="card">
           <div className="card-header text-white p-3 border text-center fs-3  ">
-            <input className ="col-md-8" placeholder="Class Name" />
+            <input className="col-md-8" placeholder="Class Name" />
           </div>
           <div className="card-body text-wrap">
-            <span className ="input-group-text" >Course info</span>
-            <textarea className="form-control" aria-label="With textarea"></textarea>
+            <span className="input-group-text">Course info</span>
+            <textarea
+              className="form-control"
+              aria-label="With textarea"
+            ></textarea>
           </div>
           <div className="card-footer">
             <button>Save Course</button>

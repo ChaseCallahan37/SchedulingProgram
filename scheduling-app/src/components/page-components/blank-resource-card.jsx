@@ -34,7 +34,6 @@ class BlankResourceCard extends Component {
     this.setState(() => {
       return { resource };
     });
-    console.log(this.state.resource);
   }
   addConstraints = () => {
     const resource = { ...this.state.resource };
