@@ -14,13 +14,13 @@ class BlankResourceCard extends Component {
       availability: "",
       constraints: [],
     },
-    constraintCount: 0,
+    constraintCount: {},
   };
   submitForm = (e) => {
     e.preventDefault();
     addResource({ ...this.state.resource });
   };
-  saveInput(content, field, constraint = null) {
+  saveInput(e, field, constraint = null) {
     const { value } = e.target;
     const resource = { ...this.state.resource };
     if (!constraint && constraint !== "") {
