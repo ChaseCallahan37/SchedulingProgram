@@ -14,9 +14,7 @@ class BlankResourceCard extends Component {
       availability: "",
       constraints: [],
     },
-    content: {
-      constraintBoxes: [],
-    },
+    constraintCount: {},
   };
   submitForm = (e) => {
     e.preventDefault();
@@ -34,7 +32,6 @@ class BlankResourceCard extends Component {
     this.setState(() => {
       return { resource };
     });
-    console.log(this.state.resource);
   }
   addConstraints = () => {
     const resource = { ...this.state.resource };
