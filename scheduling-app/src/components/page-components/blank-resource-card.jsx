@@ -84,12 +84,19 @@ class BlankResourceCard extends Component {
             <ul>
               {this.state.resource.constraints.map((constraint) => {
                 return (
-                  <input
+                  <select
                     value={`${constraint}`}
                     onChange={(e) => {
                       this.saveInput(e, "constraints", constraint);
                     }}
-                  />
+                  >
+                  <option>MIS 221</option>
+                  <option>MIS 321</option>
+                  <option>MIS 421</option>
+                  <option>MIS 500</option>
+                  <option>MIS 501</option>
+                  <option>MIS 502</option>
+                  </select>
                 );
               })}
             </ul>
