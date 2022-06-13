@@ -51,22 +51,6 @@ class BlankResourceCard extends Component {
       });
     }
   }
-  renderConstraints() {
-    const { saveInput, resource } = this.props;
-    const { constraints } = resource;
-    if (constraints) {
-      return constraints.map((c) => {
-        return (
-          <input
-            value={`${c}`}
-            onChange={({ target }) => {
-              saveInput(target.value.trim(), "constraints", c);
-            }}
-          />
-        );
-      });
-    }
-  }
   render() {
     const { saveInput, resource } = this.props;
     const { constraints } = this.state;

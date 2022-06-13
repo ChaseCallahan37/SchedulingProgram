@@ -15,17 +15,23 @@ class ResourceTable extends Component {
     this.saveInput = this.saveInput.bind(this);
     this.updateResources = this.updateResources.bind(this);
     this.saveNewResource = this.saveNewResource.bind(this);
+    this.updatingBlankResource = this.updatingBlankResource.bind(this);
     this.state = {
       resources: [],
-      blankResource: this.getBlankTemplate(),
+      blankResource: {},
     };
   }
   componentDidMount = () => {
     this.updateResources();
+    this.updatingBlankResource();
   };
   updateResources() {
     const resources = getResources();
     this.setState(() => ({ resources }));
+  }
+  updatingBlankResource() {
+    const blankResource = this.getBlankTemplate();
+    this.setState({ blankResource });
   }
   getBlankTemplate() {
     return {
@@ -40,6 +46,7 @@ class ResourceTable extends Component {
     const newResource = { ...this.state.blankResource };
     addResource(newResource);
     this.updateResources();
+    this.updatingBlankResource();
   }
   addSomeone() {
     const blankResource = { ...this.state.blankResource };
