@@ -12,25 +12,50 @@ class BlankCard extends Component {
     e.preventDefault();
   };
   render() {
+    const { updateNewClass, course, saveClass } = this.props;
     return (
       <form
         onSubmit={(e) => {
           this.submitForm(e);
+          saveClass();
         }}
       >
         <div className="card">
           <div className="card-header text-white p-3 border text-center fs-3  ">
-            <input className="col-md-8" placeholder="Class Name" />
+            <input
+              onChange={(e) => {
+                updateNewClass("title", e.target.value);
+              }}
+              className="col-md-8"
+              placeholder="Class Name"
+            />
           </div>
           <div className="card-body text-wrap">
             <span className="input-group-text">Course info</span>
             <textarea
+              onChange={(e) => {
+                updateNewClass("info", e.target.value);
+              }}
               className="form-control"
               aria-label="With textarea"
             ></textarea>
+
+            <input
+              onChange={(e) => {
+                updateNewClass("tas", e.target.value);
+              }}
+              className="col-md-8"
+              placeholder="T.A.'s"
+            />
           </div>
           <div className="card-footer">
-            <button>Save Course</button>
+            <button
+              onClick={() => {
+                saveClass();
+              }}
+            >
+              Save Course
+            </button>
           </div>
         </div>
       </form>

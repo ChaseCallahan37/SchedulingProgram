@@ -44,12 +44,15 @@ export const getCourses = () => {
 };
 
 export const saveCourse = (newCourse) => {
-  courses.push(newCourse);
+  const duplicate = courses.find((course) => course.id === newCourse.id);
+  if (!duplicate) {
+    courses.push(newCourse);
+  }
 };
 
 export const createBlankCourse = () => {
   const newCourse = {
-    id: uuidv4(),
+    id: null,
     title: "",
     info: "",
     tas: 0,
