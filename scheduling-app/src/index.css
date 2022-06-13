@@ -57,7 +57,9 @@ code {
 
 .nav-link-active {
   background-color: white;
-  color: yellow
+  color: white;
+  font-weight: 700;
+
 }
 
 .navbar .navbar-nav .nav-link {
@@ -70,10 +72,12 @@ color: #fff;
 }
 
 .nav-item:hover{
-  color: yellow
+  color: white;
+  font-weight: 700;
 }
 
 .active {
   background-color: white;
-  color: yellow
+  color: white;
+  
 }
