@@ -7,40 +7,53 @@ import ResourceTable from "../tables/resources-table";
 //Thoughts on how to go about formatting the blank card, feel free to delete it if you dont like it. -CC
 
 class BlankResourceCard extends Component {
-  state = {
-    resource: {
-      name: "",
-      type: "",
-      availability: "",
+  constructor(props) {
+    super(props);
+    this.renderConstraints = this.renderConstraints.bind(this);
+    this.state = {
       constraints: [],
-    },
-    constraintCount: {},
-  };
+    };
+  }
   submitForm = (e) => {
     e.preventDefault();
-    addResource({ ...this.state.resource });
+    this.props.saveNewResource();
   };
-  saveInput(e, field, constraint = null) {
-    const { value } = e.target;
-    const resource = { ...this.state.resource };
-    if (!constraint && constraint !== "") {
-      resource[field] = value;
-    } else {
-      let index = resource.constraints.findIndex((c) => c === constraint);
-      resource.constraints[index] = value;
-    }
-    this.setState(() => {
-      return { resource };
-    });
-  }
   addConstraints = () => {
-    const resource = { ...this.state.resource };
-    resource.constraints.push("");
-    this.setState(() => ({ resource }));
+    const constraints = [...this.props.resource.constraints];
+    console.log(constraints.findIndex((c) => c === " "));
+    if (constraints.findIndex((c) => c === " ") === -1) {
+      constraints.push(" ");
+      this.props.saveInput(constraints, "constraints");
+    }
     // const constraintBoxes = [...this.state.content.constraintBoxes]
     // constraintBoxes.push(()=>({ <input/> }))
   };
+  renderConstraints() {
+    const { saveInput, resource } = this.props;
+    const { constraints } = resource;
+    if (constraints) {
+      return constraints.map((c) => {
+        return (
+          <select
+            value={`${c}`}
+            onChange={({ target }) => {
+              saveInput(target.value.trim(), "constraints", c);
+            }}
+          >
+            <option>MIS 221</option>
+            <option>MIS 321</option>
+            <option>MIS 421</option>
+            <option>MIS 500</option>
+            <option>MIS 501</option>
+            <option>MIS 502</option>
+          </select>
+        );
+      });
+    }
+  }
   render() {
+    const { saveInput, resource } = this.props;
+    const { constraints } = this.state;
     return (
       <form
         onSubmit={(e) => {
@@ -51,8 +64,8 @@ class BlankResourceCard extends Component {
           <div className="card-header text-white p-3 border text-center fs-3  ">
             <input
               id="name"
-              onChange={(e) => {
-                this.saveInput(e, "name");
+              onChange={({ target }) => {
+                saveInput(target.value, "name");
               }}
               className="col-md-8"
               placeholder="Name"
@@ -60,8 +73,8 @@ class BlankResourceCard extends Component {
           </div>
           <div className="card-body text-wrap">
             <input
-              onChange={(e) => {
-                this.saveInput(e, "type");
+              onChange={({ target }) => {
+                saveInput(target.value, "type");
               }}
               id="type"
               type="text"
@@ -69,8 +82,8 @@ class BlankResourceCard extends Component {
             />
             <br></br>
             <input
-              onChange={(e) => {
-                this.saveInput(e, "availability");
+              onChange={({ target }) => {
+                saveInput(target.value, "availability");
               }}
               id="availability"
               type="text"
@@ -81,25 +94,7 @@ class BlankResourceCard extends Component {
             <button type="button" onClick={this.addConstraints}>
               Add
             </button>
-            <ul>
-              {this.state.resource.constraints.map((constraint) => {
-                return (
-                  <select
-                    value={`${constraint}`}
-                    onChange={(e) => {
-                      this.saveInput(e, "constraints", constraint);
-                    }}
-                  >
-                  <option>MIS 221</option>
-                  <option>MIS 321</option>
-                  <option>MIS 421</option>
-                  <option>MIS 500</option>
-                  <option>MIS 501</option>
-                  <option>MIS 502</option>
-                  </select>
-                );
-              })}
-            </ul>
+            <ul>{this.renderConstraints()}</ul>
           </div>
           <div className="card-footer">
             <button>Save</button>
