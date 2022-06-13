@@ -10,9 +10,11 @@ class ResourceBox extends Component {
           {this.props.resource && this.props.resource.name}
         </div>
         <div className="resource-card-body text-wrap">
-            {this.props.resource.type}<br></br>
-            {this.props.resource.availability}<br></br>
-            {this.props.resource.constraints}
+          {this.props.resource.type}
+          <br></br>
+          {this.props.resource.availability}
+          <br></br>
+          {this.props.resource.constraints}
         </div>
         <div className="resource-card-footer">Something added here?</div>
       </div>

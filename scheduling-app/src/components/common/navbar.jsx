@@ -1,16 +1,19 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
+const activeClass = "nav-link-active";
+
 class NavBar extends Component {
   state = {};
   render() {
     return (
-      <div>
+      <div id="" className="nav-bar-container">
         <ul className="nav nav-pills">
           <li className="nav-item">
             <NavLink
-              activeClassName="active"
-              className={"nav-link"}
+              id="nav-link-container"
+              activeClassName={"nav-link-active"}
+              className={"nav-link nav-item"}
               to="/"
               exact={true}
             >
@@ -19,8 +22,8 @@ class NavBar extends Component {
           </li>
           <li className="nav-item">
             <NavLink
-              activeClassName="active"
-              className={"nav-link"}
+              activeClassName={activeClass}
+              className={"nav-link nav-item"}
               to="/courses"
             >
               Courses
@@ -28,8 +31,9 @@ class NavBar extends Component {
           </li>
           <li className="nav-item">
             <NavLink
-              activeClassName="active"
-              className={"nav-link"}
+              onMouseOver={""}
+              activeClassName={activeClass}
+              className={"nav-link nav-item"}
               to="/resources"
             >
               Resource Page
