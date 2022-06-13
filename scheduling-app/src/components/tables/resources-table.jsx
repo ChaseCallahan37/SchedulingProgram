@@ -1,39 +1,82 @@
 import React, { Component } from "react";
-import { getResources } from "../../app-info/resource-info";
+import { addResource, getResources } from "../../app-info/resource-info";
 import BlankResourceCard from "../page-components/blank-resource-card";
 import ResourceBox from "../page-components/resources-box";
+import Resource from "../../Classes/resources-class";
+import { v4 as uuidv4 } from "uuid";
 
 class ResourceTable extends Component {
   constructor(props) {
     super(props);
     this.createResource = this.createResource.bind(this);
     this.addSomeone = this.addSomeone.bind(this);
+    this.renderBlankResource = this.renderBlankResource.bind(this);
+    this.getBlankTemplate = this.getBlankTemplate.bind(this);
+    this.saveInput = this.saveInput.bind(this);
+    this.updateResources = this.updateResources.bind(this);
+    this.saveNewResource = this.saveNewResource.bind(this);
     this.state = {
       resources: [],
+      blankResource: this.getBlankTemplate(),
     };
   }
   componentDidMount = () => {
+    this.updateResources();
+  };
+  updateResources() {
     const resources = getResources();
     this.setState(() => ({ resources }));
-  };
-  addSomeone = () => {
-    const resources = [...this.state.resources];
-    resources.push({});
-    this.setState(() => ({ resources }));
-  };
+  }
+  getBlankTemplate() {
+    return {
+      id: null,
+      type: null,
+      name: null,
+      availability: null,
+      constraints: [],
+    };
+  }
+  saveNewResource() {
+    const newResource = { ...this.state.blankResource };
+    addResource(newResource);
+    this.updateResources();
+  }
+  addSomeone() {
+    const blankResource = { ...this.state.blankResource };
+    if (!this.state.blankResource.id) {
+      blankResource.id = uuidv4();
+      this.setState(() => ({ blankResource }));
+    }
+  }
+  saveInput(content, field, constraint = null) {
+    const blankResource = { ...this.state.blankResource };
+    if (!constraint) {
+      blankResource[field] = content;
+    } else {
+      let index = blankResource.constraints.findIndex((c) => c === constraint);
+
+      blankResource.constraints[index] = content;
+    }
+    this.setState(() => ({ blankResource }));
+    console.log(this.state.blankResource);
+  }
   createResource() {
-    return (
-      <div className="row row-cols-1 row-cols-md-4 g-0">
-        {this.state.resources.map((resource) => {
-          if (!resource.name) {
-            return (
-              <BlankResourceCard key={resource.name} resource={resource} />
-            );
-          }
-          return <ResourceBox key={resource.name} resource={resource} />;
-        })}
-      </div>
-    );
+    return this.state.resources.map((resource) => {
+      return <ResourceBox key={resource.name} resource={resource} />;
+    });
+  }
+  renderBlankResource() {
+    const { blankResource } = this.state;
+    if (blankResource.id) {
+      return (
+        <BlankResourceCard
+          key={blankResource.id}
+          resource={{ ...blankResource }}
+          saveInput={this.saveInput}
+          saveNewResource={this.saveNewResource}
+        />
+      );
+    }
   }
   render() {
     return (
@@ -43,7 +86,10 @@ class ResourceTable extends Component {
             Add Resource
           </button>
         </div>
-        {this.createResource()}
+        <div className="row row-cols-1 row-cols-md-4 g-0">
+          {this.createResource()}
+          {this.renderBlankResource()}
+        </div>
       </div>
     );
   }
