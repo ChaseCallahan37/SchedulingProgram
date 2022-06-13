@@ -34,6 +34,29 @@ class BlankResourceCard extends Component {
     if (constraints) {
       return constraints.map((c) => {
         return (
+          <select
+            value={`${c}`}
+            onChange={({ target }) => {
+              saveInput(target.value.trim(), "constraints", c);
+            }}
+          >
+            <option>MIS 221</option>
+            <option>MIS 321</option>
+            <option>MIS 421</option>
+            <option>MIS 500</option>
+            <option>MIS 501</option>
+            <option>MIS 502</option>
+          </select>
+        );
+      });
+    }
+  }
+  renderConstraints() {
+    const { saveInput, resource } = this.props;
+    const { constraints } = resource;
+    if (constraints) {
+      return constraints.map((c) => {
+        return (
           <input
             value={`${c}`}
             onChange={({ target }) => {
@@ -42,14 +65,6 @@ class BlankResourceCard extends Component {
           />
         );
       });
-      // return (
-      // <input
-      //   value={`${constraint}`}
-      //   onChange={({ target }) => {
-      //     saveInput(target.value, "constraints", constraint);
-      //   }}
-      // />
-      // );
     }
   }
   render() {
