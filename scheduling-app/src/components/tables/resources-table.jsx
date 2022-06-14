@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { addResource, getResources } from "../../app-info/resource-info";
+import { saveResource, getResources } from "../../app-info/resource-info";
 import BlankResourceCard from "../page-components/blank-resource-card";
 import ResourceBox from "../page-components/resources-box";
 import Resource from "../../Classes/resources-class";
@@ -44,7 +44,7 @@ class ResourceTable extends Component {
   }
   saveNewResource() {
     const newResource = { ...this.state.blankResource };
-    addResource(newResource);
+    saveResource(newResource);
     this.updateResources();
     this.updatingBlankResource();
   }
@@ -65,7 +65,6 @@ class ResourceTable extends Component {
       blankResource.constraints[index] = content;
     }
     this.setState(() => ({ blankResource }));
-    console.log(this.state.blankResource);
   }
   createResource() {
     return this.state.resources.map((resource) => {

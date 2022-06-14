@@ -13,8 +13,13 @@ export const getResources = () => {
   return [...resources];
 };
 
-export const addResource = (newResourceJson) => {
-  const newResource = new Resource(newResourceJson);
-  resources.push(newResource);
-  console.log("Back end", resources);
+export const saveResource = (newResource) => {
+  const duplicate = resources.find((r) => r.id === newResource.id);
+  if (!duplicate) {
+    resources.push(new Resource(newResource));
+  }
+};
+
+export const createBlankResource = () => {
+  return new Resource();
 };
