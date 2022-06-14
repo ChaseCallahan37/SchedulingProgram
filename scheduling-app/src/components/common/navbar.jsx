@@ -32,8 +32,10 @@ class NavBar extends Component {
           </li>
           <li className="nav-item">
             <NavLink
+
               onMouseOver={""}
               activeClassName={"nav-link-active"}
+
               className={"nav-link nav-item"}
               to="/resources"
             >
