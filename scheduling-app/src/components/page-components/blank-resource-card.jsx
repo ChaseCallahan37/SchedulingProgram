@@ -12,8 +12,10 @@ class BlankResourceCard extends Component {
     super(props);
     this.renderConstraints = this.renderConstraints.bind(this);
     this.setClasses = this.setClasses.bind(this);
+    this.renderTypes = this.renderTypes.bind(this);
     this.state = {
       classes: [],
+      types: ["TA", "Instructor"],
     };
   }
   componentDidMount() {
@@ -33,9 +35,23 @@ class BlankResourceCard extends Component {
       constraints.push(" ");
       this.props.saveInput(constraints, "constraints");
     }
-    // const constraintBoxes = [...this.state.content.constraintBoxes]
-    // constraintBoxes.push(()=>({ <input/> }))
   };
+  renderTypes() {
+    const { types } = this.state;
+    const { saveInput } = this.props;
+    return (
+      <select
+        onChange={({ target }) => {
+          saveInput(target.value, "type");
+        }}
+      >
+        <option key="blank"></option>
+        {types.map((t) => (
+          <option key={t}>{t}</option>
+        ))}
+      </select>
+    );
+  }
   renderConstraints() {
     const { saveInput, resource } = this.props;
     const { constraints } = resource;
@@ -79,14 +95,7 @@ class BlankResourceCard extends Component {
             />
           </div>
           <div className="card-body text-wrap">
-            <input
-              onChange={({ target }) => {
-                saveInput(target.value, "type");
-              }}
-              id="type"
-              type="text"
-              placeholder="Type..."
-            />
+            {this.renderTypes()}
             <br></br>
             <input
               onChange={({ target }) => {
