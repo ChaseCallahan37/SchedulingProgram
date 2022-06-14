@@ -7,7 +7,8 @@ class NavBar extends Component {
   state = {};
   render() {
     return (
-      <div id="" className="nav-bar-container">
+      <div id="" className="nav-bar-container" >
+       
         <ul className="nav nav-pills">
           <li className="nav-item">
             <NavLink
@@ -22,7 +23,7 @@ class NavBar extends Component {
           </li>
           <li className="nav-item">
             <NavLink
-              activeClassName={activeClass}
+              activeClassName={"nav-link-active"}
               className={"nav-link nav-item"}
               to="/courses"
             >
@@ -31,10 +32,14 @@ class NavBar extends Component {
           </li>
           <li className="nav-item">
             <NavLink
-              activeClassName={activeClass}
+
+              onMouseOver={""}
+              activeClassName={"nav-link-active"}
+
               className={"nav-link nav-item"}
               to="/resources"
             >
+              
               Resource Page
             </NavLink>
           </li>

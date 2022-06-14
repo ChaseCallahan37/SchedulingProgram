@@ -13,16 +13,18 @@ class CourseHeader extends Component {
     return {
       width: 110,
       height: 45,
+      
     };
   }
   render() {
     return (
-      <div>
+      <div className="text-center">
         <nav
-          className="navbar navbar-expand-lg navbar-light"
+          className="navbar"
           style={{ color: "white", backgroundColor: "#B20837" }}
         >
           <img
+            className=""
             src={img}
             style={this.styleImg()}
             alt="University of Alabama Logo"
