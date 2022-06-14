@@ -10,7 +10,10 @@ class CourseBox extends Component {
           {this.props.course && this.props.course.title}
         </div>
         <div className="card-body text-wrap">{this.props.course.info}</div>
-        <div className="card-body text-wrap">Tas: {this.props.course.tas}</div>
+        <div className="card-body text-wrap">
+          Resources:{" "}
+          {this.props.course.resources.map((resource) => `${resource} `)}
+        </div>
         <div className="card-footer">
           <button>Edit</button>
         </div>

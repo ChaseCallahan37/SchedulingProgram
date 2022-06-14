@@ -29,7 +29,6 @@ class BlankResourceCard extends Component {
   };
   addConstraints = () => {
     const constraints = [...this.props.resource.constraints];
-    console.log(constraints.findIndex((c) => c === " "));
     if (constraints.findIndex((c) => c === " ") === -1) {
       constraints.push(" ");
       this.props.saveInput(constraints, "constraints");

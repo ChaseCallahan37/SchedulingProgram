@@ -46,7 +46,6 @@ class CourseTable extends Component {
     const newCourse = { ...this.state.newCourse };
     newCourse[field] = content;
     this.setState(() => ({ newCourse }));
-    console.log(this.state.newCourse);
   }
   addClass = () => {
     const newCourse = { ...this.state.newCourse };
