@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { addResource } from "../../app-info/resource-info";
 import ResourceTable from "../tables/resources-table";
+import { getCourses } from "../../app-info/course-info";
 
 //Shows a blank card in the form and allows user to add course information
 
@@ -10,9 +11,17 @@ class BlankResourceCard extends Component {
   constructor(props) {
     super(props);
     this.renderConstraints = this.renderConstraints.bind(this);
+    this.setClasses = this.setClasses.bind(this);
     this.state = {
-      constraints: [],
+      classes: [],
     };
+  }
+  componentDidMount() {
+    this.setClasses();
+  }
+  setClasses() {
+    const classes = getCourses().map((c) => c.title);
+    this.setState({ classes });
   }
   submitForm = (e) => {
     e.preventDefault();
@@ -35,17 +44,16 @@ class BlankResourceCard extends Component {
       return constraints.map((c) => {
         return (
           <select
+            key={c}
             value={`${c}`}
             onChange={({ target }) => {
               saveInput(target.value.trim(), "constraints", c);
             }}
           >
-            <option>MIS 221</option>
-            <option>MIS 321</option>
-            <option>MIS 421</option>
-            <option>MIS 500</option>
-            <option>MIS 501</option>
-            <option>MIS 502</option>
+            <option key={"blank"}></option>
+            {this.state.classes.map((course) => {
+              return <option key={course}>{course}</option>;
+            })}
           </select>
         );
       });
