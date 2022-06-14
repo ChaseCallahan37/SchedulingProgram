@@ -56,8 +56,8 @@ code {
 }
 
 .nav-link-active {
-  background-color: white;
-  color: white;
+  background-color: white !important;
+  color: white !important;
   font-weight: 700;
 
 }
@@ -76,8 +76,12 @@ color: #fff;
   font-weight: 700;
 }
 
-.active {
-  background-color: white;
+
+
+.visited{
   color: white;
-  
 }
+
+a:visited{  
+  color: white;  
+   }  
