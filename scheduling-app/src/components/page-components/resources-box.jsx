@@ -14,9 +14,9 @@ class ResourceBox extends Component {
           <br></br>
           {this.props.resource.availability.days.map((d) => {
             return (
-              <label
+              <p
                 key={d.day}
-              >{`${d.day}: ${d.times.start} to ${d.times.end}`}</label>
+              >{`${d.day}: ${d.times.start} to ${d.times.end}`}</p>
             );
           })}
           <br></br>

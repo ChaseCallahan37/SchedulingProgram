@@ -9,13 +9,13 @@ let resources = [
     constraints: ["MIS 221", "MIS 321"],
   }),
 ];
-debugger;
 
 export const getResources = () => {
   return [...resources];
 };
 
 export const saveResource = (newResource) => {
+  debugger;
   const duplicate = resources.find((r) => r.id === newResource.id);
   if (!duplicate) {
     resources.push(new Resource(newResource));
@@ -24,4 +24,8 @@ export const saveResource = (newResource) => {
 
 export const createBlankResource = () => {
   return new Resource();
+};
+
+export const createBlankAvailability = () => {
+  return new Availability();
 };
