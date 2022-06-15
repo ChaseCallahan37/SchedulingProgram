@@ -13,9 +13,52 @@ class BlankResourceCard extends Component {
     this.renderConstraints = this.renderConstraints.bind(this);
     this.setClasses = this.setClasses.bind(this);
     this.renderTypes = this.renderTypes.bind(this);
+    this.renderAvailability = this.renderAvailability.bind(this);
     this.state = {
       classes: [],
       types: ["TA", "Instructor"],
+      times: [
+        800, 815, 830, 845, 900, 915, 930, 945, 1000, 1015, 1030, 1045, 1100,
+        1115, 1130, 1145, 1200, 1215, 1230, 1245, 1300, 1315, 1330, 1345, 1400,
+        1415, 1430, 1445, 1500, 1515, 1530, 1545, 1600, 1615, 1630, 1645, 1700,
+      ],
+      availability: [
+        {
+          day: "monday",
+          times: {
+            start: 0,
+            end: 0,
+          },
+        },
+        {
+          day: "tuesday",
+          times: {
+            start: 0,
+            end: 0,
+          },
+        },
+        {
+          day: "wednesday",
+          times: {
+            start: 0,
+            end: 0,
+          },
+        },
+        {
+          day: "thursday",
+          times: {
+            start: 0,
+            end: 0,
+          },
+        },
+        {
+          day: "friday",
+          times: {
+            start: 0,
+            end: 0,
+          },
+        },
+      ],
     };
   }
   componentDidMount() {
@@ -51,6 +94,49 @@ class BlankResourceCard extends Component {
         ))}
       </select>
     );
+  }
+  updateAvailability(day, point, value) {
+    const availability = [...this.state.availability];
+    const updatedDay = availability.find((a) => a.day === day.day);
+    if (updatedDay) {
+      updatedDay.times[point] = value;
+      this.setState({ availability });
+    }
+    this.props.saveInput(availability, "availability");
+  }
+  renderAvailabilityTimes(day) {
+    return (
+      <div>
+        <select
+          onChange={(e) => {
+            this.updateAvailability(day, "start", e.target.value);
+          }}
+        >
+          {this.state.times.map((t) => {
+            return <option key={t}>{t}</option>;
+          })}
+        </select>
+        <select
+          onChange={(e) => {
+            this.updateAvailability(day, "end", e.target.value);
+          }}
+        >
+          {this.state.times.map((t) => {
+            return <option key={t}>{t}</option>;
+          })}
+        </select>
+      </div>
+    );
+  }
+  renderAvailability() {
+    return this.state.availability.map((day) => {
+      return (
+        <div>
+          <label>{day.day}</label>
+          {this.renderAvailabilityTimes(day)}
+        </div>
+      );
+    });
   }
   renderConstraints() {
     const { saveInput, resource } = this.props;
@@ -97,14 +183,7 @@ class BlankResourceCard extends Component {
           <div className="card-body text-wrap">
             {this.renderTypes()}
             <br></br>
-            <input
-              onChange={({ target }) => {
-                saveInput(target.value, "availability");
-              }}
-              id="availability"
-              type="text"
-              placeholder="Availability..."
-            />
+            {this.renderAvailability()}
             <br></br>
             <label>Add Constraints</label>
             <button type="button" onClick={this.addConstraints}>

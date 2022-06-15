@@ -65,6 +65,7 @@ class ResourceTable extends Component {
       blankResource.constraints[index] = content;
     }
     this.setState(() => ({ blankResource }));
+    console.log(blankResource);
   }
   createResource() {
     return this.state.resources.map((resource) => {
