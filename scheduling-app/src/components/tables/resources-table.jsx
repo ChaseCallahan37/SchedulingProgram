@@ -27,6 +27,7 @@ class ResourceTable extends Component {
   };
   updateResources() {
     const resources = getResources();
+    debugger;
     this.setState(() => ({ resources }));
   }
   updatingBlankResource() {

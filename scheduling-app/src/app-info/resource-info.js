@@ -1,13 +1,15 @@
 import Resource from "../Classes/resources-class";
+import Availability from "./../Classes/availability-class";
 
 let resources = [
   new Resource({
     type: "Teacher",
     name: "Jeff",
-    availability: "8-5 MWF",
+    availability: new Availability(),
     constraints: ["MIS 221", "MIS 321"],
   }),
 ];
+debugger;
 
 export const getResources = () => {
   return [...resources];
