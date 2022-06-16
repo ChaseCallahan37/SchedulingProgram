@@ -2,7 +2,26 @@ import React, { Component } from "react";
 
 //Where all of the course cards will live
 class CourseBox extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.renderAvailability = this.renderAvailability.bind(this);
+    this.state = {};
+  }
+  renderAvailability() {
+    const { availability } = this.props.course;
+    console.log(availability);
+    if (availability.days) {
+      return availability.days.map((d) => {
+        return (
+          <div>
+            <label>{d.day}</label>
+            {!!d.times && <label> Start: {d.times.start}</label>}
+            {!!d.times && <label> End: {d.times.end}</label>}
+          </div>
+        );
+      });
+    }
+  }
   render() {
     return (
       <div className="card">
@@ -12,7 +31,12 @@ class CourseBox extends Component {
         <div className="card-body text-wrap">{this.props.course.info}</div>
         <div className="card-body text-wrap">
           Resources:{" "}
-          {this.props.course.resources.map((resource) => `${resource} `)}
+          {this.props.course.resources &&
+            this.props.course.resources.map((resource) => `${resource} `)}
+        </div>
+        <div className="saved-availability">
+          <label>Availability:</label>
+          {this.renderAvailability()}
         </div>
         <div className="card-footer">
           <button>Edit</button>

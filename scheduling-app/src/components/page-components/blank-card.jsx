@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { addCourse } from "../../app-info/course-info";
+import AvailabilityList from "../common/availability-list";
 import CourseTable from "../tables/course-table";
 
 //Shows a blank card in the form and allows user to add course information
@@ -10,6 +11,7 @@ class BlankCard extends Component {
   state = {};
   submitForm = (e) => {
     e.preventDefault();
+    this.props.saveClass();
   };
   render() {
     const { updateNewClass, course, saveClass } = this.props;
@@ -17,7 +19,6 @@ class BlankCard extends Component {
       <form
         onSubmit={(e) => {
           this.submitForm(e);
-          saveClass();
         }}
       >
         <div className="card">
@@ -39,15 +40,8 @@ class BlankCard extends Component {
               className="form-control"
               aria-label="With textarea"
             ></textarea>
-
-            <input
-              onChange={(e) => {
-                updateNewClass("tas", e.target.value);
-              }}
-              className="col-md-8"
-              placeholder="T.A.'s"
-            />
           </div>
+          <AvailabilityList course={course} updateNewClass={updateNewClass} />
           <div className="card-footer">
             <button
               onClick={() => {

@@ -1,0 +1,60 @@
+import React from "react";
+import { createBlankAvailability } from "./../../Classes/availability-class";
+
+const defaultTimes = [
+  800, 815, 830, 845, 900, 915, 930, 945, 1000, 1015, 1030, 1045, 1100, 1115,
+  1130, 1145, 1200, 1215, 1230, 1245, 1300, 1315, 1330, 1345, 1400, 1415, 1430,
+  1445, 1500, 1515, 1530, 1545, 1600, 1615, 1630, 1645, 1700,
+];
+
+const AvailabilityList = (props) => {
+  const [time, setTime] = React.useState([...defaultTimes]);
+  const { name, course, updateNewClass } = props;
+
+  const updateChange = (d, content, field) => {
+    const availability = { ...course.availability };
+    availability.days.find((day) => {
+      if (day.day === d.day) {
+        day[field] = content;
+        return true;
+      }
+    });
+    updateNewClass("availability", availability);
+  };
+  return (
+    <div>
+      <label className="label">Availability</label>
+      {course.availability.days.map((d) => {
+        return (
+          <div className="availability-list" key={d.day}>
+            <label className="day-of-week">{d.day}</label>
+            <select
+              className="availability-dropdown"
+              onChange={(e) => {
+                updateChange(d, e.target.value, "start");
+              }}
+            >
+              <option></option>
+              {time.map((t) => {
+                return <option key={t}>{t}</option>;
+              })}
+            </select>
+            <select
+              className="availability-dropdown"
+              onChange={(e) => {
+                updateChange(d, e.target.value, "end");
+              }}
+            >
+              <option></option>
+              {time.map((t) => {
+                return <option key={t}>{t}</option>;
+              })}
+            </select>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default AvailabilityList;

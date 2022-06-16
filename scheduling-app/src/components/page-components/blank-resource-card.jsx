@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import {
-  addResource,
-  createBlankAvailability,
-} from "../../app-info/resource-info";
+import { addResource } from "../../app-info/resource-info";
+import { createBlankAvailability } from "../../Classes/availability-class";
 import ResourceTable from "../tables/resources-table";
 import { getCourses } from "./../../app-info/course-info";
 
