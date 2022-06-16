@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import {
-  addResource,
-  createBlankAvailability,
-} from "../../app-info/resource-info";
+import { addResource } from "../../app-info/resource-info";
+import { createBlankAvailability } from "../../Classes/availability-class";
 import ResourceTable from "../tables/resources-table";
 import { getCourses } from "./../../app-info/course-info";
+import AvailabilityList from "../common/availability-list";
 
 //Shows a blank card in the form and allows user to add course information
 
@@ -32,7 +31,6 @@ class BlankResourceCard extends Component {
   componentDidMount() {
     this.setClasses();
     this.setDays();
-    console.log(this.state.days);
   }
   setDays() {
     const days = [...createBlankAvailability().days];
@@ -163,7 +161,7 @@ class BlankResourceCard extends Component {
           <div className="card-body text-wrap">
             {this.renderTypes()}
             <br key="1"></br>
-            {days.length !== 0 && this.renderAvailability()}
+            <AvailabilityList item={resource} update={saveInput} />
             <br key="2"></br>
             <label>Add Constraints</label>
             <button type="button" onClick={this.addConstraints}>

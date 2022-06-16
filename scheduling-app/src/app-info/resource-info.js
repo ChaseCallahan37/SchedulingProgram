@@ -20,16 +20,3 @@ export const saveResource = (newResource) => {
     resources.push(new Resource(newResource));
   }
 };
-
-export const createBlankResource = () => {
-  return new Resource();
-};
-
-export const createBlankAvailability = (days = null) => {
-  if (!!days) {
-    return { ...new Availability([...days]) };
-  } else {
-    const newAvailability = new Availability();
-    return { ...newAvailability };
-  }
-};

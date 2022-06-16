@@ -17,4 +17,9 @@ class Resource {
   }
 }
 
+export const createBlankResource = () => {
+  const newResource = new Resource({});
+  return { ...newResource };
+};
+
 export default Resource;

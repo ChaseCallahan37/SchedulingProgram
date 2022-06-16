@@ -4,21 +4,22 @@ import BlankResourceCard from "../page-components/blank-resource-card";
 import ResourceBox from "../page-components/resources-box";
 import Resource from "../../Classes/resources-class";
 import { v4 as uuidv4 } from "uuid";
+import { createBlankResource } from "../../Classes/resources-class";
 
 class ResourceTable extends Component {
   constructor(props) {
     super(props);
     this.createResource = this.createResource.bind(this);
-    this.addSomeone = this.addSomeone.bind(this);
     this.renderBlankResource = this.renderBlankResource.bind(this);
-    this.getBlankTemplate = this.getBlankTemplate.bind(this);
     this.saveInput = this.saveInput.bind(this);
     this.updateResources = this.updateResources.bind(this);
     this.saveNewResource = this.saveNewResource.bind(this);
     this.updatingBlankResource = this.updatingBlankResource.bind(this);
+    this.toggleShowBlank = this.toggleShowBlank.bind(this);
     this.state = {
       resources: [],
       blankResource: {},
+      showBlank: false,
     };
   }
   componentDidMount = () => {
@@ -30,31 +31,15 @@ class ResourceTable extends Component {
     this.setState(() => ({ resources }));
   }
   updatingBlankResource() {
-    const blankResource = this.getBlankTemplate();
+    const blankResource = createBlankResource();
     this.setState({ blankResource });
-  }
-  getBlankTemplate() {
-    const template = {
-      id: null,
-      type: null,
-      name: null,
-      availability: null,
-      constraints: [],
-    };
-    return { ...template };
   }
   saveNewResource() {
     const newResource = { ...this.state.blankResource };
     saveResource({ ...newResource });
     this.updateResources();
     this.updatingBlankResource();
-  }
-  addSomeone() {
-    const blankResource = { ...this.state.blankResource };
-    if (!this.state.blankResource.id) {
-      blankResource.id = uuidv4();
-      this.setState(() => ({ blankResource }));
-    }
+    this.toggleShowBlank();
   }
   saveInput(content, field, constraint = null) {
     const blankResource = { ...this.state.blankResource };
@@ -67,17 +52,21 @@ class ResourceTable extends Component {
     }
     this.setState(() => ({ blankResource }));
   }
+  toggleShowBlank() {
+    this.setState((prevState) => ({ showBlank: !prevState.showBlank }));
+  }
   createResource() {
-    return this.state.resources.map((resource) => {
-      return <ResourceBox key={resource.name} resource={resource} />;
-    });
+    if (!!this.state.resources) {
+      return this.state.resources.map((resource) => {
+        return <ResourceBox key={resource.name} resource={resource} />;
+      });
+    }
   }
   renderBlankResource() {
-    const { blankResource } = this.state;
-    if (blankResource.id) {
+    const { blankResource, showBlank } = this.state;
+    if (showBlank) {
       return (
         <BlankResourceCard
-          key={blankResource.id}
           resource={{ ...blankResource }}
           saveInput={this.saveInput}
           saveNewResource={this.saveNewResource}
@@ -89,7 +78,7 @@ class ResourceTable extends Component {
     return (
       <div>
         <div className="d-md-flex justify-content-md-end">
-          <button className="button" onClick={this.addSomeone}>
+          <button className="button" onClick={this.toggleShowBlank}>
             Add Resource
           </button>
         </div>

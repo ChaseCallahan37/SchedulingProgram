@@ -25,8 +25,6 @@ code {
   background-color: #B20837;
   font-family: Georgia, serif !important;
   width: auto;
-  
- 
 }
 
 .card-footer{
@@ -76,8 +74,6 @@ color: #fff;
   font-weight: 700;
 }
 
-
-
 .visited{
   color: white;
 }
@@ -85,3 +81,37 @@ color: #fff;
 a:visited{  
   color: white;  
    }  
+
+.label{
+  font-weight: bold;
+}
+
+.availability-list{
+  margin: 15px
+}
+
+.availability-dropdown{
+  float: right;
+  margin-left: 5px;
+}
+
+.day-of-week{
+  margin-right: 15px;
+}
+
+.saved-availability{
+  margin: 15px;
+}
+
+.saved-day{
+  margin-right: 15px;
+}
+
+.saved-time{
+  float: right;
+  margin-left: 5px;
+}
+
+.saved-start-time{
+  margin-right: 5px;
+}

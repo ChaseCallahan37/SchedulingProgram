@@ -1,41 +1,3 @@
-const availabilityTemplate = [
-  {
-    day: "Monday",
-    times: {
-      start: 0,
-      end: 0,
-    },
-  },
-  {
-    day: "Tuesday",
-    times: {
-      start: 0,
-      end: 0,
-    },
-  },
-  {
-    day: "Wednesday",
-    times: {
-      start: 0,
-      end: 0,
-    },
-  },
-  {
-    day: "Thursday",
-    times: {
-      start: 0,
-      end: 0,
-    },
-  },
-  {
-    day: "Friday",
-    times: {
-      start: 0,
-      end: 0,
-    },
-  },
-];
-
 class Availability {
   constructor(days = null) {
     if (days !== null) {
@@ -81,6 +43,15 @@ class Availability {
     }
   }
 }
+
+export const createBlankAvailability = (days = null) => {
+  if (!!days) {
+    return { ...new Availability([...days]) };
+  } else {
+    const newAvailability = new Availability();
+    return { ...newAvailability };
+  }
+};
 
 export default Availability;
 

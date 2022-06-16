@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { v4 as uuidv4 } from "uuid";
 import BlankCard from "../page-components/blank-card";
 import CourseBox from "../page-components/course-box";
+import { createBlankAvailability } from "./../../Classes/availability-class";
 import {
   getCourses,
   saveCourse,
@@ -30,7 +31,8 @@ class CourseTable extends Component {
       id: null,
       title: null,
       info: null,
-      tas: null,
+      availability: createBlankAvailability(),
+      resources: null,
     };
   }
   updateCourseState() {
