@@ -37,8 +37,48 @@ const availabilityTemplate = [
 ];
 
 class Availability {
-  constructor(days = [...availabilityTemplate]) {
-    this.days = days;
+  constructor(days = null) {
+    if (days !== null) {
+      this.days = days;
+    } else {
+      this.days = [
+        {
+          day: "Monday",
+          times: {
+            start: 0,
+            end: 0,
+          },
+        },
+        {
+          day: "Tuesday",
+          times: {
+            start: 0,
+            end: 0,
+          },
+        },
+        {
+          day: "Wednesday",
+          times: {
+            start: 0,
+            end: 0,
+          },
+        },
+        {
+          day: "Thursday",
+          times: {
+            start: 0,
+            end: 0,
+          },
+        },
+        {
+          day: "Friday",
+          times: {
+            start: 0,
+            end: 0,
+          },
+        },
+      ];
+    }
   }
 }
 

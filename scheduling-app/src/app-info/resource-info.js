@@ -29,6 +29,7 @@ export const createBlankAvailability = (days = null) => {
   if (!!days) {
     return { ...new Availability([...days]) };
   } else {
-    return { ...new Availability() };
+    const newAvailability = new Availability();
+    return { ...newAvailability };
   }
 };

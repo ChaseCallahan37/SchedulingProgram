@@ -24,7 +24,6 @@ class ResourceTable extends Component {
   componentDidMount = () => {
     this.updateResources();
     this.updatingBlankResource();
-    console.log(this.state.blankResource, " && ", this.state.resources);
   };
   updateResources() {
     const resources = getResources();

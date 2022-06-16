@@ -35,7 +35,7 @@ class BlankResourceCard extends Component {
     console.log(this.state.days);
   }
   setDays() {
-    const days = createBlankAvailability().days;
+    const days = [...createBlankAvailability().days];
     this.setState({ days });
   }
   setClasses() {
