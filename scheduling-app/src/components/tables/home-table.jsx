@@ -7,6 +7,7 @@ class HomeTable extends Component {
     super(props);
     this.createCourseText = this.createCourseText.bind(this);
     this.createResourceText = this.createResourceText.bind(this);
+    this.sendData = this.sendData.bind(this);
     this.state = {
       courses: [],
       ta: "",
@@ -19,9 +20,18 @@ class HomeTable extends Component {
     const resources = getResources();
     this.setState(() => ({ courses, resources }));
   };
+  sendData() {
+    const courses = getCourses();
+    const resources = getResources();
+    const data = {
+      courses: courses,
+      resources: resources,
+    };
+  }
   createCourseText = () => {
     return (
       <div>
+        <button>Make Schedule</button>
         <h2>Courses</h2>
         <div className="row row-cols-1 row-cols-md-4 g-0">
           {this.state.courses.map((course) => {
@@ -30,7 +40,8 @@ class HomeTable extends Component {
                 <p>
                   {course.title}
                   {course.info}
-                  {course.ta}
+                  {course.resources && course.resource}
+                  {course.availability.days}
                 </p>
               );
             }
@@ -38,7 +49,7 @@ class HomeTable extends Component {
               <p>
                 {course.title} <br></br>
                 {course.info} <br></br>
-                {course.ta} <br></br>
+                {course.availability.days} <br></br>
               </p>
             );
           })}
@@ -57,7 +68,7 @@ class HomeTable extends Component {
                 <p>
                   {resource.type}
                   {resource.name}
-                  {resource.availability}
+                  {resource.availability.days}
                   {resource.constraints}
                 </p>
               );
@@ -66,7 +77,7 @@ class HomeTable extends Component {
               <p>
                 {resource.type} <br></br>
                 {resource.name} <br></br>
-                {resource.availability} <br></br>
+                {resource.availability.days} <br></br>
                 {resource.constraints}
               </p>
             );
@@ -79,6 +90,7 @@ class HomeTable extends Component {
   render() {
     return (
       <div>
+        <button onClick={this.sendData}>Make Schedule</button>
         <div className="d-md-flex justify-content-md-end"></div>
         {/* {this.createCourseText()}
     {this.createResourceText()} */}

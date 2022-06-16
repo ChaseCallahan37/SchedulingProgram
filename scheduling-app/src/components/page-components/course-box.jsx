@@ -9,14 +9,15 @@ class CourseBox extends Component {
   }
   renderAvailability() {
     const { availability } = this.props.course;
-    console.log(availability);
     if (availability.days) {
       return availability.days.map((d) => {
         return (
-          <div>
-            <label>{d.day}</label>
-            {!!d.times && <label> Start: {d.times.start}</label>}
+          <div className="saved-availability" key={d.day}>
+            <label className="saved-day">{d.day}</label>
+            <div className="saved-time">
+            {!!d.times && <label className="saved-start-time"> Start: {d.times.start}</label>}
             {!!d.times && <label> End: {d.times.end}</label>}
+            </div>
           </div>
         );
       });
@@ -34,10 +35,8 @@ class CourseBox extends Component {
           {this.props.course.resources &&
             this.props.course.resources.map((resource) => `${resource} `)}
         </div>
-        <div className="saved-availability">
-          <label>Availability:</label>
-          {this.renderAvailability()}
-        </div>
+        <label className="label">Availability:</label>
+        {this.renderAvailability()}
         <div className="card-footer">
           <button>Edit</button>
         </div>

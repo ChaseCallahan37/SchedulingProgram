@@ -41,7 +41,7 @@ class BlankCard extends Component {
               aria-label="With textarea"
             ></textarea>
           </div>
-          <AvailabilityList course={course} updateNewClass={updateNewClass} />
+          <AvailabilityList item={course} update={updateNewClass} />
           <div className="card-footer">
             <button
               onClick={() => {

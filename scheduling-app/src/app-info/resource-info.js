@@ -20,7 +20,3 @@ export const saveResource = (newResource) => {
     resources.push(new Resource(newResource));
   }
 };
-
-export const createBlankResource = () => {
-  return new Resource();
-};

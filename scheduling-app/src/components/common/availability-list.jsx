@@ -9,47 +9,47 @@ const defaultTimes = [
 
 const AvailabilityList = (props) => {
   const [time, setTime] = React.useState([...defaultTimes]);
-  const { name, course, updateNewClass } = props;
+  const { item, update } = props;
 
   const updateChange = (d, content, field) => {
-    const availability = { ...course.availability };
+    const availability = { ...item.availability };
     availability.days.find((day) => {
       if (day.day === d.day) {
-        day[field] = content;
+        day.times[field] = content;
         return true;
       }
     });
-    updateNewClass("availability", availability);
+    update("availability", availability);
   };
   return (
     <div>
       <label className="label">Availability</label>
-      {course.availability.days.map((d) => {
+      {item.availability.days.map((d) => {
         return (
           <div className="availability-list" key={d.day}>
             <label className="day-of-week">{d.day}</label>
-            <select
-              className="availability-dropdown"
-              onChange={(e) => {
-                updateChange(d, e.target.value, "start");
-              }}
-            >
-              <option></option>
-              {time.map((t) => {
-                return <option key={t}>{t}</option>;
-              })}
-            </select>
-            <select
-              className="availability-dropdown"
-              onChange={(e) => {
-                updateChange(d, e.target.value, "end");
-              }}
-            >
-              <option></option>
-              {time.map((t) => {
-                return <option key={t}>{t}</option>;
-              })}
-            </select>
+            <div className="availability-dropdown">
+              <select
+                onChange={(e) => {
+                  updateChange(d, e.target.value, "start");
+                }}
+              >
+                <option></option>
+                {time.map((t) => {
+                  return <option key={t}>{t}</option>;
+                })}
+              </select>
+              <select
+                onChange={(e) => {
+                  updateChange(d, e.target.value, "end");
+                }}
+              >
+                <option></option>
+                {time.map((t) => {
+                  return <option key={t}>{t}</option>;
+                })}
+              </select>
+            </div>
           </div>
         );
       })}
