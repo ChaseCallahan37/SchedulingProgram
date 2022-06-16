@@ -5,7 +5,7 @@ let resources = [
   new Resource({
     type: "Teacher",
     name: "Jeff",
-    availability: new Availability(),
+    availability: { ...new Availability() },
     constraints: ["MIS 221", "MIS 321"],
   }),
 ];
@@ -15,7 +15,6 @@ export const getResources = () => {
 };
 
 export const saveResource = (newResource) => {
-  debugger;
   const duplicate = resources.find((r) => r.id === newResource.id);
   if (!duplicate) {
     resources.push(new Resource(newResource));
@@ -26,6 +25,10 @@ export const createBlankResource = () => {
   return new Resource();
 };
 
-export const createBlankAvailability = () => {
-  return new Availability();
+export const createBlankAvailability = (days = null) => {
+  if (!!days) {
+    return { ...new Availability([...days]) };
+  } else {
+    return { ...new Availability() };
+  }
 };

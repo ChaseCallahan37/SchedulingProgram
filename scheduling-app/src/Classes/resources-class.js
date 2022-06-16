@@ -6,7 +6,7 @@ class Resource {
     id = uuidv4(),
     type,
     name,
-    availability = new Availability(),
+    availability = { ...new Availability() },
     constraints = [],
   }) {
     this.id = id;

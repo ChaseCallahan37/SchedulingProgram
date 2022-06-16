@@ -37,7 +37,7 @@ const availabilityTemplate = [
 ];
 
 class Availability {
-  constructor(days = availabilityTemplate) {
+  constructor(days = [...availabilityTemplate]) {
     this.days = days;
   }
 }

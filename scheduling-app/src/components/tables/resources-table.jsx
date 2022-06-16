@@ -24,6 +24,7 @@ class ResourceTable extends Component {
   componentDidMount = () => {
     this.updateResources();
     this.updatingBlankResource();
+    console.log(this.state.blankResource, " && ", this.state.resources);
   };
   updateResources() {
     const resources = getResources();
@@ -34,17 +35,18 @@ class ResourceTable extends Component {
     this.setState({ blankResource });
   }
   getBlankTemplate() {
-    return {
+    const template = {
       id: null,
       type: null,
       name: null,
       availability: null,
       constraints: [],
     };
+    return { ...template };
   }
   saveNewResource() {
     const newResource = { ...this.state.blankResource };
-    saveResource(newResource);
+    saveResource({ ...newResource });
     this.updateResources();
     this.updatingBlankResource();
   }
@@ -65,7 +67,6 @@ class ResourceTable extends Component {
       blankResource.constraints[index] = content;
     }
     this.setState(() => ({ blankResource }));
-    console.log(blankResource);
   }
   createResource() {
     return this.state.resources.map((resource) => {

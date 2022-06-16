@@ -26,19 +26,17 @@ class BlankResourceCard extends Component {
         1115, 1130, 1145, 1200, 1215, 1230, 1245, 1300, 1315, 1330, 1345, 1400,
         1415, 1430, 1445, 1500, 1515, 1530, 1545, 1600, 1615, 1630, 1645, 1700,
       ],
-      days: [...createBlankAvailability().days],
+      days: [],
     };
   }
   componentDidMount() {
     this.setClasses();
-    // this.setDays();
+    this.setDays();
+    console.log(this.state.days);
   }
   setDays() {
-    let days = [...this.state.days];
-    if (days.length === 0) {
-      days = createBlankAvailability().days;
-      this.setState({ days });
-    }
+    const days = createBlankAvailability().days;
+    this.setState({ days });
   }
   setClasses() {
     const classes = getCourses().map((c) => c.title);
@@ -47,6 +45,7 @@ class BlankResourceCard extends Component {
   submitForm = (e) => {
     e.preventDefault();
     this.props.saveNewResource();
+    this.setDays();
   };
   addConstraints = () => {
     const constraints = [...this.props.resource.constraints];
@@ -71,15 +70,15 @@ class BlankResourceCard extends Component {
       </select>
     );
   }
-  updateAvailability(day, point, value) {
+  updateAvailability(d, field, value) {
     const days = [...this.state.days];
-    const updatedDay = days.find((d) => d.day === day.day);
+    const updatedDay = days.find((day) => day.day === d.day);
     if (updatedDay) {
-      updatedDay.times[point] = value;
+      updatedDay.times[field] = value;
       this.setState({ days });
     }
-    // const availability = createBlankAvailability(days);
-    this.props.saveInput(days, "availability");
+    const availability = createBlankAvailability(days);
+    this.props.saveInput(availability, "availability");
   }
   renderAvailabilityTimes(d) {
     return (
@@ -89,6 +88,8 @@ class BlankResourceCard extends Component {
             this.updateAvailability(d, "start", e.target.value);
           }}
         >
+          {" "}
+          <option key="blank"></option>
           {this.state.times.map((t) => {
             return <option key={t}>{t}</option>;
           })}
@@ -98,6 +99,8 @@ class BlankResourceCard extends Component {
             this.updateAvailability(d, "end", e.target.value);
           }}
         >
+          {" "}
+          <option key="blank"></option>
           {this.state.times.map((t) => {
             return <option key={t}>{t}</option>;
           })}
@@ -108,7 +111,7 @@ class BlankResourceCard extends Component {
   renderAvailability() {
     return this.state.days.map((d) => {
       return (
-        <div>
+        <div key={d.day}>
           <label>{d.day}</label>
           {this.renderAvailabilityTimes(d)}
         </div>
@@ -159,9 +162,9 @@ class BlankResourceCard extends Component {
           </div>
           <div className="card-body text-wrap">
             {this.renderTypes()}
-            <br></br>
+            <br key="1"></br>
             {days.length !== 0 && this.renderAvailability()}
-            <br></br>
+            <br key="2"></br>
             <label>Add Constraints</label>
             <button type="button" onClick={this.addConstraints}>
               Add
@@ -178,41 +181,3 @@ class BlankResourceCard extends Component {
 }
 
 export default BlankResourceCard;
-
-const oldAvailTemp = [
-  {
-    day: "monday",
-    times: {
-      start: 0,
-      end: 0,
-    },
-  },
-  {
-    day: "tuesday",
-    times: {
-      start: 0,
-      end: 0,
-    },
-  },
-  {
-    day: "wednesday",
-    times: {
-      start: 0,
-      end: 0,
-    },
-  },
-  {
-    day: "thursday",
-    times: {
-      start: 0,
-      end: 0,
-    },
-  },
-  {
-    day: "friday",
-    times: {
-      start: 0,
-      end: 0,
-    },
-  },
-];
