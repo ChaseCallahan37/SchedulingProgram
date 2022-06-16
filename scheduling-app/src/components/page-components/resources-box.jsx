@@ -12,7 +12,13 @@ class ResourceBox extends Component {
         <div className="resource-card-body text-wrap">
           {this.props.resource.type}
           <br></br>
-          {this.props.resource.availability}
+          {this.props.resource.availability.days.map((d) => {
+            return (
+              <p
+                key={d.day}
+              >{`${d.day}: ${d.times.start} to ${d.times.end}`}</p>
+            );
+          })}
           <br></br>
           {this.props.resource.constraints}
         </div>

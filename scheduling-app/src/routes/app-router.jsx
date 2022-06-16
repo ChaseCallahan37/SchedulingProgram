@@ -5,7 +5,6 @@ import CourseHeader from "../components/page-components/course-header";
 import HomeTable from "../components/tables/home-table";
 import ResourceTable from "./../components/tables/resources-table";
 
-
 class AppRouter extends Component {
   state = {};
   render() {

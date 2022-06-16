@@ -1,10 +1,11 @@
 import Resource from "../Classes/resources-class";
+import Availability from "./../Classes/availability-class";
 
 let resources = [
   new Resource({
     type: "Teacher",
     name: "Jeff",
-    availability: "8-5 MWF",
+    availability: { ...new Availability() },
     constraints: ["MIS 221", "MIS 321"],
   }),
 ];
@@ -22,4 +23,13 @@ export const saveResource = (newResource) => {
 
 export const createBlankResource = () => {
   return new Resource();
+};
+
+export const createBlankAvailability = (days = null) => {
+  if (!!days) {
+    return { ...new Availability([...days]) };
+  } else {
+    const newAvailability = new Availability();
+    return { ...newAvailability };
+  }
 };
