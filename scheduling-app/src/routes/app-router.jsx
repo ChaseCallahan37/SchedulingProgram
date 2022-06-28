@@ -4,6 +4,7 @@ import CourseTable from "../components/tables/course-table";
 import CourseHeader from "../components/page-components/course-header";
 import HomeTable from "../components/tables/home-table";
 import ResourceTable from "./../components/tables/resources-table";
+import TestTable from "./../components/tables/Test-Table";
 
 class AppRouter extends Component {
   state = {};
@@ -15,6 +16,7 @@ class AppRouter extends Component {
           <Route path="/" component={HomeTable} exact={true} />
           <Route path="/courses" component={CourseTable} />
           <Route path="/resources" component={ResourceTable}></Route>
+          <Route path="/test" component={TestTable} />
         </div>
       </BrowserRouter>
     );
