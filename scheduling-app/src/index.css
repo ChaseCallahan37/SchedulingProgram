@@ -100,11 +100,12 @@ a:visited{
 }
 
 .saved-availability{
-  margin: 15px;
+  margin-right: 15px;
+  margin-bottom: 15px;
 }
 
 .saved-day{
-  margin-right: 15px;
+  margin-right: 0px;
 }
 
 .saved-time{

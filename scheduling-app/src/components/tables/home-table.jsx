@@ -2,6 +2,7 @@ import React, { Component, useEffect, useState } from "react";
 import { getCourses } from "../../app-info/course-info";
 import { getResources } from "../../app-info/resource-info";
 import AvailabilityList from "../common/availability-list";
+import BlankAvailability from "../common/BlankAvailability";
 import Card from "../common/Card";
 
 class HomeTable extends Component {
@@ -121,6 +122,9 @@ class HomeTable extends Component {
         <div className="d-md-flex justify-content-md-end"></div>
         {/* {this.createCourseText()}
     {this.createResourceText()} */}
+        <br></br>
+        <br></br>
+        <BlankAvailability />
       </div>
     );
   }

@@ -4,7 +4,7 @@ class Card extends Component {
   state = {
     styles: {
       parentDiv: "card",
-      header: "card-header text-white p-3 border text-center fs-3",
+      header: "card-header text-white p-3 border text-center fs-3 ",
       body: "card-body text-wrap",
       footer: "card-footer",
     },
@@ -21,7 +21,7 @@ class Card extends Component {
           {content.body && content.body.map((cont) => cont.render)}
         </div>
         <div className={styles.footer}>
-          <button>Edit</button>
+          {content.footer && content.footer.map((f) => f.render)}
         </div>
       </div>
     );
