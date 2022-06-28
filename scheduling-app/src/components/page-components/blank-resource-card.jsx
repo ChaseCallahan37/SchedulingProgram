@@ -4,6 +4,7 @@ import { createBlankAvailability } from "../../Classes/availability-class";
 import ResourceTable from "../tables/resources-table";
 import { getCourses } from "./../../app-info/course-info";
 import AvailabilityList from "../common/availability-list";
+import Time from "../../Classes/TimeClass"
 
 //Shows a blank card in the form and allows user to add course information
 
