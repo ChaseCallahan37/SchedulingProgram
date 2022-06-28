@@ -1,6 +1,8 @@
 import React, { Component, useEffect, useState } from "react";
 import { getCourses } from "../../app-info/course-info";
 import { getResources } from "../../app-info/resource-info";
+import AvailabilityList from "../common/availability-list";
+import Card from "../common/Card";
 
 class HomeTable extends Component {
   constructor(props) {
@@ -89,8 +91,32 @@ class HomeTable extends Component {
   };
 
   render() {
+    const courses = getCourses();
     return (
       <div>
+        {courses &&
+          courses.map((c) => (
+            <Card
+              key={c.id}
+              content={{
+                header: [
+                  {
+                    render: <label key={c.title}>{c.title}</label>,
+                  },
+                ],
+                body: [
+                  {
+                    render: <p key={c.info}>{c.info}</p>,
+                  },
+                  {
+                    render: (
+                      <AvailabilityList key={c.id} item={c} update={() => {}} />
+                    ),
+                  },
+                ],
+              }}
+            />
+          ))}
         <button onClick={this.sendData}>Make Schedule</button>
         <div className="d-md-flex justify-content-md-end"></div>
         {/* {this.createCourseText()}

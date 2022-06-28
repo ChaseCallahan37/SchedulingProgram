@@ -16,6 +16,27 @@ const MIS221Avail = [
       end: 1700,
     },
   },
+  {
+    day: "wednesday",
+    times: {
+      start: 800,
+      end: 1100,
+    },
+  },
+  {
+    day: "thursday",
+    times: {
+      start: 1200,
+      end: 1300,
+    },
+  },
+  {
+    day: "friday",
+    times: {
+      start: 1500,
+      end: 1800,
+    },
+  },
 ];
 
 const MIS321Avail = [
