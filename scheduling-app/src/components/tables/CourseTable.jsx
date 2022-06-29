@@ -17,7 +17,7 @@ import ShowAvailability from "../common/ShowAvailability";
 import BlankAvailability from "../common/BlankAvailability";
 import { relativeTimeThreshold } from "moment";
 
-class TestTable extends Component {
+class CourseTable extends Component {
   constructor(props) {
     super(props);
     this.createClasses = this.createClasses.bind(this);
@@ -166,29 +166,37 @@ class TestTable extends Component {
           {courses.length !== 0 &&
             courses.map((course) => (
               <Card
+                key={course.title}
                 update={this.onChange}
                 content={{
                   header: [
                     {
-                      render: <label>{course.title}</label>,
+                      render: <label key="header1">{course.title}</label>,
                     },
                   ],
                   body: [
                     {
-                      render: <p>{course.info}</p>,
-                    },
-                    {
-                      render: <label className="label">Availability:</label>,
+                      render: <p key="body1">{course.info}</p>,
                     },
                     {
                       render: (
-                        <ShowAvailability availability={course.availability} />
+                        <label key="body2" className="label">
+                          Availability:
+                        </label>
+                      ),
+                    },
+                    {
+                      render: (
+                        <ShowAvailability
+                          key="body3"
+                          availability={course.availability}
+                        />
                       ),
                     },
                   ],
                   footer: [
                     {
-                      render: <button>Edit This Course</button>,
+                      render: <button key="footer1">Edit This Course</button>,
                     },
                   ],
                 }}
@@ -200,4 +208,4 @@ class TestTable extends Component {
   }
 }
 
-export default TestTable;
+export default CourseTable;

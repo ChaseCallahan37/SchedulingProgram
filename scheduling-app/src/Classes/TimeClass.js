@@ -1,13 +1,21 @@
 class Time {
-  constructor(display = { hour: "", minute: "", pm: null }, military = 0) {
-    this.display = display;
+  constructor(
+    { hour, minute, pm, military } = {
+      hour: "",
+      minute: "",
+      pm: null,
+      military: 0,
+    }
+  ) {
+    this.hour = hour;
+    this.minute = minute;
+    this.pm = pm;
     this.military = military;
   }
   displayToMilitary() {
-    const { hour, minute, pm } = this.display;
-    const rawMilitary = `${hour}${minute}`;
+    const rawMilitary = `${this.hour}${this.minute}`;
     this.military = parseInt(rawMilitary);
-    if (pm) {
+    if (this.pm) {
       this.military += 1200;
     }
   }

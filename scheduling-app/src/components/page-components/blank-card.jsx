@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { addCourse } from "../../app-info/course-info";
 import AvailabilityList from "../common/availability-list";
-import CourseTable from "../tables/course-table";
 
 //Shows a blank card in the form and allows user to add course information
 

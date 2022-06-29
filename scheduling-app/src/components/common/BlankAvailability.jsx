@@ -10,22 +10,17 @@ const defaultTimes = [
 
 class BlankAvailability extends Component {
   state = {
-    template: {
+    times: {
       hours: [],
       minutes: [],
     },
-    blank: {
-      hour: "",
-      minute: "",
-      pm: null,
-    },
   };
   componentDidMount() {
-    const time = new Time();
-    this.setState({
-      hours: time.generateHours(),
-      minutes: time.generateMinutes(),
-    });
+    const timeGenerator = new Time();
+    const times = { ...this.state.times };
+    times.hours = timeGenerator.generateHours();
+    times.minutes = timeGenerator.generateMinutes();
+    this.setState({ times });
   }
   //   updateChange = (d, content, field) => {
   //     // const availability = { ...item.availability };
@@ -37,42 +32,105 @@ class BlankAvailability extends Component {
   //     // });
   //     // update("availability", availability);
   //   };
-  updateHour = (e) => {
-    const amount = e.target.value;
-    if (!amount || amount.match(/^\d{0,2}$/)) {
-        if(amount < 13){
-            const blank = { ...this.state.blank };
-            blank.hour = e.target.value;
-            this.setState({ blank });
-        }
+  // updateHour = (e) => {
+  //   const amount = e.target.value;
+  //   if (!amount || amount.match(/^\d{0,2}$/)) {
+  //     if (amount < 13) {
+  //       const blank = { ...this.state.blank };
+  //       blank.hour = e.target.value;
+  //       this.setState({ blank });
+  //     }
+  //   } else {
+  //     e.preventDefault();
+  //   }
+  // };
+  // updateMinute = (e) => {
+  //   const amount = e.target.value;
+  //   if (!amount || amount.match(/^\d{0,2}$/)) {
+  //     if (amount < 60) {
+  //       const blank = { ...this.state.blank };
+  //       blank.minute = e.target.value;
+  //       this.setState({ blank });
+  //     }
+  //   } else {
+  //     e.preventDefault();
+  //   }
+  // };
+  validateInput = (value, path) => {
+    if (!value) return true;
+
+    if (value.match(/^\d{0,2}$/)) {
+      if (path[1] === "minute" && value >= 60) {
+        return false;
+      } else if (path[1] === "hour" && value >= 13) {
+        return false;
+      }
     } else {
-      e.preventDefault();
+      return false;
     }
+
+    return true;
   };
-  updateMinute = (e) => {
-    const amount = e.target.value;
-    if (!amount || amount.match(/^\d{0,2}$/)) {
-        if(amount < 60){
-            const blank = { ...this.state.blank };
-            blank.minute = e.target.value;
-            this.setState({ blank });
+  update = (e) => {
+    const { name, value, id } = e.target;
+    const path = name.split(".");
+
+    const validValue = this.validateInput(value, path);
+
+    if (validValue) {
+      const availability = [...this.props.availability];
+      const day = availability.find((a) => {
+        if (a.title === id) {
+          a.times[path[0]][path[1]] = value;
+          return true;
         }
-    } else {
-      e.preventDefault();
+        return false;
+      });
+      this.props.update("availability", availability);
     }
   };
 
   render() {
-    const { item, update } = this.props;
+    const { availability, update } = this.props;
     const { template, blank } = this.state;
-
     return (
       <div>
-        <label>Hours</label>
-        <input value={blank.hour} onChange={this.updateHour} />
-        Down
-        <label>Minute</label>
-        <input value={blank.minute} onChange={this.updateMinute} />
+        {availability &&
+          availability.map((day) => (
+            <div>
+              <h4>{day.title}</h4>
+              <h5>From</h5>
+              <label>Hours</label>
+              <input
+                onChange={this.update}
+                id={`${day.title}`}
+                name="start.hour"
+                value={day.times.start.hour}
+              />
+              <label>Minutes</label>
+              <input
+                onChange={this.update}
+                id={`${day.title}`}
+                name="start.minute"
+                value={day.times.start.minute}
+              />
+              <h5>To</h5>
+              <label>Hours</label>
+              <input
+                onChange={this.update}
+                id={`${day.title}`}
+                name="end.hour"
+                value={day.times.end.hour}
+              />
+              <label>Minutes</label>
+              <input
+                onChange={this.update}
+                id={`${day.title}`}
+                name="end.minute"
+                value={day.times.end.minute}
+              />
+            </div>
+          ))}
       </div>
     );
   }

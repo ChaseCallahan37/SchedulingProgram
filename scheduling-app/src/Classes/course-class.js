@@ -1,12 +1,13 @@
 import { v4 as uuidv4 } from "uuid";
 import Availability from "./availability-class";
+import { getBlankAvailability } from "./availability-class";
 
 class Course {
   constructor({
     id = uuidv4(),
     title,
     info,
-    availability = new Availability(),
+    availability = getBlankAvailability(),
     resources = [],
   }) {
     this.id = id;
