@@ -11,6 +11,7 @@ import {
 import Card from "../common/Card";
 import AvailabilityList from "../common/availability-list";
 import ShowAvailability from "../common/ShowAvailability";
+import BlankAvailability from "../common/BlankAvailability";
 
 class TestTable extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class TestTable extends Component {
   newCourseTemplate() {
     return {
       id: null,
-      title: null,
+      title: "",
       info: null,
       availability: createBlankAvailability(),
       resources: null,
@@ -77,11 +78,15 @@ class TestTable extends Component {
     );
   }
   onChange = (e) => {
-    console.log("On change")
+    const { name, value } = e.target;
+    const newCourse = { ...this.state.newCourse };
+    newCourse[name] = value;
+    this.setState({ newCourse });
+    console.log(this.state.newCourse);
   };
 
   render() {
-    const { courses } = this.state;
+    const { courses, newCourse } = this.state;
     return (
       <div>
         <div className="d-md-flex justify-content-md-end">
@@ -90,10 +95,56 @@ class TestTable extends Component {
           </button>
         </div>
         <div className="row row-cols-1 row-cols-md-4 g-0">
+          {newCourse.id && (
+            <Card
+              key="new"
+              content={{
+                header: [
+                  {
+                    render: (
+                      <input
+                        className="col-md-8"
+                        type="text"
+                        name="title"
+                        value={newCourse.title}
+                        placeholder="Name"
+                        onChange={this.onChange}
+                      ></input>
+                    ),
+                  },
+                ],
+                body: [
+                  {
+                    render: (
+                      <span className="input-group-text">Course Info</span>
+                    ),
+                  },
+                  {
+                    render: (
+                      <textarea
+                        name="info"
+                        onChange={this.onChange}
+                        className="form-control"
+                        aria-label="With textarea"
+                      ></textarea>
+                    ),
+                  },
+                  {
+                    render: <BlankAvailability />,
+                  },
+                ],
+                footer: [
+                  {
+                    render: <button>Save</button>,
+                  },
+                ],
+              }}
+            />
+          )}
           {courses.length !== 0 &&
             courses.map((c) => (
               <Card
-              update={this.onChange}
+                update={this.onChange}
                 content={{
                   header: [
                     {

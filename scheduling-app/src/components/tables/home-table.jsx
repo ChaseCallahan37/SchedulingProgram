@@ -95,6 +95,26 @@ class HomeTable extends Component {
     const courses = getCourses();
     return (
       <div>
+        <Card
+          key="new"
+          content={{
+            header: [
+              {
+                render: <label>New Class</label>,
+              },
+            ],
+            body: [
+              {
+                render: <BlankAvailability />,
+              },
+            ],
+            footer: [
+              {
+                render: <button>Save</button>,
+              },
+            ],
+          }}
+        />
         {courses &&
           courses.map((c) => (
             <Card
