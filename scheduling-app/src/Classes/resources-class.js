@@ -1,12 +1,13 @@
 import { v4 as uuidv4 } from "uuid";
 import Availability from "./availability-class";
+import { getBlankAvailability } from "./availability-class";
 
 class Resource {
   constructor({
     id = uuidv4(),
     type,
     name,
-    availability = { ...new Availability() },
+    availability = getBlankAvailability(),
     constraints = [],
   }) {
     this.id = id;

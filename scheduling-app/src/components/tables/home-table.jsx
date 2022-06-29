@@ -95,49 +95,6 @@ class HomeTable extends Component {
     const courses = getCourses();
     return (
       <div>
-        <Card
-          key="new"
-          content={{
-            header: [
-              {
-                render: <label>New Class</label>,
-              },
-            ],
-            body: [
-              {
-                render: <BlankAvailability />,
-              },
-            ],
-            footer: [
-              {
-                render: <button>Save</button>,
-              },
-            ],
-          }}
-        />
-        {courses &&
-          courses.map((c) => (
-            <Card
-              key={c.id}
-              content={{
-                header: [
-                  {
-                    render: <label key={c.title}>{c.title}</label>,
-                  },
-                ],
-                body: [
-                  {
-                    render: <p key={c.info}>{c.info}</p>,
-                  },
-                  {
-                    render: (
-                      <AvailabilityList key={c.id} item={c} update={() => {}} />
-                    ),
-                  },
-                ],
-              }}
-            />
-          ))}
         <button onClick={this.sendData}>Make Schedule</button>
         <div className="d-md-flex justify-content-md-end"></div>
         {/* {this.createCourseText()}

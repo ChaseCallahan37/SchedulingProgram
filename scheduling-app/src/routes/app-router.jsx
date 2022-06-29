@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import CourseTable from "../components/tables/course-table";
+import CourseTable from "../components/tables/CourseTable";
 import CourseHeader from "../components/page-components/course-header";
 import HomeTable from "../components/tables/home-table";
 import ResourceTable from "./../components/tables/resources-table";

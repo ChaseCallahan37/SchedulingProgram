@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { v4 as uuidv4 } from "uuid";
-import BlankCard from "../page-components/blank-card";
-import CourseBox from "../page-components/course-box";
-import { createBlankAvailability } from "./../../Classes/availability-class";
+import BlankCard from "../scheduling-app/src/components/page-components/blank-card";
+import CourseBox from "../scheduling-app/src/components/page-components/course-box";
+import { createBlankAvailability } from "../scheduling-app/src/Classes/availability-class";
 import {
   getCourses,
   saveCourse,
   createBlankCourse,
-} from "../../app-info/course-info";
+} from "../scheduling-app/src/app-info/course-info";
 
 class CourseTable extends Component {
   constructor(props) {

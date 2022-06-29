@@ -1,3 +1,5 @@
+import Time from "./TimeClass";
+
 class Availability {
   constructor(days = null) {
     if (days !== null) {
@@ -7,36 +9,36 @@ class Availability {
         {
           day: "Monday",
           times: {
-            start: 0,
-            end: 0,
+            start: new Time(),
+            end: new Time(),
           },
         },
         {
           day: "Tuesday",
           times: {
-            start: 0,
-            end: 0,
+            start: new Time(),
+            end: new Time(),
           },
         },
         {
           day: "Wednesday",
           times: {
-            start: 0,
-            end: 0,
+            start: new Time(),
+            end: new Time(),
           },
         },
         {
           day: "Thursday",
           times: {
-            start: 0,
-            end: 0,
+            start: new Time(),
+            end: new Time(),
           },
         },
         {
           day: "Friday",
           times: {
-            start: 0,
-            end: 0,
+            start: new Time(),
+            end: new Time(),
           },
         },
       ];
@@ -63,3 +65,45 @@ export default Availability;
 //         end: 1200
 //     }
 // }
+
+const availability = [
+  {
+    title: "Monday",
+    times: {
+      start: new Time(),
+      end: new Time(),
+    },
+  },
+  {
+    title: "Tuesday",
+    times: {
+      start: new Time(),
+      end: new Time(),
+    },
+  },
+  {
+    title: "Wednesday",
+    times: {
+      start: new Time(),
+      end: new Time(),
+    },
+  },
+  {
+    title: "Thursday",
+    times: {
+      start: new Time(),
+      end: new Time(),
+    },
+  },
+  {
+    title: "Friday",
+    times: {
+      start: new Time(),
+      end: new Time(),
+    },
+  },
+];
+
+export const getBlankAvailability = () => {
+  return availability;
+};

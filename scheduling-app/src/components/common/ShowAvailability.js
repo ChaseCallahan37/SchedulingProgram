@@ -4,20 +4,24 @@ const ShowAvailability = (props) => {
   const { availability } = props;
   return (
     <div>
-      {availability.days &&
-        availability.days.map((d) => (
-          <div className="saved-availability" key={d.day}>
-            <label className="saved-day">{d.day}</label>
-            <div className="saved-time">
-              {!!d.times && (
-                <label className="saved-start-time">
-                  Start: {d.times.start}
-                </label>
-              )}
-              {!!d.times && <label> End: {d.times.end}</label>}
-            </div>
+      {availability.map((day) => (
+        <div className="saved-availability" key={day.title}>
+          <label className="saved-day">{day.title}</label>
+          <div className="saved-time">
+            {!!day.times && (
+              <label className="saved-start-time">
+                Start: {`${day.times.start.hour}:${day.times.start.minute}`}
+              </label>
+            )}
+            {!!day.times && (
+              <label>
+                {" "}
+                End: {`${day.times.end.hour}:${day.times.end.minute}`}
+              </label>
+            )}
           </div>
-        ))}
+        </div>
+      ))}
     </div>
   );
 };
