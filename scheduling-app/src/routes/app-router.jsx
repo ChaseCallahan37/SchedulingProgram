@@ -16,7 +16,6 @@ class AppRouter extends Component {
           <Route path="/" component={HomeTable} exact={true} />
           <Route path="/courses" component={CourseTable} />
           <Route path="/resources" component={ResourceTable}></Route>
-          <Route path="/test" component={TestTable} />
         </div>
       </BrowserRouter>
     );
