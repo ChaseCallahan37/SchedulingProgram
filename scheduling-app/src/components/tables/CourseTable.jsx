@@ -18,190 +18,144 @@ import BlankAvailability from "../common/BlankAvailability";
 import { relativeTimeThreshold } from "moment";
 
 class CourseTable extends Component {
-  constructor(props) {
-    super(props);
-    this.createClasses = this.createClasses.bind(this);
-    this.addClass = this.addClass.bind(this);
-    this.updateNewClass = this.updateNewClass.bind(this);
-    this.renderBlankCard = this.renderBlankCard.bind(this);
-    this.updateCourseState = this.updateCourseState.bind(this);
-    this.saveClass = this.saveClass.bind(this);
-    this.state = {
-      courses: [],
-      newCourse: this.newCourseTemplate(),
-    };
-  }
-  componentDidMount = () => {
-    this.updateCourseState();
-  };
-  newCourseTemplate() {
-    return {
+  state = {
+    courses: [],
+    newCourse: {
       id: null,
       title: "",
-      info: null,
+      info: "",
       availability: getBlankAvailability(),
-      resources: null,
-    };
-  }
-  updateCourseState() {
+      resources: [],
+    },
+  };
+
+  componentDidMount = () => {
     const courses = getCourses();
     this.setState(() => ({ courses }));
-  }
+  };
+  handleAddClass = () => {
+    const newCourse = { ...this.state.newCourse };
+    newCourse.id = uuidv4();
+    this.setState(() => ({ newCourse }));
+  };
+  handleOnChange = (name, value) => {
+    const newCourse = { ...this.state.newCourse };
+    newCourse[name] = value;
+    this.updateNewCourse(newCourse);
+  };
   saveClass() {
     saveCourse({ ...this.state.newCourse });
-    this.setState(() => ({ newCourse: this.newCourseTemplate() }));
-    this.updateCourseState();
+    this.setState(() => ({
+      newCourse: {
+        id: null,
+        title: "",
+        info: "",
+        availability: getBlankAvailability(),
+        resources: [],
+      },
+    }));
   }
   updateNewClass(field, content) {
     const newCourse = { ...this.state.newCourse };
     newCourse[field] = content;
     this.setState(() => ({ newCourse }));
   }
-  addClass = () => {
-    const newCourse = { ...this.state.newCourse };
-    newCourse.id = uuidv4();
-    this.setState(() => ({ newCourse }));
-  };
-  createClasses() {
-    const { courses } = this.state;
-    return courses.map((course) => {
-      return <CourseBox key={course.id} course={course} />;
-    });
-  }
-  renderBlankCard() {
-    const { newCourse } = this.state;
-    return (
-      newCourse.id && (
-        <BlankCard
-          key={"unique"}
-          course={newCourse}
-          updateNewClass={this.updateNewClass}
-          saveClass={this.saveClass}
-        />
-      )
-    );
-  }
-  onChange = (name, value) => {
-    const newCourse = { ...this.state.newCourse };
-    newCourse[name] = value;
-    this.updateNewCourse(newCourse);
-  };
-  updateNewCourse(newCourse) {
+  updateNewCourse = (newCourse) => {
     this.setState({ newCourse });
     console.log(this.state.newCourse);
-  }
-  // onChange = (e) => {
-  //   const { name, value } = e.target;
-  //   const newCourse = { ...this.state.newCourse };
-  //   newCourse[name] = value;
-  //   this.setState({ newCourse });
-  //   console.log(this.state.newCourse);
-  // };
+  };
+  renderAllCourses = () => {
+    const { courses } = this.state;
+    //If there are courses
+    if (courses.length !== 0) {
+      return courses.map((course) => (
+        <Card
+          key={course.title}
+          update={this.handleOnChange}
+          content={{
+            header: [<label key="header1">{course.title}</label>],
+            body: [
+              <p key="body1">{course.info}</p>,
+
+              <label key="body2" className="label">
+                Availability:
+              </label>,
+
+              <ShowAvailability
+                key="body3"
+                availability={course.availability}
+              />,
+            ],
+            footer: [<button key="footer1">Edit This Course</button>],
+          }}
+        />
+      ));
+    }
+  };
+  renderBlankCourse = () => {
+    const { newCourse } = this.state;
+    if (newCourse.id) {
+      return (
+        <Card
+          key="new"
+          content={{
+            header: [
+              <input
+                key="header1"
+                className="col-md-8"
+                type="text"
+                name="title"
+                value={newCourse.title}
+                placeholder="Name"
+                onChange={(e) =>
+                  this.handleOnChange(e.target.name, e.target.value)
+                }
+              ></input>,
+            ],
+            body: [
+              <span key="body1" className="input-group-text">
+                Course Info
+              </span>,
+
+              <textarea
+                key="body2"
+                name="info"
+                onChange={(e) =>
+                  this.handleOnChange(e.target.name, e.target.value)
+                }
+                className="form-control"
+                aria-label="With textarea"
+              ></textarea>,
+
+              <BlankAvailability
+                key="body3"
+                availability={newCourse.availability}
+                update={this.handleOnChange}
+              />,
+            ],
+            footer: [
+              <button key="footer1" onClick={this.saveClass}>
+                Save
+              </button>,
+            ],
+          }}
+        />
+      );
+    }
+  };
 
   render() {
     const { courses, newCourse } = this.state;
     return (
       <div>
         <div className="d-md-flex justify-content-md-end">
-          <button className="button" onClick={this.addClass}>
+          <button className="button" onClick={this.handleAddClass}>
             Add Course
           </button>
         </div>
         <div className="row row-cols-1 row-cols-md-4 g-0">
-          {newCourse.id && (
-            <Card
-              key="new"
-              content={{
-                header: [
-                  {
-                    render: (
-                      <input
-                        className="col-md-8"
-                        type="text"
-                        name="title"
-                        value={newCourse.title}
-                        placeholder="Name"
-                        onChange={(e) =>
-                          this.onChange(e.target.name, e.target.value)
-                        }
-                      ></input>
-                    ),
-                  },
-                ],
-                body: [
-                  {
-                    render: (
-                      <span className="input-group-text">Course Info</span>
-                    ),
-                  },
-                  {
-                    render: (
-                      <textarea
-                        name="info"
-                        onChange={(e) =>
-                          this.onChange(e.target.name, e.target.value)
-                        }
-                        className="form-control"
-                        aria-label="With textarea"
-                      ></textarea>
-                    ),
-                  },
-                  {
-                    render: (
-                      <BlankAvailability
-                        availability={newCourse.availability}
-                        update={this.onChange}
-                      />
-                    ),
-                  },
-                ],
-                footer: [
-                  {
-                    render: <button onClick={this.saveClass}>Save</button>,
-                  },
-                ],
-              }}
-            />
-          )}
-          {courses.length !== 0 &&
-            courses.map((course) => (
-              <Card
-                key={course.title}
-                update={this.onChange}
-                content={{
-                  header: [
-                    {
-                      render: <label key="header1">{course.title}</label>,
-                    },
-                  ],
-                  body: [
-                    {
-                      render: <p key="body1">{course.info}</p>,
-                    },
-                    {
-                      render: (
-                        <label key="body2" className="label">
-                          Availability:
-                        </label>
-                      ),
-                    },
-                    {
-                      render: (
-                        <ShowAvailability
-                          key="body3"
-                          availability={course.availability}
-                        />
-                      ),
-                    },
-                  ],
-                  footer: [
-                    {
-                      render: <button key="footer1">Edit This Course</button>,
-                    },
-                  ],
-                }}
-              />
-            ))}
+          {this.renderAllCourses()}
+          {this.renderBlankCourse()}
         </div>
       </div>
     );

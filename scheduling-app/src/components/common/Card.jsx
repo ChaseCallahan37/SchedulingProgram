@@ -15,13 +15,13 @@ class Card extends Component {
     return (
       <div className={styles.parentDiv}>
         <div key="header" className={styles.header}>
-          {content.header && content.header.map((head) => head.render)}
+          {content.header && content.header.map((head) => head)}
         </div>
         <div key="body" className={styles.body}>
-          {content.body && content.body.map((bod) => bod.render)}
+          {content.body && content.body.map((bod) => bod)}
         </div>
         <div key="footer" className={styles.footer}>
-          {content.footer && content.footer.map((foot) => foot.render)}
+          {content.footer && content.footer.map((foot) => foot)}
         </div>
       </div>
     );
