@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CourseTable from "../components/tables/CourseTable";
 import CourseHeader from "../components/page-components/course-header";
 import HomeTable from "../components/tables/home-table";
-import ResourceTable from "./../components/tables/resources-table";
+import ResourceTable from "./../components/tables/ResourceTable";
 import TestTable from "../test-cms-stuff/Test-Table";
 
 class AppRouter extends Component {

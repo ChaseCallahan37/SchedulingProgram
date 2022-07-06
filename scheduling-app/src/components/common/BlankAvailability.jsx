@@ -86,7 +86,8 @@ class BlankAvailability extends Component {
         }
         return false;
       });
-      this.props.update("availability", availability);
+      const e = { target: { name: "availability", value: availability } };
+      this.props.update(e);
     }
   };
 

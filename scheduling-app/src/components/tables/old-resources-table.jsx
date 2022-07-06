@@ -6,7 +6,7 @@ import Resource from "../../Classes/resources-class";
 import { v4 as uuidv4 } from "uuid";
 import { createBlankResource } from "../../Classes/resources-class";
 
-class ResourceTable extends Component {
+class OldResourceTable extends Component {
   constructor(props) {
     super(props);
     this.createResource = this.createResource.bind(this);
@@ -91,4 +91,4 @@ class ResourceTable extends Component {
   }
 }
 
-export default ResourceTable;
+export default OldResourceTable;
