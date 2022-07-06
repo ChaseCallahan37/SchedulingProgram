@@ -1,11 +1,26 @@
 import Resource from "../Classes/resources-class";
 import Availability from "./../Classes/availability-class";
+import Time from "../Classes/TimeClass";
 
 let resources = [
   new Resource({
     type: "Teacher",
     name: "Jeff",
-    availability: { ...new Availability() },
+    availability: [
+      {
+        title: "wednesday",
+        times: {
+          start: new Time({
+            hour: "8",
+            minute: "30",
+          }),
+          end: new Time({
+            hour: "5",
+            minute: "45",
+          }),
+        },
+      },
+    ],
     constraints: ["MIS 221", "MIS 321"],
   }),
 ];

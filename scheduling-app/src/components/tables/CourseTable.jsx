@@ -16,6 +16,7 @@ import AvailabilityList from "../common/availability-list";
 import ShowAvailability from "../common/ShowAvailability";
 import BlankAvailability from "../common/BlankAvailability";
 import { relativeTimeThreshold } from "moment";
+import Time from "../../Classes/TimeClass";
 
 class CourseTable extends Component {
   state = {
@@ -24,37 +25,113 @@ class CourseTable extends Component {
       id: null,
       title: "",
       info: "",
-      availability: getBlankAvailability(),
+      availability: [
+        {
+          title: "Monday",
+          times: {
+            start: new Time(),
+            end: new Time(),
+          },
+        },
+        {
+          title: "Tuesday",
+          times: {
+            start: new Time(),
+            end: new Time(),
+          },
+        },
+        {
+          title: "Wednesday",
+          times: {
+            start: new Time(),
+            end: new Time(),
+          },
+        },
+        {
+          title: "Thursday",
+          times: {
+            start: new Time(),
+            end: new Time(),
+          },
+        },
+        {
+          title: "Friday",
+          times: {
+            start: new Time(),
+            end: new Time(),
+          },
+        },
+      ],
       resources: [],
     },
   };
 
   componentDidMount = () => {
-    const courses = getCourses();
-    this.setState(() => ({ courses }));
+    this.updateCourses();
+  };
+  updateCourses = () => {
+    this.setState(() => ({ courses: getCourses() }));
   };
   handleAddClass = () => {
     const newCourse = { ...this.state.newCourse };
     newCourse.id = uuidv4();
     this.setState(() => ({ newCourse }));
   };
-  handleOnChange = (name, value) => {
+  handleOnChange = (e) => {
+    const { name, value } = e.target;
     const newCourse = { ...this.state.newCourse };
     newCourse[name] = value;
     this.updateNewCourse(newCourse);
   };
-  saveClass() {
+  saveClass = () => {
     saveCourse({ ...this.state.newCourse });
     this.setState(() => ({
       newCourse: {
         id: null,
         title: "",
         info: "",
-        availability: getBlankAvailability(),
+        availability: [
+          {
+            title: "Monday",
+            times: {
+              start: new Time(),
+              end: new Time(),
+            },
+          },
+          {
+            title: "Tuesday",
+            times: {
+              start: new Time(),
+              end: new Time(),
+            },
+          },
+          {
+            title: "Wednesday",
+            times: {
+              start: new Time(),
+              end: new Time(),
+            },
+          },
+          {
+            title: "Thursday",
+            times: {
+              start: new Time(),
+              end: new Time(),
+            },
+          },
+          {
+            title: "Friday",
+            times: {
+              start: new Time(),
+              end: new Time(),
+            },
+          },
+        ],
         resources: [],
       },
     }));
-  }
+    this.updateCourses();
+  };
   updateNewClass(field, content) {
     const newCourse = { ...this.state.newCourse };
     newCourse[field] = content;
@@ -107,9 +184,7 @@ class CourseTable extends Component {
                 name="title"
                 value={newCourse.title}
                 placeholder="Name"
-                onChange={(e) =>
-                  this.handleOnChange(e.target.name, e.target.value)
-                }
+                onChange={this.handleOnChange}
               ></input>,
             ],
             body: [
@@ -120,9 +195,7 @@ class CourseTable extends Component {
               <textarea
                 key="body2"
                 name="info"
-                onChange={(e) =>
-                  this.handleOnChange(e.target.name, e.target.value)
-                }
+                onChange={this.handleOnChange}
                 className="form-control"
                 aria-label="With textarea"
               ></textarea>,

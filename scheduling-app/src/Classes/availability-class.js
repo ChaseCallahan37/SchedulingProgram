@@ -105,5 +105,5 @@ const availability = [
 ];
 
 export const getBlankAvailability = () => {
-  return availability;
+  return [...availability];
 };
