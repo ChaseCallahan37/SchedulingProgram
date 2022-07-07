@@ -71,24 +71,22 @@ class BlankAvailability extends Component {
 
     return true;
   };
+  // update = () => {};
   update = (e) => {
     const { name, value, id } = e.target;
-    const path = name.split(".");
+    const time = value.split(":");
 
-    const validValue = this.validateInput(value, path);
-
-    if (validValue) {
-      const availability = [...this.props.availability];
-      const day = availability.find((a) => {
-        if (a.title === id) {
-          a.times[path[0]][path[1]] = value;
-          return true;
-        }
-        return false;
-      });
-      const e = { target: { name: "availability", value: availability } };
-      this.props.update(e);
-    }
+    const availability = [...this.props.availability];
+    availability.find((searchDay) => {
+      if (searchDay.title === id) {
+        searchDay.times[name].hour = time[0];
+        searchDay.times[name].minute = time[1];
+        return true;
+      }
+      return false;
+    });
+    const event = { target: { name: "availability", value: availability } };
+    this.props.update(event);
   };
 
   render() {
@@ -102,21 +100,21 @@ class BlankAvailability extends Component {
               <h4>{day.title}</h4>
               <h6 className="start-end">Start</h6>
               <input
+                key="start"
                 type="time"
                 className="avail-inputs"
                 onChange={this.update}
                 id={`${day.title}`}
-                name="start.hour"
-                value={day.times.start.hour}
+                name="start"
               />
               <h6 className="start-end">End</h6>
               <input
+                key="end"
                 type="time"
                 className="avail-inputs"
                 onChange={this.update}
                 id={`${day.title}`}
-                name="end.hour"
-                value={day.times.end.hour}
+                name="end"
               />
               <hr></hr>
             </div>

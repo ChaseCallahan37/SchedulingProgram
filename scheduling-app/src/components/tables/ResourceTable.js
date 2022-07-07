@@ -1,5 +1,9 @@
 import React, { Component } from "react";
-import { getResources, saveResource } from "./../../app-info/resource-info";
+import {
+  getResources,
+  saveResource,
+  removeResource,
+} from "./../../app-info/resource-info";
 import Card from "../common/Card";
 import ShowAvailability from "../common/ShowAvailability";
 import { getBlankAvailability } from "../../Classes/availability-class";
@@ -68,6 +72,12 @@ class ResourceTable extends Component {
     };
     this.setState({ blankResource });
   }
+  pullResource = (id) => {
+    const resources = [...this.state.resources];
+    const index = resources.findIndex((resource) => resource.id === id);
+    resources.splice(index, 1);
+    this.setState({ resources });
+  };
   handleAddResource = () => {
     this.setState({ showBlank: true });
     this.resetBlankResource();
@@ -91,6 +101,15 @@ class ResourceTable extends Component {
     this.resetBlankResource();
     this.setState({ showBlank: false });
   };
+  handleEditResource = (e) => {
+    const { id } = e.target;
+    this.pullResource(id);
+    const resources = [...this.state.resources];
+    let blankResource = { ...this.state.blankResource };
+    const editResource = resources.find((resource) => resource.id === id);
+    blankResource = editResource;
+    this.setState({ blankResource, showBlank: true });
+  };
   renderAllResources = () => {
     const { resources } = this.state;
     return resources.map((resource) => {
@@ -107,7 +126,11 @@ class ResourceTable extends Component {
                 Teaching Style: {resource.constraints.teachingStyle}
               </label>,
             ],
-            footer: [<button>Button</button>],
+            footer: [
+              <button className="button" id={resource.id} onClick={this.handleEditResource}>
+                Edit
+              </button>,
+            ],
           }}
         />
       );
@@ -183,7 +206,7 @@ class ResourceTable extends Component {
               </select>
             </div>,
           ],
-          footer: [<button onClick={this.handleSaveResource}>Save</button>],
+          footer: [<button className="button" onClick={this.handleSaveResource}>Save</button>],
         }}
       />
     );

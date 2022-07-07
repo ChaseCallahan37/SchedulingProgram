@@ -163,7 +163,7 @@ class CourseTable extends Component {
                 availability={course.availability}
               />,
             ],
-            footer: [<button key="footer1">Edit This Course</button>],
+            footer: [<button className ="button" key="footer1">Edit This Course</button>],
           }}
         />
       ));
@@ -207,7 +207,7 @@ class CourseTable extends Component {
               />,
             ],
             footer: [
-              <button key="footer1" onClick={this.saveClass}>
+              <button className="button" key="footer1" onClick={this.saveClass}>
                 Save
               </button>,
             ],

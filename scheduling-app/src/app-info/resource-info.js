@@ -33,8 +33,16 @@ export const getResources = () => {
 };
 
 export const saveResource = (newResource) => {
-  const duplicate = resources.find((r) => r.id === newResource.id);
-  if (!duplicate) {
+  const index = resources.findIndex((res) => res.id === newResource.id);
+  if (index === -1) {
     resources.push(new Resource(newResource));
+  } else {
+    const test = new Resource(newResource);
+    resources[index] = test;
   }
+};
+
+export const removeResource = (id) => {
+  const index = resources.findIndex((resource) => resource.id === id)
+  resources.splice(index, 1)
 };

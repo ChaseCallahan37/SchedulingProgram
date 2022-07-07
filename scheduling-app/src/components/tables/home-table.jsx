@@ -35,7 +35,9 @@ class HomeTable extends Component {
   createCourseText = () => {
     return (
       <div>
-        <button>Make Schedule</button>
+        
+        <button className="button" >Make Schedule</button>
+     
         <h2>Courses</h2>
         <div className="row row-cols-1 row-cols-md-4 g-0">
           {this.state.courses.map((course) => {
@@ -94,9 +96,9 @@ class HomeTable extends Component {
   render() {
     const courses = getCourses();
     return (
-      <div>
-        <button onClick={this.sendData}>Make Schedule</button>
-        <div className="d-md-flex justify-content-md-end"></div>
+      <div className="d-md-flex justify-content-md-end">
+        <button className ="button" onClick={this.sendData}>Make Schedule</button>
+       
         {/* {this.createCourseText()}
     {this.createResourceText()} */}
         <br></br>

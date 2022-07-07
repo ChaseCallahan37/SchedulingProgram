@@ -11,25 +11,29 @@ class CourseHeader extends Component {
   }
   styleImg() {
     return {
-      width: 110,
-      height: 45,
-      
+      width: 200,
+      height: 75,
     };
   }
   render() {
     return (
-      <div className="text-center">
+      <div className="">
         <nav
           className="navbar"
           style={{ color: "white", backgroundColor: "#B20837" }}
         >
-          <img
-            className=""
-            src={img}
-            style={this.styleImg()}
-            alt="University of Alabama Logo"
-          />
-          <h1>Scheduling</h1>
+          <figure id="figure-header">
+            <img
+              id="alabama-logo"
+              className=""
+              src={img}
+              style={this.styleImg()}
+              alt="University of Alabama Logo"
+            />
+            <figcaption id="scheduling-label">
+              <h3>Scheduling Tool </h3>
+            </figcaption>
+          </figure>
           <NavBar />
         </nav>
       </div>
