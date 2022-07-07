@@ -99,44 +99,26 @@ class BlankAvailability extends Component {
         {availability &&
           availability.map((day) => (
             <div>
-              <hr></hr>
               <h4>{day.title}</h4>
-              <h5>Start</h5>
-              <label></label>
+              <h6 className="start-end">Start</h6>
               <input
-            
+                type="time"
                 className="avail-inputs"
                 onChange={this.update}
                 id={`${day.title}`}
                 name="start.hour"
                 value={day.times.start.hour}
               />
-              <label>:</label>
+              <h6 className="start-end">End</h6>
               <input
-             
-                className="avail-inputs"
-                onChange={this.update}
-                id={`${day.title}`}
-                name="start.minute"
-                value={day.times.start.minute}
-              />
-              <h5>End</h5>
-              <label></label>
-              <input
+                type="time"
                 className="avail-inputs"
                 onChange={this.update}
                 id={`${day.title}`}
                 name="end.hour"
                 value={day.times.end.hour}
               />
-              <label>:</label>
-              <input
-                className="avail-inputs"
-                onChange={this.update}
-                id={`${day.title}`}
-                name="end.minute"
-                value={day.times.end.minute}
-              />
+              <hr></hr>
             </div>
           ))}
       </div>

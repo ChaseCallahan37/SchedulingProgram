@@ -146,8 +146,9 @@ class ResourceTable extends Component {
             />,
             <div>
               <h2>Constraints</h2>
-              <label>Class Size Allowed</label>
+              <label id="constraints-list">Class Size Allowed</label>
               <select
+                id="constraints-select"
                 name="constraints.classSize"
                 onChange={this.handleUpdates}
               >
@@ -156,8 +157,9 @@ class ResourceTable extends Component {
                 <option>Medium</option>
                 <option>Large</option>
               </select>
-              <label>Teaching Method</label>
+              <label id="constraints-list">Teaching Method</label>
               <select
+                id="constraints-select"
                 name="constraints.teachingStyle"
                 onChange={this.handleUpdates}
               >
@@ -167,8 +169,9 @@ class ResourceTable extends Component {
                 <option>Hybrid</option>
                 <option>All</option>
               </select>
-              <label>Classes Per Year</label>
+              <label id="constraints-list">Classes Per Year</label>
               <select
+                id="constraints-select"
                 name="constraints.classesPerYear"
                 onChange={this.handleUpdates}
               >

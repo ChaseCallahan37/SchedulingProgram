@@ -1,48 +1,46 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 .button {
   color: white;
-  background-color: #B20837;
+  background-color: #b20837;
   margin: 5px;
-  border-color:#B20837 ;
+  border-color: #b20837;
 }
 
-
-.card-header{
+.card-header {
   color: white;
-  background-color: #B20837;
+  background-color: #b20837;
   font-family: Georgia, serif !important;
   width: auto;
 }
 
-.card-footer{
+.card-footer {
   border-radius: 0px 0px 15px 15px;
 }
 
-
-.card{
+.card {
   width: 18rem;
   border-radius: 0px 0px 15px 15px;
   margin-left: 70px;
-  margin-top:15px;
+  margin-top: 15px;
   margin-bottom: 30px;
   height: auto;
 }
 
 .nav-link {
-  color: white
+  color: white;
 }
 
 #nav-bar-container {
@@ -50,14 +48,13 @@ code {
   border-style: solid;
   border-color: black;
   border: 10px;
-  color: pink
+  color: pink;
 }
 
 .nav-link-active {
   background-color: white;
   color: white !important;
   font-weight: 700;
-
 }
 
 .navbar .navbar-nav .nav-link {
@@ -65,59 +62,71 @@ code {
   font-size: 1.1em;
 }
 .navbar .navbar-nav .nav-link:hover {
-background-color: #FFACB7;
-color: #fff;
+  background-color: #ffacb7;
+  color: #fff;
 }
 
-.nav-item:hover{
+.nav-item:hover {
   color: white;
   font-weight: 700;
 }
 
-.visited{
+.visited {
   color: white;
 }
 
-a:visited{  
-  color: white;  
-   }  
+a:visited {
+  color: white;
+}
 
-.label{
+.label {
   font-weight: bold;
 }
 
-.availability-list{
-  margin: 15px
+.availability-list {
+  margin: 15px;
 }
 
-.availability-dropdown{
+.availability-dropdown {
   float: right;
   margin-left: 5px;
 }
 
-.day-of-week{
+.day-of-week {
   margin-right: 15px;
 }
 
-.saved-availability{
+.saved-availability {
   margin-right: 15px;
   margin-bottom: 15px;
 }
 
-.saved-day{
+.saved-day {
   margin-right: 0px;
 }
 
-.saved-time{
+.saved-time {
   float: right;
   margin-left: 5px;
 }
 
-.saved-start-time{
+.saved-start-time {
   margin-right: 5px;
 }
 
-.avail-inputs{
-  margin: 5px;
-  width: 25%;
+.avail-inputs {
+  margin-bottom: 5px;
+}
+
+.start-end {
+  margin: 0px;
+}
+
+#constraints-list {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+#constraints-select {
+  float: right;
 }
