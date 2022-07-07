@@ -1,6 +1,7 @@
 import Course from "./../Classes/course-class";
 import { createBlankAvailability } from "./../Classes/availability-class";
 import Time from "../Classes/TimeClass";
+import { courseData } from "../Api-Calls/SchedulingApi";
 
 const MIS221Avail = [
   {

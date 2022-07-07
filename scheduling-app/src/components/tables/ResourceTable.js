@@ -6,15 +6,18 @@ import { getBlankAvailability } from "../../Classes/availability-class";
 import { v4 as uuidv4 } from "uuid";
 import BlankAvailability from "../common/BlankAvailability";
 import Time from "../../Classes/TimeClass";
+import { getCourses } from "../../app-info/course-info";
 
 class ResourceTable extends Component {
   state = {
     resources: [],
+    courses: [],
     blankResource: {},
     showBlank: false,
   };
   componentDidMount() {
     this.updateResources();
+    this.setState({ courses: getCourses() });
   }
   updateResources = () => {
     this.setState({ resources: getResources() });
@@ -61,7 +64,7 @@ class ResourceTable extends Component {
           },
         },
       ],
-      constraints: [],
+      constraints: { classSize: "", teachingStyle: "" },
     };
     this.setState({ blankResource });
   }
@@ -72,8 +75,15 @@ class ResourceTable extends Component {
   handleUpdates = (e) => {
     const { name, value } = e.target;
     const blankResource = { ...this.state.blankResource };
-    blankResource[name] = value;
-    this.setState({ blankResource });
+
+    if (name.includes(".")) {
+      const path = name.split(".");
+      blankResource[path[0]][path[1]] = value;
+    } else {
+      blankResource[name] = value;
+      this.setState({ blankResource });
+    }
+    console.log(this.state.blankResource);
   };
   handleSaveResource = () => {
     saveResource({ ...this.state.blankResource });
@@ -84,15 +94,23 @@ class ResourceTable extends Component {
   renderAllResources = () => {
     const { resources } = this.state;
     return resources.map((resource) => {
-      const content = {
-        header: [<h1>{resource.name}</h1>],
-        body: [
-          <label>Type: {resource.type}</label>,
-          <ShowAvailability availability={resource.availability} />,
-        ],
-        footer: [<button>Button</button>],
-      };
-      return <Card content={content} />;
+      return (
+        <Card
+          content={{
+            header: [<h1>{resource.name}</h1>],
+            body: [
+              <label>Type: {resource.type}</label>,
+              <ShowAvailability availability={resource.availability} />,
+              <label>Class Size: {resource.constraints.classSize}</label>,
+              <br></br>,
+              <label>
+                Teaching Style: {resource.constraints.teachingStyle}
+              </label>,
+            ],
+            footer: [<button>Button</button>],
+          }}
+        />
+      );
     });
   };
   renderBlankResource() {
@@ -102,23 +120,65 @@ class ResourceTable extends Component {
         content={{
           header: [
             <input
+              className="col-md-8"
+              id="resource-name-box"
               onChange={this.handleUpdates}
               value={name}
               name="name"
               placeholder="Name"
             />,
-          ],
-          body: [
-            <input
+            <select
               onChange={this.handleUpdates}
               value={type}
               name="type"
               placeholder="Type"
-            />,
+            >
+              <option></option>
+              <option>Tenure Track</option>
+              <option>Non-Tenure Track</option>
+              <option>PhD. Student</option>
+            </select>,
+          ],
+          body: [
             <BlankAvailability
               availability={availability}
               update={this.handleUpdates}
             />,
+            <div>
+              <h2>Constraints</h2>
+              <label>Class Size Allowed</label>
+              <select
+                name="constraints.classSize"
+                onChange={this.handleUpdates}
+              >
+                <option></option>
+                <option>Small</option>
+                <option>Medium</option>
+                <option>Large</option>
+              </select>
+              <label>Teaching Method</label>
+              <select
+                name="constraints.teachingStyle"
+                onChange={this.handleUpdates}
+              >
+                <option></option>
+                <option>Online</option>
+                <option>In-Person</option>
+                <option>Hybrid</option>
+                <option>All</option>
+              </select>
+              <label>Classes Per Year</label>
+              <select
+                name="constraints.classesPerYear"
+                onChange={this.handleUpdates}
+              >
+                <option></option>
+                <option></option>
+                <option>In-Person</option>
+                <option>Hybrid</option>
+                <option>All</option>
+              </select>
+            </div>,
           ],
           footer: [<button onClick={this.handleSaveResource}>Save</button>],
         }}
@@ -126,7 +186,7 @@ class ResourceTable extends Component {
     );
   }
   render() {
-    const { resources, showBlank } = this.state;
+    const { resources, showBlank, courses } = this.state;
     return (
       <div>
         <div className="d-md-flex justify-content-md-end">

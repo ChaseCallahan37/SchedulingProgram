@@ -5,6 +5,7 @@ class Card extends Component {
     styles: {
       parentDiv: "card",
       header: "card-header text-white p-3 border text-center fs-3 ",
+      
       body: "card-body text-wrap",
       footer: "card-footer",
     },

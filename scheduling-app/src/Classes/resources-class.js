@@ -8,7 +8,7 @@ class Resource {
     type,
     name,
     availability = getBlankAvailability(),
-    constraints = [],
+    constraints = { classSize: "", teachingStyle: "" },
   }) {
     this.id = id;
     this.type = type; // ta or instructor

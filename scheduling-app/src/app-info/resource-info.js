@@ -21,7 +21,10 @@ let resources = [
         },
       },
     ],
-    constraints: ["MIS 221", "MIS 321"],
+    constraints: {
+      classSize: "Large",
+      teachingStyle: "In-Person",
+    },
   }),
 ];
 

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { saveResource, getResources } from "../../app-info/resource-info";
-import BlankResourceCard from "../page-components/blank-resource-card";
-import ResourceBox from "../page-components/resources-box";
-import Resource from "../../Classes/resources-class";
+import { saveResource, getResources } from "../scheduling-app/src/app-info/resource-info";
+import BlankResourceCard from "../scheduling-app/src/components/page-components/blank-resource-card";
+import ResourceBox from "../scheduling-app/src/components/page-components/resources-box";
+import Resource from "../scheduling-app/src/Classes/resources-class";
 import { v4 as uuidv4 } from "uuid";
-import { createBlankResource } from "../../Classes/resources-class";
+import { createBlankResource } from "../scheduling-app/src/Classes/resources-class";
 
 class OldResourceTable extends Component {
   constructor(props) {
