@@ -4,6 +4,7 @@ import { getResources } from "../../app-info/resource-info";
 import AvailabilityList from "../common/availability-list";
 import BlankAvailability from "../common/BlankAvailability";
 import Card from "../common/Card";
+import { GETCourses } from "./../../Api-Calls/SchedulingApi";
 
 class HomeTable extends Component {
   constructor(props) {
@@ -32,12 +33,15 @@ class HomeTable extends Component {
     };
     console.log(data);
   }
+  getDatData = async () => {
+    const data = await GETCourses();
+    console.log(data);
+  };
   createCourseText = () => {
     return (
       <div>
-        
-        <button className="button" >Make Schedule</button>
-     
+        <button className="button">Make Schedule</button>
+
         <h2>Courses</h2>
         <div className="row row-cols-1 row-cols-md-4 g-0">
           {this.state.courses.map((course) => {
@@ -94,11 +98,13 @@ class HomeTable extends Component {
   };
 
   render() {
-    const courses = getCourses();
+    this.getDatData();
     return (
       <div className="d-md-flex justify-content-md-end">
-        <button className ="button" onClick={this.sendData}>Make Schedule</button>
-       
+        <button className="button" onClick={this.sendData}>
+          Make Schedule
+        </button>
+
         {/* {this.createCourseText()}
     {this.createResourceText()} */}
         <br></br>

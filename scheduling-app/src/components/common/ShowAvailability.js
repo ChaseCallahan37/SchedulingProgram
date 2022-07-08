@@ -8,16 +8,13 @@ const ShowAvailability = (props) => {
         <div className="saved-availability" key={day.title}>
           <label className="saved-day">{day.title}</label>
           <div className="saved-time">
-            {!!day.times && (
+            {!!day.start && (
               <label className="saved-start-time">
-                Start: {`${day.times.start.hour}:${day.times.start.minute}`}
+                Start: {`${day.start.hour}:${day.start.minute}`}
               </label>
             )}
-            {!!day.times && (
-              <label>
-                {" "}
-                End: {`${day.times.end.hour}:${day.times.end.minute}`}
-              </label>
+            {!!day.end && (
+              <label> End: {`${day.end.hour}:${day.end.minute}`}</label>
             )}
           </div>
         </div>
