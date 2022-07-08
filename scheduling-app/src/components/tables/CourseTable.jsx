@@ -17,10 +17,12 @@ import ShowAvailability from "../common/ShowAvailability";
 import BlankAvailability from "../common/BlankAvailability";
 import { relativeTimeThreshold } from "moment";
 import Time from "../../Classes/TimeClass";
+import { GETCourses } from "./../../Api-Calls/SchedulingApi";
 
 class CourseTable extends Component {
   state = {
     courses: [],
+    showBlank: false,
     newCourse: {
       id: null,
       title: "",
@@ -69,13 +71,14 @@ class CourseTable extends Component {
   componentDidMount = () => {
     this.updateCourses();
   };
-  updateCourses = () => {
-    this.setState(() => ({ courses: getCourses() }));
+  updateCourses = async () => {
+    const courses = await getCourses();
+    this.setState(() => ({ courses }));
   };
   handleAddClass = () => {
     const newCourse = { ...this.state.newCourse };
     newCourse.id = uuidv4();
-    this.setState(() => ({ newCourse }));
+    this.setState(() => ({ newCourse, showBlank: true }));
   };
   handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -83,9 +86,17 @@ class CourseTable extends Component {
     newCourse[name] = value;
     this.updateNewCourse(newCourse);
   };
+  handleEdit = (e) => {
+    const { id } = e.target;
+    const courses = [...this.state.courses];
+    const index = courses.findIndex((course) => course.id === id);
+    const newCourse = courses.splice(index, 1)[0];
+    this.setState(() => ({ newCourse, showBlank: true, courses }));
+  };
   saveClass = () => {
     saveCourse({ ...this.state.newCourse });
     this.setState(() => ({
+      showBlank: false,
       newCourse: {
         id: null,
         title: "",
@@ -163,15 +174,24 @@ class CourseTable extends Component {
                 availability={course.availability}
               />,
             ],
-            footer: [<button className ="button" key="footer1">Edit This Course</button>],
+            footer: [
+              <button
+                id={course.id}
+                onClick={this.handleEdit}
+                className="button"
+                key="footer1"
+              >
+                Edit
+              </button>,
+            ],
           }}
         />
       ));
     }
   };
   renderBlankCourse = () => {
-    const { newCourse } = this.state;
-    if (newCourse.id) {
+    const { newCourse, showBlank } = this.state;
+    if (showBlank) {
       return (
         <Card
           key="new"
@@ -219,6 +239,7 @@ class CourseTable extends Component {
 
   render() {
     const { courses, newCourse } = this.state;
+    console.log(courses);
     return (
       <div>
         <div className="d-md-flex justify-content-md-end">

@@ -83,9 +83,11 @@ export const getCourses = () => {
 };
 
 export const saveCourse = (newCourse) => {
-  const duplicate = courses.find((course) => course.id === newCourse.id);
-  if (!duplicate) {
+  const index = courses.findIndex((course) => course.id === newCourse.id);
+  if (index === -1) {
     courses.push(new Course(newCourse));
+  } else {
+    courses.splice(index, 1, new Course(newCourse));
   }
 };
 
