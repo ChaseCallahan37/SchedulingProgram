@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import img from "../../Images/Logo.png";
-import NavBar from "./NavBar";
+import NavBar from "./Navbar";
 
 //Header, always visible
 
