@@ -70,14 +70,20 @@ const ResourceTable = () => {
           resources.map((resource) => {
             return (
               <Card
+                key={resource.id}
                 content={{
-                  header: [<h1>{resource.name}</h1>],
+                  header: [<h1 key="head-1">{resource.name}</h1>],
                   body: [
-                    <label>Type: {resource.type}</label>,
-                    <ShowAvailability availability={resource.availability} />,
-                    <label>Class Size: {resource.constraints.classSize}</label>,
-                    <br></br>,
-                    <label>
+                    <label key="label-1">Type: {resource.type}</label>,
+                    <ShowAvailability
+                      key={`showavailability${resource.id}`}
+                      availability={resource.availability}
+                    />,
+                    <label key="label-2">
+                      Class Size: {resource.constraints.classSize}
+                    </label>,
+                    <br key="break-em"></br>,
+                    <label key="label-3">
                       Teaching Style: {resource.constraints.teachingStyle}
                     </label>,
                   ],
@@ -86,6 +92,7 @@ const ResourceTable = () => {
                       className="button"
                       id={resource.id}
                       onClick={(e) => handleEditResource(e.target.id)}
+                      key="footer-1"
                     >
                       Edit
                     </button>,
@@ -96,6 +103,7 @@ const ResourceTable = () => {
           })}
         {showBlank && (
           <Card
+            key={blankResource.id}
             content={{
               header: [
                 <input
@@ -105,12 +113,14 @@ const ResourceTable = () => {
                   value={name}
                   name="name"
                   placeholder="Name"
+                  key="head-1"
                 />,
                 <select
                   onChange={(e) => handleUpdates(e.target)}
                   value={type}
                   name="type"
                   placeholder="Type"
+                  key="head-2"
                 >
                   <option></option>
                   <option>Tenure Track</option>
@@ -120,10 +130,11 @@ const ResourceTable = () => {
               ],
               body: [
                 <BlankAvailability
+                  key="body-1"
                   availability={availability}
                   update={(e) => handleUpdates(e.target)}
                 />,
-                <div>
+                <div key="body-2">
                   <h2>Constraints</h2>
                   <label id="constraints-list">Class Size Allowed</label>
                   <select
@@ -163,7 +174,11 @@ const ResourceTable = () => {
                 </div>,
               ],
               footer: [
-                <button className="button" onClick={handleSaveResource}>
+                <button
+                  key="foot-1"
+                  className="button"
+                  onClick={handleSaveResource}
+                >
                   Save
                 </button>,
               ],

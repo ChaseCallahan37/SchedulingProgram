@@ -91,7 +91,7 @@ const CourseTable = () => {
           ))}
         {showBlank && (
           <Card
-            key="new"
+            key={newCourse.id}
             content={{
               header: [
                 <input
