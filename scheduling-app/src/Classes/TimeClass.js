@@ -1,23 +1,7 @@
 class Time {
-  constructor(
-    { hour, minute, pm, military } = {
-      hour: "",
-      minute: "",
-      pm: null,
-      military: 0,
-    }
-  ) {
-    this.hour = hour;
-    this.minute = minute;
-    this.pm = pm;
-    this.military = military;
-  }
-  displayToMilitary() {
-    const rawMilitary = `${this.hour}${this.minute}`;
-    this.military = parseInt(rawMilitary);
-    if (this.pm) {
-      this.military += 1200;
-    }
+  constructor() {
+    this.start = "";
+    this.end = "";
   }
   generateHours() {
     let time = [];

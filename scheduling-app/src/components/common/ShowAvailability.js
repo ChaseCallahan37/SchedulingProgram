@@ -2,6 +2,7 @@ import React from "react";
 
 const ShowAvailability = (props) => {
   const { availability } = props;
+
   return (
     <div>
       {availability.map((day) => (
@@ -10,12 +11,10 @@ const ShowAvailability = (props) => {
           <div className="saved-time">
             {!!day.start && (
               <label className="saved-start-time">
-                Start: {`${day.start.hour}:${day.start.minute}`}
+                Start: {`${day.start}`}
               </label>
             )}
-            {!!day.end && (
-              <label> End: {`${day.end.hour}:${day.end.minute}`}</label>
-            )}
+            {!!day.end && <label> End: {`${day.end}`}</label>}
           </div>
         </div>
       ))}

@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import CourseTable from "../components/tables/CourseTable";
-import CourseHeader from "../components/page-components/Header";
-import HomeTable from "../components/tables/home-table";
-import ResourceTable from "./../components/tables/ResourceTable";
-import TestTable from "../test-cms-stuff/Test-Table";
+import CourseTable from "../components/Tables/CourseTable";
+import CourseHeader from "../components/Common/Header";
+import HomeTable from "../components/Tables/HomeTable";
+import ResourceTable from "../components/Tables/ResourceTable";
 
 class AppRouter extends Component {
   state = {};
@@ -16,7 +15,6 @@ class AppRouter extends Component {
           <Route path="/" component={HomeTable} exact={true} />
           <Route path="/courses" component={CourseTable} />
           <Route path="/resources" component={ResourceTable}></Route>
-          <Route path="/test" component={TestTable}></Route>
         </div>
       </BrowserRouter>
     );

@@ -1,259 +1,140 @@
-import React, { Component } from "react";
-import { v4 as uuidv4 } from "uuid";
-import BlankCard from "../page-components/blank-card";
-import CourseBox from "../page-components/course-box";
-import {
-  createBlankAvailability,
-  getBlankAvailability,
-} from "./../../Classes/availability-class";
-import {
-  getCourses,
-  saveCourse,
-  createBlankCourse,
-} from "../../app-info/course-info";
-import Card from "../common/Card";
-import AvailabilityList from "../common/availability-list";
-import ShowAvailability from "../common/ShowAvailability";
-import BlankAvailability from "../common/BlankAvailability";
-import { relativeTimeThreshold } from "moment";
-import Time from "../../Classes/TimeClass";
-import { GETCourses } from "./../../Api-Calls/SchedulingApi";
+import React, { useState, useEffect } from "react";
+import { getCourses, sendCourse } from "../../AppInfo/CourseInfo";
+import Card from "../Common/Card";
+import ShowAvailability from "../Common/ShowAvailability";
+import BlankAvailability from "../Common/BlankAvailability";
+import { GETCourses } from "../../Utils/SchedulingApi";
+import Course from "../../Classes/CourseClass";
 
-class CourseTable extends Component {
-  state = {
-    courses: [],
-    showBlank: false,
-    newCourse: {
-      id: null,
-      title: "",
-      info: "",
-      availability: [
-        {
-          title: "Monday",
-          times: {
-            start: new Time(),
-            end: new Time(),
-          },
-        },
-        {
-          title: "Tuesday",
-          times: {
-            start: new Time(),
-            end: new Time(),
-          },
-        },
-        {
-          title: "Wednesday",
-          times: {
-            start: new Time(),
-            end: new Time(),
-          },
-        },
-        {
-          title: "Thursday",
-          times: {
-            start: new Time(),
-            end: new Time(),
-          },
-        },
-        {
-          title: "Friday",
-          times: {
-            start: new Time(),
-            end: new Time(),
-          },
-        },
-      ],
-      resources: [],
-    },
-  };
+const CourseTable = () => {
+  const [courses, setCourses] = useState(null);
+  const [showBlank, setShowBlank] = useState(false);
+  const [newCourse, setNewCourse] = useState(new Course());
 
-  componentDidMount = () => {
-    this.updateCourses();
+  useEffect(() => {
+    if (courses === null) {
+      const pulledCourses = getCourses();
+      setCourses(pulledCourses);
+    }
+  });
+  const handleOnChange = ({ name, value }) => {
+    setNewCourse({ ...newCourse, [name]: value });
   };
-  updateCourses = async () => {
-    const courses = await getCourses();
-    this.setState(() => ({ courses }));
+  const handleEdit = (id) => {
+    if (!showBlank) {
+      const coursesCopy = [...courses];
+      const index = coursesCopy.findIndex((course) => course.id === id);
+      const newCourse = coursesCopy.splice(index, 1)[0];
+      setNewCourse(newCourse);
+      setShowBlank(true);
+      setCourses(coursesCopy);
+    }
   };
-  handleAddClass = () => {
-    const newCourse = { ...this.state.newCourse };
-    newCourse.id = uuidv4();
-    this.setState(() => ({ newCourse, showBlank: true }));
+  const saveCourse = () => {
+    const data = { ...newCourse };
+    sendCourse(data);
+    const pulledCourses = getCourses();
+    setCourses(pulledCourses);
+    setShowBlank(false);
+    setNewCourse(new Course());
   };
-  handleOnChange = (e) => {
-    const { name, value } = e.target;
-    const newCourse = { ...this.state.newCourse };
-    newCourse[name] = value;
-    this.updateNewCourse(newCourse);
-  };
-  handleEdit = (e) => {
-    const { id } = e.target;
-    const courses = [...this.state.courses];
-    const index = courses.findIndex((course) => course.id === id);
-    const newCourse = courses.splice(index, 1)[0];
-    this.setState(() => ({ newCourse, showBlank: true, courses }));
-  };
-  saveClass = () => {
-    saveCourse({ ...this.state.newCourse });
-    this.setState(() => ({
-      showBlank: false,
-      newCourse: {
-        id: null,
-        title: "",
-        info: "",
-        availability: [
-          {
-            title: "Monday",
-            times: {
-              start: new Time(),
-              end: new Time(),
-            },
-          },
-          {
-            title: "Tuesday",
-            times: {
-              start: new Time(),
-              end: new Time(),
-            },
-          },
-          {
-            title: "Wednesday",
-            times: {
-              start: new Time(),
-              end: new Time(),
-            },
-          },
-          {
-            title: "Thursday",
-            times: {
-              start: new Time(),
-              end: new Time(),
-            },
-          },
-          {
-            title: "Friday",
-            times: {
-              start: new Time(),
-              end: new Time(),
-            },
-          },
-        ],
-        resources: [],
-      },
-    }));
-    this.updateCourses();
-  };
-  updateNewClass(field, content) {
-    const newCourse = { ...this.state.newCourse };
+  const updateNewClass = (field, content) => {
+    const newCourse = { ...newCourse };
     newCourse[field] = content;
-    this.setState(() => ({ newCourse }));
-  }
-  updateNewCourse = (newCourse) => {
-    this.setState({ newCourse });
-    console.log(this.state.newCourse);
+    setNewCourse(newCourse);
   };
-  renderAllCourses = () => {
-    const { courses } = this.state;
-    //If there are courses
-    if (courses.length !== 0) {
-      return courses.map((course) => (
-        <Card
-          key={course.title}
-          update={this.handleOnChange}
-          content={{
-            header: [<label key="header1">{course.title}</label>],
-            body: [
-              <p key="body1">{course.info}</p>,
 
-              <label key="body2" className="label">
-                Availability:
-              </label>,
-
-              <ShowAvailability
-                key="body3"
-                availability={course.availability}
-              />,
-            ],
-            footer: [
-              <button
-                id={course.id}
-                onClick={this.handleEdit}
-                className="button"
-                key="footer1"
-              >
-                Edit
-              </button>,
-            ],
+  return (
+    <div>
+      <div className="d-md-flex justify-content-md-end">
+        <button
+          className="button"
+          onClick={() => {
+            !showBlank && setShowBlank(true);
           }}
-        />
-      ));
-    }
-  };
-  renderBlankCourse = () => {
-    const { newCourse, showBlank } = this.state;
-    if (showBlank) {
-      return (
-        <Card
-          key="new"
-          content={{
-            header: [
-              <input
-                key="header1"
-                className="col-md-8"
-                type="text"
-                name="title"
-                value={newCourse.title}
-                placeholder="Name"
-                onChange={this.handleOnChange}
-              ></input>,
-            ],
-            body: [
-              <span key="body1" className="input-group-text">
-                Course Info
-              </span>,
-
-              <textarea
-                key="body2"
-                name="info"
-                onChange={this.handleOnChange}
-                className="form-control"
-                aria-label="With textarea"
-              ></textarea>,
-
-              <BlankAvailability
-                key="body3"
-                availability={newCourse.availability}
-                update={this.handleOnChange}
-              />,
-            ],
-            footer: [
-              <button className="button" key="footer1" onClick={this.saveClass}>
-                Save
-              </button>,
-            ],
-          }}
-        />
-      );
-    }
-  };
-
-  render() {
-    const { courses, newCourse } = this.state;
-    console.log(courses);
-    return (
-      <div>
-        <div className="d-md-flex justify-content-md-end">
-          <button className="button" onClick={this.handleAddClass}>
-            Add Course
-          </button>
-        </div>
-        <div className="row row-cols-1 row-cols-md-4 g-0">
-          {this.renderAllCourses()}
-          {this.renderBlankCourse()}
-        </div>
+        >
+          Add Course
+        </button>
       </div>
-    );
-  }
-}
+      <div className="row row-cols-1 row-cols-md-4 g-0">
+        {courses !== null &&
+          courses.map((course) => (
+            <Card
+              key={course.title}
+              update={(e) => handleOnChange(e.target)}
+              content={{
+                header: [<label key="header1">{course.title}</label>],
+                body: [
+                  <p key="body1">{course.info}</p>,
+
+                  <label key="body2" className="label">
+                    Availability:
+                  </label>,
+
+                  <ShowAvailability
+                    key="body3"
+                    availability={course.availability}
+                  />,
+                ],
+                footer: [
+                  <button
+                    id={course.id}
+                    onClick={(e) => handleEdit(e.target.id)}
+                    className="button"
+                    key="footer1"
+                  >
+                    Edit
+                  </button>,
+                ],
+              }}
+            />
+          ))}
+        {showBlank && (
+          <Card
+            key="new"
+            content={{
+              header: [
+                <input
+                  key="header1"
+                  className="col-md-8"
+                  type="text"
+                  name="title"
+                  value={newCourse.title}
+                  placeholder="Name"
+                  onChange={(e) => handleOnChange(e.target)}
+                ></input>,
+              ],
+              body: [
+                <span key="body1" className="input-group-text">
+                  Course Info
+                </span>,
+
+                <textarea
+                  key="body2"
+                  name="info"
+                  value={newCourse.info}
+                  onChange={(e) => handleOnChange(e.target)}
+                  className="form-control"
+                  aria-label="With textarea"
+                ></textarea>,
+
+                <BlankAvailability
+                  key="body3"
+                  availability={newCourse.availability}
+                  update={(e) => handleOnChange(e.target)}
+                />,
+              ],
+              footer: [
+                <button className="button" key="footer1" onClick={saveCourse}>
+                  Save
+                </button>,
+              ],
+            }}
+          />
+        )}
+      </div>
+    </div>
+  );
+};
 
 export default CourseTable;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { createBlankAvailability } from "./../../Classes/availability-class";
-import Time from "../../Classes/TimeClass";
+import { createBlankAvailability } from "./AvailabilityClass";
+import Time from "../scheduling-app/src/Classes/TimeClass";
 
 const defaultTimes = [
   800, 815, 830, 845, 900, 915, 930, 945, 1000, 1015, 1030, 1045, 1100, 1115,

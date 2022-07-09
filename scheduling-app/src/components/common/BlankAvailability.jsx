@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { createBlankAvailability } from "./../../Classes/availability-class";
 import Time from "../../Classes/TimeClass";
 
 const defaultTimes = [
@@ -22,65 +21,13 @@ class BlankAvailability extends Component {
     times.minutes = timeGenerator.generateMinutes();
     this.setState({ times });
   }
-  //   updateChange = (d, content, field) => {
-  //     // const availability = { ...item.availability };
-  //     // availability.days.find((day) => {
-  //     //   if (day.day === d.day) {
-  //     //     day.times[field] = content;
-  //     //     return true;
-  //     //   }
-  //     // });
-  //     // update("availability", availability);
-  //   };
-  // updateHour = (e) => {
-  //   const amount = e.target.value;
-  //   if (!amount || amount.match(/^\d{0,2}$/)) {
-  //     if (amount < 13) {
-  //       const blank = { ...this.state.blank };
-  //       blank.hour = e.target.value;
-  //       this.setState({ blank });
-  //     }
-  //   } else {
-  //     e.preventDefault();
-  //   }
-  // };
-  // updateMinute = (e) => {
-  //   const amount = e.target.value;
-  //   if (!amount || amount.match(/^\d{0,2}$/)) {
-  //     if (amount < 60) {
-  //       const blank = { ...this.state.blank };
-  //       blank.minute = e.target.value;
-  //       this.setState({ blank });
-  //     }
-  //   } else {
-  //     e.preventDefault();
-  //   }
-  // };
-  validateInput = (value, path) => {
-    if (!value) return true;
-
-    if (value.match(/^\d{0,2}$/)) {
-      if (path[1] === "minute" && value >= 60) {
-        return false;
-      } else if (path[1] === "hour" && value >= 13) {
-        return false;
-      }
-    } else {
-      return false;
-    }
-
-    return true;
-  };
-  // update = () => {};
   update = (e) => {
     const { name, value, id } = e.target;
-    const time = value.split(":");
 
     const availability = [...this.props.availability];
     availability.find((searchDay) => {
       if (searchDay.title === id) {
-        searchDay.times[name].hour = time[0];
-        searchDay.times[name].minute = time[1];
+        searchDay[name] = value;
         return true;
       }
       return false;
@@ -100,6 +47,7 @@ class BlankAvailability extends Component {
               <h4>{day.title}</h4>
               <h6 className="start-end">Start</h6>
               <input
+                value={day.start}
                 key="start"
                 type="time"
                 className="avail-inputs"
@@ -109,6 +57,7 @@ class BlankAvailability extends Component {
               />
               <h6 className="start-end">End</h6>
               <input
+                value={day.end}
                 key="end"
                 type="time"
                 className="avail-inputs"

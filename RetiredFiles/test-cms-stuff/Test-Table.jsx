@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 import { v4 as uuidv4 } from "uuid";
-import BlankCard from "../components/page-components/blank-card";
-import CourseBox from "../components/page-components/course-box";
+import BlankCard from "../../scheduling-app/src/components/page-components/blank-card";
+import CourseBox from "../../scheduling-app/src/components/page-components/course-box";
 import {
   createBlankAvailability,
   getBlankAvailability,
-} from "../Classes/availability-class";
+} from "../../scheduling-app/src/Classes/AvailabilityClass";
 import {
   getCourses,
   saveCourse,
   createBlankCourse,
-} from "../app-info/course-info";
-import Card from "../components/common/Card";
-import AvailabilityList from "../components/common/availability-list";
-import ShowAvailability from "../components/common/ShowAvailability";
-import BlankAvailability from "../components/common/BlankAvailability";
+} from "../../scheduling-app/src/app-info/course-info";
+import Card from "../../scheduling-app/src/components/common/Card";
+import AvailabilityList from "../../scheduling-app/src/components/common/availability-list";
+import ShowAvailability from "../../scheduling-app/src/components/common/ShowAvailability";
+import BlankAvailability from "../../scheduling-app/src/components/common/BlankAvailability";
 import { relativeTimeThreshold } from "moment";
 import Modal from "react-modal";
 import E from "./EventClass";
