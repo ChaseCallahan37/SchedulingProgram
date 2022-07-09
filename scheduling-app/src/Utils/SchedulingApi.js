@@ -1,18 +1,18 @@
-import Course from "../Classes/course-class";
+import Course from "../Classes/CourseClass";
 import axios from "axios";
 
 const url = "https://localhost:7262/api/course";
 
-const courseData = async () => {
-  const data = await fetch(url)
-    .then((data) => {
-      return data;
-    })
-    .catch((er) => {
-      console.log(er);
-    });
-  console.log(data);
-};
+// const courseData = async () => {
+//   const data = await fetch(url)
+//     .then((data) => {
+//       return data;
+//     })
+//     .catch((er) => {
+//       console.log(er);
+//     });
+//   console.log(data);
+// };
 
 export const GETCourses = async () => {
   return await axios({
