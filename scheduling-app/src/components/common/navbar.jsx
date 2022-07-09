@@ -1,47 +1,47 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
-const activeClass = "nav-link-active";
-
-class NavBar extends Component {
-  state = {};
-  render() {
-    return (
-      <div id="" className="nav-bar-container">
-        <ul className="nav nav-pills">
-          <li className="nav-item">
-            <NavLink
-              id="nav-link-container"
-              activeClassName={"nav-link-active"}
-              className={"nav-link nav-item"}
-              to="/"
-              exact={true}
-            >
-              Home
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              activeClassName={"nav-link-active"}
-              className={"nav-link nav-item"}
-              to="/courses"
-            >
-              Courses
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              activeClassName={"nav-link-active"}
-              className={"nav-link nav-item"}
-              to="/resources"
-            >
-              Resource Page
-            </NavLink>
-          </li>
-        </ul>
-      </div>
-    );
-  }
-}
+const NavBar = () => {
+  const activeClassStyle = "nav-link nav-link-active";
+  const nonActiveClassStyle = "nav-link nav-item";
+  return (
+    <div id="" className="nav-bar-container">
+      <ul className="nav nav-pills">
+        <li className="nav-item">
+          <NavLink
+            id="nav-link-container"
+            className={({ isActive }) =>
+              isActive ? activeClassStyle : nonActiveClassStyle
+            }
+            to="/"
+            exact="true"
+          >
+            Home
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? activeClassStyle : nonActiveClassStyle
+            }
+            to="/courses"
+          >
+            Courses
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? activeClassStyle : nonActiveClassStyle
+            }
+            to="/resources"
+          >
+            Resource Page
+          </NavLink>
+        </li>
+      </ul>
+    </div>
+  );
+};
 
 export default NavBar;

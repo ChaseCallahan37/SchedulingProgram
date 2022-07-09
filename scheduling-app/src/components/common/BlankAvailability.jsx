@@ -43,7 +43,7 @@ class BlankAvailability extends Component {
       <div>
         {availability &&
           availability.map((day) => (
-            <div>
+            <div key={day.title}>
               <h4>{day.title}</h4>
               <h6 className="start-end">Start</h6>
               <input
