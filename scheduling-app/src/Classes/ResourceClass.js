@@ -6,6 +6,7 @@ class Resource {
     resourceFields = {
       id: uuidv4(),
       type: "",
+      subType: "",
       name: "",
       availability: [
         new Day("Monday"),
@@ -17,9 +18,10 @@ class Resource {
       constraints: { classSize: "", teachingStyle: "" },
     }
   ) {
-    const { id, type, name, availability, constraints } = resourceFields;
+    const { id, type, name, availability, constraints, subType } = resourceFields;
     this.id = id;
     this.type = type; // ta or instructor
+    this.subType = subType; // ta or instructor
     this.name = name; // name of the individual
     this.availability = availability; // time and day they are able to teach/ta
     this.constraints = constraints; // classes the individual is qualified to teach/ta

@@ -11,6 +11,9 @@ import BlankAvailability from "../Common/BlankAvailability";
 import Time from "../../Classes/TimeClass";
 import { getCourses } from "../../AppInfo/CourseInfo";
 import Resource from "./../../Classes/ResourceClass";
+import TypeSelector from "../Common/TypeSelector";
+import CheckboxGroup from "../Common/CheckboxGroup";
+import SelectBox from "../Common/SelectBox";
 
 const ResourceTable = () => {
   const [resources, setResources] = useState(null);
@@ -55,6 +58,7 @@ const ResourceTable = () => {
 
   return (
     <div>
+    <SelectBox />
       <div className="d-md-flex justify-content-md-end">
         <button
           className="button"
@@ -90,8 +94,7 @@ const ResourceTable = () => {
                   footer: [
                     <button
                       className="button"
-                      id={resource.id}
-                      onClick={(e) => handleEditResource(e.target.id)}
+                      onClick={() => handleEditResource(resource.id)}
                       key="footer-1"
                     >
                       Edit
@@ -115,8 +118,12 @@ const ResourceTable = () => {
                   placeholder="Name"
                   key="head-1"
                 />,
+              ],
+              body: [
+                <TypeSelector update={handleUpdates} name={"type"} />,
+                blankResource.type === "Instructor" ? (
                 <select
-                  onChange={(e) => handleUpdates(e.target)}
+                  onChange={(e) => handleUpdates({name: "subType", value: e.target.value})}
                   value={type}
                   name="type"
                   placeholder="Type"
@@ -126,17 +133,15 @@ const ResourceTable = () => {
                   <option>Tenure Track</option>
                   <option>Non-Tenure Track</option>
                   <option>PhD. Student</option>
-                </select>,
-              ],
-              body: [
+                </select>) : null,
                 <BlankAvailability
                   key="body-1"
                   availability={availability}
                   update={(e) => handleUpdates(e.target)}
                 />,
-                <div key="body-2">
-                  <h2>Constraints</h2>
-                  <label id="constraints-list">Class Size Allowed</label>
+                  <h2>Constraints</h2>,
+                  blankResource.type === "Instructor" ? (<div>
+                    <label id="constraints-list">Class Size Allowed</label>
                   <select
                     id="constraints-select"
                     name="constraints.classSize"
@@ -147,8 +152,10 @@ const ResourceTable = () => {
                     <option>Medium</option>
                     <option>Large</option>
                   </select>
-                  <label id="constraints-list">Teaching Method</label>
-                  <select
+                  </div>) : null,
+                  blankResource.type === "Instructor" ? (<div>
+                    <label id="constraints-list">Teaching Method</label>
+                    <select
                     id="constraints-select"
                     name="constraints.teachingStyle"
                     onChange={(e) => handleUpdates(e.target)}
@@ -159,19 +166,40 @@ const ResourceTable = () => {
                     <option>Hybrid</option>
                     <option>All</option>
                   </select>
-                  <label id="constraints-list">Classes Per Year</label>
+                  </div>) : null,
+                  blankResource.type === "Instructor" ? (<div>
+                  <h4 id="constraints-list">Class Load</h4>
+                  <div>
+                  <label>Fall</label>
                   <select
                     id="constraints-select"
                     name="constraints.classesPerYear"
                     onChange={(e) => handleUpdates(e.target)}
                   >
                     <option></option>
-                    <option></option>
-                    <option>In-Person</option>
-                    <option>Hybrid</option>
-                    <option>All</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
                   </select>
-                </div>,
+                  </div>
+                  <div>
+                  <label>Spring</label>
+                  <select
+                    id="constraints-select"
+                    name="constraints.classesPerYear"
+                    onChange={(e) => handleUpdates(e.target)}
+                  >
+                    <option></option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                  </select>
+                  </div>
+                  </div>) : null,
+                  // <CheckboxGroup options={[1,2,3,4]}/>
+
               ],
               footer: [
                 <button
