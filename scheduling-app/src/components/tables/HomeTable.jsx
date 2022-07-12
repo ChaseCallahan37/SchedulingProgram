@@ -19,7 +19,6 @@ class HomeTable extends Component {
       courses: courses,
       resources: resources,
     };
-    console.log(data);
   };
 
   render() {

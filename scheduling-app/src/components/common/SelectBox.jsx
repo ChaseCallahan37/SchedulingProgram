@@ -1,15 +1,23 @@
-import React from 'react';
+import React from "react";
 
 function SelectBox(props) {
-    
-    return (
-        <div>
-            <select>
-            <option>{}</option>
-            {props.options && props.options.map()}
-            </select>
-        </div>
-    );
+  const { items, update, name } = props;
+
+  const makeOption = () => {
+    const optionsRender = items.map((item) => {
+      return <option key={item}>{item}</option>;
+    });
+    return optionsRender;
+  };
+
+  return (
+    <div>
+      <select onChange={(e) => update({name, value: e.target.value})}>
+        <option key="blank">{}</option>
+        {makeOption()}
+      </select>
+    </div>
+  );
 }
 
 export default SelectBox;

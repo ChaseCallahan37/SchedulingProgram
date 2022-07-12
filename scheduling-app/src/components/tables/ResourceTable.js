@@ -58,7 +58,6 @@ const ResourceTable = () => {
 
   return (
     <div>
-    <SelectBox />
       <div className="d-md-flex justify-content-md-end">
         <button
           className="button"
@@ -122,84 +121,64 @@ const ResourceTable = () => {
               body: [
                 <TypeSelector update={handleUpdates} name={"type"} />,
                 blankResource.type === "Instructor" ? (
-                <select
-                  onChange={(e) => handleUpdates({name: "subType", value: e.target.value})}
-                  value={type}
-                  name="type"
-                  placeholder="Type"
-                  key="head-2"
-                >
-                  <option></option>
-                  <option>Tenure Track</option>
-                  <option>Non-Tenure Track</option>
-                  <option>PhD. Student</option>
-                </select>) : null,
+                  <SelectBox
+                    name="subType"
+                    items={["Tenure Track", "Non-Tenure Track", "PhD. Student"]}
+                    update={handleUpdates}
+                  />
+                ) : null,
                 <BlankAvailability
                   key="body-1"
                   availability={availability}
                   update={(e) => handleUpdates(e.target)}
                 />,
-                  <h2>Constraints</h2>,
-                  blankResource.type === "Instructor" ? (<div>
+                <h2>Constraints</h2>,
+                blankResource.type === "Instructor" ? (
+                  <div>
                     <label id="constraints-list">Class Size Allowed</label>
-                  <select
-                    id="constraints-select"
-                    name="constraints.classSize"
-                    onChange={(e) => handleUpdates(e.target)}
-                  >
-                    <option></option>
-                    <option>Small</option>
-                    <option>Medium</option>
-                    <option>Large</option>
-                  </select>
-                  </div>) : null,
-                  blankResource.type === "Instructor" ? (<div>
+                    <SelectBox
+                      id="constraints-select"
+                      name="constraints.classSize"
+                      update={handleUpdates}
+                      items={["Small", "Medium", "Large"]}
+                    />
+                  </div>
+                ) : null,
+                blankResource.type === "Instructor" ? (
+                  <div>
                     <label id="constraints-list">Teaching Method</label>
-                    <select
-                    id="constraints-select"
-                    name="constraints.teachingStyle"
-                    onChange={(e) => handleUpdates(e.target)}
-                  >
-                    <option></option>
-                    <option>Online</option>
-                    <option>In-Person</option>
-                    <option>Hybrid</option>
-                    <option>All</option>
-                  </select>
-                  </div>) : null,
-                  blankResource.type === "Instructor" ? (<div>
-                  <h4 id="constraints-list">Class Load</h4>
-                  <div>
-                  <label>Fall</label>
-                  <select
-                    id="constraints-select"
-                    name="constraints.classesPerYear"
-                    onChange={(e) => handleUpdates(e.target)}
-                  >
-                    <option></option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                  </select>
+                    <SelectBox
+                      id="constraints-select"
+                      name="constraints.teachingStyle"
+                      items={["Online", "In-Person", "Hybrid", "All"]}
+                      update={handleUpdates}
+                    />
                   </div>
+                ) : null,
+                blankResource.type === "Instructor" ? (
                   <div>
-                  <label>Spring</label>
-                  <select
-                    id="constraints-select"
-                    name="constraints.classesPerYear"
-                    onChange={(e) => handleUpdates(e.target)}
-                  >
-                    <option></option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                  </select>
+                    <h4 id="constraints-list">Class Load</h4>
+                    <div>
+                      <label>Fall</label>
+                      <SelectBox
+                        id="constraints-select"
+                        name="constraints.classesPerYear"
+                        update={handleUpdates}
+                        items={["1", "2", "3", "4"]}
+                      />
+                    </div>
+                    <div>
+                      <label>Spring</label>
+                      <SelectBox
+                        id="constraints-select"
+                        name="constraints.classesPerYear"
+                        update={handleUpdates}
+                        items={["1", "2", "3", "4"]}
+                      />
+                    </div>
                   </div>
-                  </div>) : null,
-                  // <CheckboxGroup options={[1,2,3,4]}/>
-
+                ) : null,
+                // <CheckboxGroup options={[1,2,3,4]}/>
               ],
               footer: [
                 <button

@@ -12,9 +12,13 @@ const CourseTable = () => {
   const [newCourse, setNewCourse] = useState(new Course());
 
   useEffect(() => {
-    if (courses === null) {
-      const pulledCourses = getCourses();
+    const pullCourses = async () =>{
+      const pulledCourses = await GETCourses();
       setCourses(pulledCourses);
+    }
+
+    if (courses === null) {
+      pullCourses()
     }
   });
   const handleOnChange = ({ name, value }) => {
