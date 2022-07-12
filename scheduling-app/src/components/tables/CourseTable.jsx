@@ -3,24 +3,35 @@ import { getCourses, sendCourse } from "../../AppInfo/CourseInfo";
 import Card from "../Common/Card";
 import ShowAvailability from "../Common/ShowAvailability";
 import BlankAvailability from "../Common/BlankAvailability";
-import { GETCourses } from "../../Utils/SchedulingApi";
+import {
+  GETCourses,
+  createCourse,
+  updateCourse,
+  deleteCourse,
+} from "../../Utils/Requests/CourseCalls";
 import Course from "../../Classes/CourseClass";
 
 const CourseTable = () => {
   const [courses, setCourses] = useState(null);
   const [showBlank, setShowBlank] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
   const [newCourse, setNewCourse] = useState(new Course());
 
   useEffect(() => {
-    const pullCourses = async () =>{
-      const pulledCourses = await GETCourses();
-      setCourses(pulledCourses);
-    }
-
     if (courses === null) {
-      pullCourses()
+      pullCourses();
     }
   });
+  const pullCourses = async () => {
+    const pulledCourses = await GETCourses();
+    const filteredCourses = checkEditCourse(pulledCourses);
+    setCourses(filteredCourses);
+  };
+  const checkEditCourse = (pulledCourses) => {
+    return pulledCourses
+      ? pulledCourses.filter((c) => c.id !== newCourse.id)
+      : [];
+  };
   const handleOnChange = ({ name, value }) => {
     setNewCourse({ ...newCourse, [name]: value });
   };
@@ -30,17 +41,28 @@ const CourseTable = () => {
       const index = coursesCopy.findIndex((course) => course.id === id);
       const newCourse = coursesCopy.splice(index, 1)[0];
       setNewCourse(newCourse);
+      setCourses(coursesCopy);
       setShowBlank(true);
+      setIsEdit(true);
       setCourses(coursesCopy);
     }
   };
   const saveCourse = () => {
     const data = { ...newCourse };
-    sendCourse(data);
-    const pulledCourses = getCourses();
-    setCourses(pulledCourses);
+    delete data.setEnd;
+    delete data.setStart;
+    if (isEdit) {
+      updateCourse(data);
+    } else {
+      createCourse(data);
+    }
     setShowBlank(false);
+    setIsEdit(false);
     setNewCourse(new Course());
+    pullCourses();
+  };
+  const handleDelete = (id) => {
+    deleteCourse(id);
   };
   const updateNewClass = (field, content) => {
     const newCourse = { ...newCourse };
@@ -88,6 +110,9 @@ const CourseTable = () => {
                     key="footer1"
                   >
                     Edit
+                  </button>,
+                  <button onClick={() => handleDelete(course.id)}>
+                    Delete
                   </button>,
                 ],
               }}
