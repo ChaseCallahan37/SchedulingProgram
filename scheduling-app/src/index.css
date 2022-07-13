@@ -162,3 +162,12 @@ a:visited {
 
 }
 
+.btn-group {
+  width: 100%;
+  margin: 5px;
+}
+
+#button-group-two {
+  padding-right: 30px;
+  padding-left: 30px;
+}
