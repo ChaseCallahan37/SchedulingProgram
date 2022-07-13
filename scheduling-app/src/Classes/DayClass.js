@@ -3,7 +3,7 @@ import Time from "./TimeClass";
 class Day {
   constructor(title = "") {
     this.title = title;
-    this.times = []
+    this.times = [new Time()];
   }
   setStart = (start) => {
     this.times[0].start = start;

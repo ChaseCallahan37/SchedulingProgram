@@ -47,7 +47,7 @@ class BlankAvailability extends Component {
               <h4>{day.title}</h4>
               <h6 className="start-end">Start</h6>
               <input
-                value={day.start}
+                value={day.times[0].start}
                 key="start"
                 type="time"
                 className="avail-inputs"
@@ -57,7 +57,7 @@ class BlankAvailability extends Component {
               />
               <h6 className="start-end">End</h6>
               <input
-                value={day.end}
+                value={day.times[0].end}
                 key="end"
                 type="time"
                 className="avail-inputs"

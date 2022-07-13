@@ -47,19 +47,21 @@ const CourseTable = () => {
       setCourses(coursesCopy);
     }
   };
-  const saveCourse = () => {
+  const saveCourse = async () => {
     const data = { ...newCourse };
-    delete data.setEnd;
-    delete data.setStart;
+    let createdCourse;
     if (isEdit) {
-      updateCourse(data);
+      createdCourse = await updateCourse(data);
     } else {
-      createCourse(data);
+      createdCourse = await createCourse(data);
     }
     setShowBlank(false);
     setIsEdit(false);
     setNewCourse(new Course());
-    pullCourses();
+
+    const revisedCourses = [...courses];
+    revisedCourses.push(createdCourse);
+    setCourses(revisedCourses);
   };
   const handleDelete = (id) => {
     deleteCourse(id);

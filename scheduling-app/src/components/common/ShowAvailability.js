@@ -3,7 +3,6 @@ import { getRandomId } from "../../Utils/UtilFunctions";
 
 const ShowAvailability = (props) => {
   const { availability } = props;
-
   return (
     <div key={getRandomId()}>
       {availability.map((day) => (
@@ -14,10 +13,12 @@ const ShowAvailability = (props) => {
           <div key="inner-div" className="saved-time">
             {!!day.start && (
               <label key="label-1" className="saved-start-time">
-                Start: {`${day.start}`}
+                Start: {`${day.times[0].start}`}
               </label>
             )}
-            {!!day.end && <label key="label-2"> End: {`${day.end}`}</label>}
+            {!!day.end && (
+              <label key="label-2"> End: {`${day.times[0].end}`}</label>
+            )}
           </div>
         </div>
       ))}
