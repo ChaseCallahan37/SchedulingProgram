@@ -124,22 +124,6 @@ const ResourceTable = () => {
                   placeholder="Name"
                   key="head-1"
                 />,
-               <div className="custom-select"  >
-                <select
-                  onChange={(e) => handleUpdates(e.target)}
-                  value={type}
-                  name="type"
-                  placeholder="Type"
-                  key="head-2"
-                 
-                >
-                  <option></option>
-                  <option >Tenure Track</option>
-                  <option >Non-Tenure Track</option>
-                  <option >PhD. Student</option>
-                </select>
-                </div>
-                ,
               ],
               body: [
                 <TypeSelector update={handleUpdates} name={"type"} />,
