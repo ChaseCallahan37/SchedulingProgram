@@ -4,13 +4,13 @@ import {
   sendResource,
   removeResource,
 } from "../../AppInfo/ResourceInfo";
-import Card from "../Common/Card";
-import ShowAvailability from "../Common/ShowAvailability";
+import Card from "../common/Card";
+import ShowAvailability from "../common/ShowAvailability";
 import { v4 as uuidv4 } from "uuid";
-import BlankAvailability from "../Common/BlankAvailability";
+import BlankAvailability from "../common/BlankAvailability";
 import Time from "../../Classes/TimeClass";
 import { getCourses } from "../../AppInfo/CourseInfo";
-import Resource from "./../../Classes/ResourceClass";
+import Resource from "../../Classes/ResourceClass";
 
 const ResourceTable = () => {
   const [resources, setResources] = useState(null);
@@ -74,18 +74,25 @@ const ResourceTable = () => {
                 content={{
                   header: [<h1 key="head-1">{resource.name}</h1>],
                   body: [
+                    
                     <label key="label-1">Type: {resource.type}</label>,
+                    <hr></hr>,
                     <ShowAvailability
                       key={`showavailability${resource.id}`}
                       availability={resource.availability}
-                    />,
+                    />,<hr></hr>,
                     <label key="label-2">
-                      Class Size: {resource.constraints.classSize}
+                      <b>Class Size:</b>
+                       {resource.constraints.classSize}
                     </label>,
-                    <br key="break-em"></br>,
+                    
                     <label key="label-3">
-                      Teaching Style: {resource.constraints.teachingStyle}
+                     <b> Teaching Style:</b> {resource.constraints.teachingStyle}
                     </label>,
+                    
+                    <label key ="label-4">
+                      <b>Allotted Classes Per Year:</b> {resource.constraints.classesPerYear}
+                    </label>
                   ],
                   footer: [
                     <button
@@ -115,18 +122,22 @@ const ResourceTable = () => {
                   placeholder="Name"
                   key="head-1"
                 />,
+               <div className="custom-select"  >
                 <select
                   onChange={(e) => handleUpdates(e.target)}
                   value={type}
                   name="type"
                   placeholder="Type"
                   key="head-2"
+                 
                 >
                   <option></option>
-                  <option>Tenure Track</option>
-                  <option>Non-Tenure Track</option>
-                  <option>PhD. Student</option>
-                </select>,
+                  <option >Tenure Track</option>
+                  <option >Non-Tenure Track</option>
+                  <option >PhD. Student</option>
+                </select>
+                </div>
+                ,
               ],
               body: [
                 <BlankAvailability
@@ -166,10 +177,15 @@ const ResourceTable = () => {
                     onChange={(e) => handleUpdates(e.target)}
                   >
                     <option></option>
-                    <option></option>
-                    <option>In-Person</option>
-                    <option>Hybrid</option>
-                    <option>All</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
                   </select>
                 </div>,
               ],

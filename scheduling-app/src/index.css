@@ -104,6 +104,7 @@ a:visited {
 
 .saved-day {
   margin-right: 0px;
+  font-weight: bold;
 }
 
 .saved-time {
@@ -155,3 +156,9 @@ a:visited {
   margin-bottom: 0px;
   margin-top: 0px;
 }
+
+.custom-select{
+  font-family: "Times New Roman", serif;
+
+}
+

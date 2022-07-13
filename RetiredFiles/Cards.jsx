@@ -10,11 +10,13 @@ const ShowAvailability = (props) => {
     <div>
       {availability.schedule.map((day) => (
         <div className="saved-availability" key={day.title}>
+         
           <label className="saved-day">{day.title}</label>
           <div className="saved-time">
+            
             {!!day.times && (
               <label className="saved-start-time">
-                Start: {`${day.showStart()}`}
+              Start: {`${day.showStart()}`}
               </label>
             )}
             {!!day.times && <label> End: {`${day.showEnd()}`}</label>}

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getCourses, sendCourse } from "../../AppInfo/CourseInfo";
-import Card from "../Common/Card";
-import ShowAvailability from "../Common/ShowAvailability";
-import BlankAvailability from "../Common/BlankAvailability";
+import Card from "../common/Card";
+import ShowAvailability from "../common/ShowAvailability";
+import BlankAvailability from "../common/BlankAvailability";
 import { GETCourses } from "../../Utils/SchedulingApi";
 import Course from "../../Classes/CourseClass";
 

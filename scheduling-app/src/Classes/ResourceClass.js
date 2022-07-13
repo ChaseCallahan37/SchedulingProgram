@@ -8,7 +8,7 @@ class Resource {
       type: "",
       name: "",
       availability: [
-        new Day("Monday"),
+        new Day(""),
         new Day("Tuesday"),
         new Day("Wednesday"),
         new Day("Thursday"),

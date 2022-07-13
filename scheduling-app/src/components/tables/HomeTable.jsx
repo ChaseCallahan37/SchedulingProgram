@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from "react";
-import BlankAvailability from "../Common/BlankAvailability";
-import Card from "../Common/Card";
+import BlankAvailability from "../common/BlankAvailability";
+import Card from "../common/Card";
 import { getCourses } from "../../AppInfo/CourseInfo";
 import { getResources } from "../../AppInfo/ResourceInfo";
 

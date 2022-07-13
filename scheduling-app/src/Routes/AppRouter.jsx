@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CourseTable from "../components/Tables/CourseTable";
-import CourseHeader from "../components/Common/Header";
+import CourseHeader from "../components/common/Header";
 import HomeTable from "../components/Tables/HomeTable";
 import ResourceTable from "../components/Tables/ResourceTable";
 import NotFoundTable from "../components/Tables/NotFoundTable";
