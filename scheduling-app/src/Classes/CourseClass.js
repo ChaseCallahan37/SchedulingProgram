@@ -7,13 +7,7 @@ class Course {
       id: uuidv4(),
       title: "",
       info: "",
-      availability: [
-        new Day("Monday"),
-        new Day("Tuesday"),
-        new Day("Wednesday"),
-        new Day("Thursday"),
-        new Day("Friday"),
-      ],
+      availability: [],
       resources: [],
     }
   ) {

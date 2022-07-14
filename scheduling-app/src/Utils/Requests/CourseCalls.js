@@ -14,6 +14,7 @@ export const GETCourses = async () => {
 };
 
 export const createCourse = async (data) => {
+  debugger;
   const res = await axios({
     url: `${baseUrl}/course`,
     method: "POST",

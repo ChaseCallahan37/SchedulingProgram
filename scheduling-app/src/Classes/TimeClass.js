@@ -1,7 +1,13 @@
 class Time {
-  constructor() {
+  constructor({ start = "", end = "" } = { start: "", end: "" }) {
     this.start = "";
     this.end = "";
+  }
+  getStartInt() {
+    const time = this.start.split(":");
+    let intTime = parseInt(time[0]);
+    intTime += parseInt(time[1]);
+    return intTime;
   }
   generateHours() {
     let time = [];
