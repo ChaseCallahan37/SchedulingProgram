@@ -1,13 +1,10 @@
 import React from "react";
+import "./TypeSelector.css";
 
 function TypeSelector(props) {
   const { update, name } = props;
   return (
-    <div
-      className="btn-group"
-      role="group"
-      aria-label="Basic example"
-    >
+    <div className="btn-group" role="group" aria-label="Basic example">
       <button
         onClick={(e) => update({ name, value: e.target.innerText })}
         type="button"
@@ -21,7 +18,7 @@ function TypeSelector(props) {
         className="btn btn-secondary"
         id="button-group-two"
       >
-      TA
+        TA
       </button>
     </div>
   );

@@ -1,0 +1,15 @@
+.saved-availability {
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+.saved-day {
+  margin-right: 0px;
+  font-weight: bold;
+}
+.saved-time {
+  float: right;
+  margin-left: 5px;
+}
+.saved-start-time {
+  margin-right: 5px;
+}

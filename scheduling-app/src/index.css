@@ -16,12 +16,13 @@ code {
   color: white;
   background-color: #b20837;
   margin: 5px;
-border-color: #b20837;
+  border-color: #b20837;
   border-radius: 15px;
   box-shadow: 0 5px #999;
 }
+
 .button:active {
-  background-color: #8D0B2F;
+  background-color: #8d0b2f;
   transform: translateY(4px);
   box-shadow: 0 3px #666;
 }
@@ -46,128 +47,6 @@ border-color: #b20837;
   height: auto;
 }
 
-.nav-link {
-  color: white;
-  font-size: 1.5em;
-  font-family: "Times New Roman", serif;
-}
-
-.nav-link-active {
-  background-color: white;
-  color: white !important;
-  font-weight: 700;
-}
-
-.navbar .navbar-nav .nav-link {
-  color: #fff;
-  font-size: 200px;
-}
-.navbar .navbar-nav .nav-link:hover {
-  background-color: #ffacb7;
-  color: #fff;
-}
-
-.nav-item:hover {
-  color: white;
-  font-weight: 700;
-}
-
-.visited {
-  color: white;
-}
-
-a:visited {
-  color: white;
-}
-
 .label {
   font-weight: bold;
-}
-
-.availability-list {
-  margin: 15px;
-}
-
-.availability-dropdown {
-  float: right;
-  margin-left: 5px;
-}
-
-.day-of-week {
-  margin-right: 15px;
-}
-
-.saved-availability {
-  margin-right: 15px;
-  margin-bottom: 15px;
-}
-
-.saved-day {
-  margin-right: 0px;
-  font-weight: bold;
-}
-
-.saved-time {
-  float: right;
-  margin-left: 5px;
-}
-
-.saved-start-time {
-  margin-right: 5px;
-}
-
-.avail-inputs {
-  margin-bottom: 5px;
-}
-
-.start-end {
-  margin: 0px;
-}
-
-#constraints-list {
-  margin-right: 5px;
-  margin-bottom: 5px;
-}
-
-#constraints-select {
-  float: right;
-}
-
-#scheduling-label {
-  font-family: "Times New Roman", serif;
-  font-size: 200%;
-  text-align: center;
-  margin-bottom: 0px;
-}
-
-.nav-bar-container {
-  position: sticky;
-}
-
-#alabama-logo {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 0px;
-}
-
-#figure-header {
-  margin-left: 40%;
-  margin-bottom: 0px;
-  margin-top: 0px;
-}
-
-.custom-select{
-  font-family: "Times New Roman", serif;
-
-}
-
-.btn-group {
-  width: 100%;
-  margin: 5px;
-}
-
-#button-group-two {
-  padding-right: 30px;
-  padding-left: 30px;
 }

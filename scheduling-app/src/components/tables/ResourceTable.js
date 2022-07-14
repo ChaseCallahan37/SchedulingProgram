@@ -14,6 +14,7 @@ import Resource from "./../../Classes/ResourceClass";
 import TypeSelector from "../common/TypeSelector";
 import CheckboxGroup from "../common/CheckboxGroup";
 import SelectBox from "../common/SelectBox";
+import "./ResourceTable.css";
 
 const ResourceTable = () => {
   const [resources, setResources] = useState(null);
@@ -77,25 +78,27 @@ const ResourceTable = () => {
                 content={{
                   header: [<h1 key="head-1">{resource.name}</h1>],
                   body: [
-                    
                     <label key="label-1">Type: {resource.type}</label>,
                     <hr></hr>,
                     <ShowAvailability
                       key={`showavailability${resource.id}`}
                       availability={resource.availability}
-                    />,<hr></hr>,
+                    />,
+                    <hr></hr>,
                     <label key="label-2">
                       <b>Class Size:</b>
-                       {resource.constraints.classSize}
+                      {resource.constraints.classSize}
                     </label>,
-                    
+
                     <label key="label-3">
-                     <b> Teaching Style:</b> {resource.constraints.teachingStyle}
+                      <b> Teaching Style:</b>{" "}
+                      {resource.constraints.teachingStyle}
                     </label>,
-                    
-                    <label key ="label-4">
-                      <b>Allotted Classes Per Year:</b> {resource.constraints.classesPerYear}
-                    </label>
+
+                    <label key="label-4">
+                      <b>Allotted Classes Per Year:</b>{" "}
+                      {resource.constraints.classesPerYear}
+                    </label>,
                   ],
                   footer: [
                     <button

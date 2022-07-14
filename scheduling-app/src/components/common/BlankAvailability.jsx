@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Time from "../../Classes/TimeClass";
+import "./BlankAvailability.css";
 
 const defaultTimes = [
   800, 815, 830, 845, 900, 915, 930, 945, 1000, 1015, 1030, 1045, 1100, 1115,
