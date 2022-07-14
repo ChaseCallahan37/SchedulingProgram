@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import "./Navbar.css";
 
 const NavBar = () => {
   const activeClassStyle = "nav-link nav-link-active";
