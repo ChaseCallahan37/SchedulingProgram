@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import Form from "./Form";
 
+Modal.setAppElement('#root');
+
 function CardPopup(props) {
   const [modalIsOpen, setIsOpen] = useState(true);
 
   const { item, update, save } = props;
-
-  const handleUpdate = (data) => {
-    update(data);
-  };
 
   //   const afterOpenModal = () => {
   //     // references are now sync'd and can be accessed.
@@ -35,11 +33,18 @@ function CardPopup(props) {
     <div>
       <Modal
         isOpen={modalIsOpen}
-        onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <Form item={item} update={handleUpdate} />
+        <Form item={item} update={update} />
+        <button
+          onClick={() => {
+            setIsOpen(false);
+            save();
+          }}
+        >
+          Save
+        </button>
       </Modal>
     </div>
   );

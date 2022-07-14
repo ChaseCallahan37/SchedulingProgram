@@ -18,24 +18,6 @@ class Course {
     this.availability = availability;
     this.resources = resources;
   }
-  setStart = (title, time) => {
-    this.availability.find((avail) => {
-      if (avail.title === title) {
-        avail.start = time;
-        return true;
-      }
-      return false;
-    });
-  };
-  setEnd = (title, time) => {
-    this.availability.find((avail) => {
-      if (avail.title === title) {
-        avail.end = time;
-        return true;
-      }
-      return false;
-    });
-  };
 }
 
 export default Course;

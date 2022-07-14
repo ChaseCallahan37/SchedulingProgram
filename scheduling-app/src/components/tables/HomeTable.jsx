@@ -1,7 +1,6 @@
 import React, { Component, useEffect, useState } from "react";
 import BlankAvailability from "../common/BlankAvailability";
 import Card from "../common/Card";
-import { getCourses } from "../../AppInfo/CourseInfo";
 import { getResources } from "../../AppInfo/ResourceInfo";
 import {
   POSTCourse,
@@ -18,10 +17,8 @@ class HomeTable extends Component {
   };
 
   sendData = async () => {
-    const courses = getCourses();
     const resources = getResources();
     const data = {
-      courses: courses,
       resources: resources,
     };
     createCourse();
