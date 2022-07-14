@@ -1,8 +1,8 @@
 import Course from "../../Classes/CourseClass";
 import axios from "axios";
 
-const baseUrl = process.env.REACT_APP_LOCAL_SCHEDULING_API;
-// const baseUrl = "https://schedulingapimis.azurewebsites.net/api";
+// const baseUrl = process.env.REACT_APP_LOCAL_SCHEDULING_API;
+const baseUrl = "https://schedulingapimis.azurewebsites.net/api";
 
 export const GETCourses = async () => {
   return await axios({
