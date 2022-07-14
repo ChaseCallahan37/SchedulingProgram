@@ -10,7 +10,7 @@ import {
   deleteCourse,
 } from "../../Utils/Requests/CourseCalls";
 import Course from "../../Classes/CourseClass";
-import Calendar from "../Common/Calendar";
+import Calendar from "../common/Calendar";
 
 const CourseTable = () => {
   const [courses, setCourses] = useState(null);
@@ -22,7 +22,6 @@ const CourseTable = () => {
     if (courses === null) {
       pullCourses();
     }
-    console.log(courses);
   });
   const pullCourses = async () => {
     const pulledCourses = await GETCourses();
@@ -36,7 +35,6 @@ const CourseTable = () => {
   };
   const handleOnChange = ({ name, value }) => {
     setNewCourse({ ...newCourse, [name]: value });
-    console.log(newCourse);
   };
   const handleEdit = (id) => {
     if (!showBlank) {
