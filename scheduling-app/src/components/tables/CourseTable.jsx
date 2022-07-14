@@ -11,6 +11,7 @@ import {
 } from "../../Utils/Requests/CourseCalls";
 import Course from "../../Classes/CourseClass";
 import Calendar from "../common/Calendar";
+import CardPopup from "../common/CardPopup";
 
 const CourseTable = () => {
   const [courses, setCourses] = useState(null);
@@ -48,7 +49,7 @@ const CourseTable = () => {
       setCourses(coursesCopy);
     }
   };
-  const saveCourse = async () => {
+  const handleSaveCourse = async () => {
     const data = { ...newCourse };
     let createdCourse;
     if (isEdit) {
@@ -100,11 +101,6 @@ const CourseTable = () => {
                     Availability:
                   </label>,
                   <Calendar availability={course.availability} />,
-
-                  <ShowAvailability
-                    key="body3"
-                    availability={course.availability}
-                  />,
                 ],
                 footer: [
                   <button
@@ -122,47 +118,12 @@ const CourseTable = () => {
               }}
             />
           ))}
+
         {showBlank && (
-          <Card
-            key={newCourse.id}
-            content={{
-              header: [
-                <input
-                  key="header1"
-                  className="col-md-8"
-                  type="text"
-                  name="title"
-                  value={newCourse.title}
-                  placeholder="Name"
-                  onChange={(e) => handleOnChange(e.target)}
-                ></input>,
-              ],
-              body: [
-                <span key="body1" className="input-group-text">
-                  Course Info
-                </span>,
-
-                <textarea
-                  key="body2"
-                  name="info"
-                  value={newCourse.info}
-                  onChange={(e) => handleOnChange(e.target)}
-                  className="form-control"
-                  aria-label="With textarea"
-                ></textarea>,
-
-                <Calendar
-                  name={"availability"}
-                  update={handleOnChange}
-                  availability={newCourse.availability}
-                />,
-              ],
-              footer: [
-                <button className="button" key="footer1" onClick={saveCourse}>
-                  Save
-                </button>,
-              ],
-            }}
+          <CardPopup
+            item={newCourse}
+            update={handleOnChange}
+            save={handleSaveCourse}
           />
         )}
       </div>
