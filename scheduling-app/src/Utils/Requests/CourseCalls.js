@@ -13,8 +13,9 @@ export const GETCourses = async () => {
     .catch((err) => console.log(err));
 };
 
-export const createCourse = (data) => {
-  axios({
+export const createCourse = async (data) => {
+  debugger;
+  const res = await axios({
     url: `${baseUrl}/course`,
     method: "POST",
     headers: {
@@ -26,10 +27,11 @@ export const createCourse = (data) => {
     const error = await err;
     console.log(error);
   });
+  return res.data;
 };
 
-export const updateCourse = (data) => {
-  axios({
+export const updateCourse = async (data) => {
+  const res = await axios({
     url: `${baseUrl}/course/${data.id}`,
     method: "PUT",
     headers: {
@@ -41,10 +43,11 @@ export const updateCourse = (data) => {
     const error = await err;
     console.log(error);
   });
+  return res.data;
 };
 
 export const deleteCourse = (id) => {
-  axios({
+  const res = axios({
     url: `${baseUrl}/courses/${id}`,
     method: "DELETE",
     headers: {
@@ -52,4 +55,5 @@ export const deleteCourse = (id) => {
       "Content-Type": "application/json",
     },
   });
+  return res.data;
 };

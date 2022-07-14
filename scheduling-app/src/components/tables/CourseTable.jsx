@@ -10,6 +10,7 @@ import {
   deleteCourse,
 } from "../../Utils/Requests/CourseCalls";
 import Course from "../../Classes/CourseClass";
+import Calendar from "../Common/Calendar";
 
 const CourseTable = () => {
   const [courses, setCourses] = useState(null);
@@ -21,6 +22,7 @@ const CourseTable = () => {
     if (courses === null) {
       pullCourses();
     }
+    console.log(courses);
   });
   const pullCourses = async () => {
     const pulledCourses = await GETCourses();
@@ -34,6 +36,7 @@ const CourseTable = () => {
   };
   const handleOnChange = ({ name, value }) => {
     setNewCourse({ ...newCourse, [name]: value });
+    console.log(newCourse);
   };
   const handleEdit = (id) => {
     if (!showBlank) {
@@ -47,19 +50,21 @@ const CourseTable = () => {
       setCourses(coursesCopy);
     }
   };
-  const saveCourse = () => {
+  const saveCourse = async () => {
     const data = { ...newCourse };
-    delete data.setEnd;
-    delete data.setStart;
+    let createdCourse;
     if (isEdit) {
-      updateCourse(data);
+      createdCourse = await updateCourse(data);
     } else {
-      createCourse(data);
+      createdCourse = await createCourse(data);
     }
     setShowBlank(false);
     setIsEdit(false);
     setNewCourse(new Course());
-    pullCourses();
+
+    const revisedCourses = [...courses];
+    revisedCourses.push(createdCourse);
+    setCourses(revisedCourses);
   };
   const handleDelete = (id) => {
     deleteCourse(id);
@@ -96,6 +101,7 @@ const CourseTable = () => {
                   <label key="body2" className="label">
                     Availability:
                   </label>,
+                  <Calendar availability={course.availability} />,
 
                   <ShowAvailability
                     key="body3"
@@ -147,10 +153,10 @@ const CourseTable = () => {
                   aria-label="With textarea"
                 ></textarea>,
 
-                <BlankAvailability
-                  key="body3"
+                <Calendar
+                  name={"availability"}
+                  update={handleOnChange}
                   availability={newCourse.availability}
-                  update={(e) => handleOnChange(e.target)}
                 />,
               ],
               footer: [
