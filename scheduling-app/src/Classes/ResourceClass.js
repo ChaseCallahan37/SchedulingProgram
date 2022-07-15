@@ -5,25 +5,20 @@ class Resource {
   constructor(
     resourceFields = {
       id: uuidv4(),
+      name: "",
       type: "",
       subType: "",
-      name: "",
-      availability: [
-        new Day(""),
-        new Day("Tuesday"),
-        new Day("Wednesday"),
-        new Day("Thursday"),
-        new Day("Friday"),
-      ],
+      availability: [],
       constraints: { classSize: "", teachingStyle: "" },
     }
   ) {
-    const { id, type, name, availability, constraints, subType } = resourceFields;
+    const { id, type, name, availability, constraints, subType } =
+      resourceFields;
     this.id = id;
-    this.type = type; // ta or instructor
-    this.subType = subType; // ta or instructor
     this.name = name; // name of the individual
-    this.availability = availability; // time and day they are able to teach/ta
+    this.type = type; // ta or instructor
+    this.availability = availability;
+    this.subType = subType; // ta or instructor
     this.constraints = constraints; // classes the individual is qualified to teach/ta
   }
   updateFileds = (fields) => {

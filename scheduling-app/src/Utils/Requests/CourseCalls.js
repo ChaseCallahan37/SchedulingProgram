@@ -1,8 +1,8 @@
 import Course from "../../Classes/CourseClass";
 import axios from "axios";
 
-// const baseUrl = process.env.REACT_APP_LOCAL_SCHEDULING_API;
-const baseUrl = "https://scheduling-api-backend.herokuapp.com/api";
+const baseUrl = process.env.REACT_APP_LOCAL_SCHEDULING_API;
+// const baseUrl = "https://scheduling-api-backend.herokuapp.com/api";
 export const GETCourses = async () => {
   return await axios({
     url: `${baseUrl}/course`,

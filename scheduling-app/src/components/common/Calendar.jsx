@@ -19,7 +19,7 @@ const Calendar = (props) => {
   return (
     <ScheduleSelector
       startDate={startDate}
-      dateFormat={"dddd"}
+      dateFormat={"ddd"}
       selection={availability ? availability : schedule}
       numDays={7}
       minTime={8}
