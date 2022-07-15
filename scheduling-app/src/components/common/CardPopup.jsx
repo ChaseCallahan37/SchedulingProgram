@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import Form from "./Form";
 
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
 
 function CardPopup(props) {
-  const [modalIsOpen, setIsOpen] = useState(true);
+  const { item, update, save, open, onClose } = props;
 
-  const { item, update, save } = props;
+  const [isOpen, setIsOpen] = useState(open);
 
   //   const afterOpenModal = () => {
   //     // references are now sync'd and can be accessed.
@@ -16,8 +16,8 @@ function CardPopup(props) {
 
   const closeModal = () => {
     setIsOpen(false);
+    onClose();
   };
-
   const customStyles = {
     content: {
       top: "50%",
@@ -31,16 +31,17 @@ function CardPopup(props) {
 
   return (
     <div>
-      <Modal
-        isOpen={modalIsOpen}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
+      <Modal isOpen={isOpen} style={customStyles} contentLabel="Example Modal">
+        <button className="button" onClick={closeModal}>
+          X
+        </button>
+
         <Form item={item} update={update} />
         <button
+          className="button"
           onClick={() => {
-            setIsOpen(false);
             save();
+            closeModal();
           }}
         >
           Save

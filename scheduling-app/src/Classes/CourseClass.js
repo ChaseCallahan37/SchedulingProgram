@@ -5,15 +5,14 @@ class Course {
   constructor(
     courseFields = {
       id: uuidv4(),
-      title: "",
+      name: "",
       info: "",
       availability: [],
-      resources: [],
     }
   ) {
-    const { id, title, info, availability, resources } = courseFields;
+    const { id, name, info, availability, resources } = courseFields;
     this.id = id;
-    this.title = title;
+    this.name = name;
     this.info = info;
     this.availability = availability;
     this.resources = resources;

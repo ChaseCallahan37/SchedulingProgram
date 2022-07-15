@@ -5,8 +5,9 @@ let resources = [];
 
 const jeff = new Resource();
 jeff.updateFileds({
-  name: "Jeffy",
+  name: "Jeff",
   type: "Instructor",
+  availability: [],
   constraints: { classSize: "Large", teachingStyle: "In-Person" },
 });
 
