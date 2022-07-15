@@ -1,5 +1,6 @@
 import React from "react";
 import { getRandomId } from "../../Utils/UtilFunctions";
+import "./ShowAvailability.css";
 
 const ShowAvailability = (props) => {
   const { availability } = props;

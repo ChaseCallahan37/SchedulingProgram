@@ -16,6 +16,7 @@ import TypeSelector from "../common/TypeSelector";
 import CheckboxGroup from "../common/CheckboxGroup";
 import SelectBox from "../common/SelectBox";
 import Calendar from "../common/Calendar";
+import "./ResourceTable.css";
 
 const ResourceTable = () => {
   const [resources, setResources] = useState(null);
@@ -79,6 +80,7 @@ const ResourceTable = () => {
           resources.map((resource) => (
             <Card onEdit={handleEditResource} item={resource} />
           ))}
+
 
         {showBlank && (
           <CardPopup

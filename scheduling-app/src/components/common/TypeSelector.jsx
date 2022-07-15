@@ -1,4 +1,5 @@
 import React from "react";
+import "./TypeSelector.css";
 
 function TypeSelector(props) {
   const { update, name, items } = props;
