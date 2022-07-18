@@ -13,15 +13,16 @@ const Calendar = (props) => {
     if (update) {
       update({ name, value: newSchedule });
     }
+    console.log(newSchedule);
   };
-  const startDate = moment(new Date("1/2/2000"));
+  const startDate = moment(new Date("1/3/2000"));
 
   return (
     <ScheduleSelector
       startDate={startDate}
       dateFormat={"ddd"}
       selection={availability ? availability : schedule}
-      numDays={7}
+      numDays={5}
       minTime={8}
       maxTime={22}
       hourlyChunks={1}

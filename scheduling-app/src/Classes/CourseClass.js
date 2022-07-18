@@ -8,6 +8,7 @@ class Course {
       name: "",
       info: "",
       availability: [],
+      resources: [],
     }
   ) {
     const { id, name, info, availability, resources } = courseFields;
