@@ -13,7 +13,6 @@ const Calendar = (props) => {
     if (update) {
       update({ name, value: newSchedule });
     }
-    console.log(newSchedule);
   };
   const startDate = moment(new Date("1/3/2000"));
 

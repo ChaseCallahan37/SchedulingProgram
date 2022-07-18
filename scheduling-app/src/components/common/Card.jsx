@@ -3,6 +3,7 @@ import Case from "case";
 import Calendar from "./Calendar";
 import { wrapInDivAndLabel } from "../../Utils/UtilFunctions";
 import LabelWithCount from "./LabelWithCount";
+import { getRandomId } from "../../Utils/UtilFunctions";
 
 const Card = (props) => {
   const { content, item, onEdit } = props;
@@ -43,7 +44,7 @@ const Card = (props) => {
           field,
           <div>
             {item[field].map((i) => (
-              <div>
+              <div key={getRandomId()}>
                 <label className="label">{i.name}</label>
                 <span>: {i.value}</span>
               </div>
