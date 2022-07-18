@@ -29,7 +29,7 @@ function LabelWithCount(props) {
         typeFields.map((type) => {
           const el = (
             <div key={type}>
-              <label>{type}</label>
+              <label className="label">{type}:</label>
               {disabled ? (
                 <input disabled name={type} id={count} type="number" />
               ) : (

@@ -25,8 +25,12 @@ const Calendar = (props) => {
       numDays={5}
       minTime={8}
       maxTime={22}
-      hourlyChunks={1}
+      hourlyChunks={2}
       onChange={handleChange}
+      selectedColor={"#b20837"}
+      unselectedColor={"#EED6D3"}
+      hoveredColor={"#E8B4B8"}
+      timeFormat={"h:mmA"}
     />
   );
 };

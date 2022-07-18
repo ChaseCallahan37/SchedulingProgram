@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import Form from "./Form";
+import "./CardPopup.css";
 
 Modal.setAppElement("#root");
 
@@ -20,19 +21,19 @@ function CardPopup(props) {
   };
   const customStyles = {
     content: {
-      top: "50%",
+      top: "10%",
       left: "50%",
       right: "auto",
-      bottom: "auto",
+      bottom: "10%",
       marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
+      transform: "translate(-50%, 0%)",
     },
   };
 
   return (
     <div>
       <Modal isOpen={isOpen} style={customStyles} contentLabel="Example Modal">
-        <button className="button" onClick={closeModal}>
+        <button className="button x-button" onClick={closeModal}>
           X
         </button>
 
