@@ -2,6 +2,7 @@ import React from "react";
 import Case from "case";
 import Calendar from "./Calendar";
 import { wrapInDivAndLabel } from "../../Utils/UtilFunctions";
+import LabelWithCount from "./LabelWithCount";
 
 const Card = (props) => {
   const { content, item, onEdit } = props;
@@ -37,6 +38,18 @@ const Card = (props) => {
           <Calendar availability={item.availability} />
         );
         break;
+      case "resources":
+        return wrapInDivAndLabel(
+          field,
+          <div>
+            {item[field].map((i) => (
+              <div>
+                <label className="label">{i.name}</label>
+                <span>: {i.value}</span>
+              </div>
+            ))}
+          </div>
+        );
       default:
         return null;
         break;

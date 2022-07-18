@@ -37,6 +37,7 @@ const CourseTable = () => {
   };
   const handleOnChange = ({ name, value }) => {
     setNewCourse({ ...newCourse, [name]: value });
+    console.log(newCourse);
   };
   const handleEdit = (id) => {
     if (!showBlank) {
@@ -77,7 +78,6 @@ const CourseTable = () => {
     newCourse[field] = content;
     setNewCourse(newCourse);
   };
-
   return (
     <div>
       <div className="d-md-flex justify-content-md-end">
