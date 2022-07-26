@@ -8,7 +8,7 @@ import {
 import SelectBox from "./SelectBox";
 import getEnum from "./../../Utils/Enums";
 import TypeSelector from "./TypeSelector";
-import LabelWithCount from "./LabelWithCount";
+import LabelWithCount from "./RangeSelect";
 import RangeSelect from "./RangeSelect";
 
 const Form = (props) => {
@@ -91,13 +91,11 @@ const Form = (props) => {
         return wrapInDivAndLabel(
           field,
           <div>
-            <RangeSelect
+            <LabelWithCount
               updateField="value"
-              items={item[field]}
+              update={update}
               name={field}
-              update={(value) => {
-                update({ name: field, value });
-              }}
+              items={item[field]}
             />
           </div>
         );

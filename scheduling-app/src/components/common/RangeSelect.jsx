@@ -1,17 +1,19 @@
 import React from "react";
 import getEnum from "../../Utils/Enums";
 
-function RangeSelect(props) {
-  const { update, name, items, updateField } = props;
+//Uses count variable so that each input id can increment
+//This is used when passed into the update function for the resources
+//field. This expects an array of objects with a name field within each
+//object
 
-  const Type = getEnum("type");
+function RangeSelect(props) {
+  const { items, updateField, update, name, disabled } = props;
+  const Type = getEnum("Type");
   const typeFields = Object.keys(Type);
 
   const handleUpdate = (e) => {
     const index = e.target.id;
-
     const copyItems = [...items];
-    debugger;
     copyItems[index] = { name: e.target.name, value: 0 };
     copyItems[index][updateField] = e.target.value;
     update({
@@ -21,24 +23,33 @@ function RangeSelect(props) {
   };
 
   let count = 0;
-
   return (
     <div onChange={handleUpdate}>
       {typeFields &&
         typeFields.map((type) => {
           const el = (
-            <div>
-              <label for="customRange2" class="form-label">
-                {type}
-              </label>
-              <input
-                type="range"
-                class="form-range"
-                min="0"
-                max="5"
-                id={count}
-                name={type}
-              ></input>
+            <div key={type}>
+              <label className="label">{type}:</label>
+              {disabled ? (
+                <input
+                  disabled
+                  name={type}
+                  id={count}
+                  type="range"
+                  className="form-range"
+                  min="0"
+                  max="5"
+                />
+              ) : (
+                <input
+                  name={type}
+                  id={count}
+                  type="range"
+                  className="form-range"
+                  min="0"
+                  max="5"
+                />
+              )}
             </div>
           );
           count++;

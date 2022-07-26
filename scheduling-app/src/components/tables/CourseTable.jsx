@@ -43,7 +43,6 @@ const CourseTable = () => {
   };
   const handleOnChange = ({ name, value }) => {
     setNewCourse({ ...newCourse, [name]: value });
-    console.log(newCourse);
   };
   const handleEdit = (id) => {
     if (!showBlank) {

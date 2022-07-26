@@ -2,7 +2,7 @@ import React from "react";
 import Case from "case";
 import Calendar from "./Calendar";
 import { wrapInDivAndLabel } from "../../Utils/UtilFunctions";
-import LabelWithCount from "./LabelWithCount";
+import LabelWithCount from "./RangeSelect";
 import { getRandomId } from "../../Utils/UtilFunctions";
 
 const Card = (props) => {
