@@ -6,14 +6,17 @@ class Course {
     courseFields = {
       id: uuidv4(),
       name: "",
+      teachingStyle: "",
       info: "",
       availability: [],
       resources: [],
     }
   ) {
-    const { id, name, info, availability, resources } = courseFields;
+    const { id, name, teachingStyle, info, availability, resources } =
+      courseFields;
     this.id = id;
     this.name = name;
+    this.teachingStyle = teachingStyle;
     this.info = info;
     this.availability = availability;
     this.resources = resources;

@@ -97,13 +97,19 @@ const Form = (props) => {
           />
         );
         break;
+      case "teachingStyle":
+        return (
+          <div>
+            <p>This is teaching style</p>
+          </div>
+        );
+        break;
       default:
         return null;
 
         break;
     }
   };
-
   return (
     <div>
       {fieldNames &&

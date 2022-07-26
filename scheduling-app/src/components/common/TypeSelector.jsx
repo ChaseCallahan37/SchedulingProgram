@@ -3,6 +3,10 @@ import "./TypeSelector.css";
 
 function TypeSelector(props) {
   const { update, name, items } = props;
+  const taStyle = {
+    "padding-left": "30px",
+    "padding-right": "30px",
+  };
   return (
     <div className="btn-group" role="group" aria-label="Basic example">
       {items &&
@@ -11,6 +15,7 @@ function TypeSelector(props) {
             key={item}
             onClick={(e) => update({ name, value: e.target.innerText })}
             type="button"
+            style={item === "TA" ? taStyle : null}
             className="btn btn-secondary"
           >
             {item}

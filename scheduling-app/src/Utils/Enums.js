@@ -11,8 +11,8 @@ const enums = {
     Online: "online",
   },
   Type: {
-    TA: "ta",
     Instructor: "instructor",
+    TA: "ta",
   },
 };
 
