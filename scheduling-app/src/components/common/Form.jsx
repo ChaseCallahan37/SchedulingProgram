@@ -8,7 +8,6 @@ import {
 import SelectBox from "./SelectBox";
 import getEnum from "./../../Utils/Enums";
 import TypeSelector from "./TypeSelector";
-import LabelWithCount from "./RangeSelect";
 import RangeSelect from "./RangeSelect";
 
 const Form = (props) => {
@@ -88,23 +87,13 @@ const Form = (props) => {
         }
         break;
       case "resources":
-        return wrapInDivAndLabel(
-          field,
-          <div>
-            <LabelWithCount
-              updateField="value"
-              update={update}
-              name={field}
-              items={item[field]}
-            />
-          </div>
-        );
+        return wrapInDivAndLabel(field, <div>hi</div>);
         break;
       case "teachingStyle":
-        return (
-          <div>
-            <p>This is teaching style</p>
-          </div>
+        const items = Object.keys(getEnum(field));
+        return wrapInDivAndLabel(
+          field,
+          <TypeSelector update={update} name={field} items={items} />
         );
         break;
       default:
