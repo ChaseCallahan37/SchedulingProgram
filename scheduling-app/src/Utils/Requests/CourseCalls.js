@@ -13,19 +13,22 @@ export const GETCourses = async () => {
 };
 
 export const createCourse = async (data) => {
-  const res = await axios({
-    url: `${baseUrl}/course`,
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify(data),
-  }).catch(async (err) => {
-    const error = await err;
-    console.log(error);
-  });
-  return res.data;
+  delete data.resources;
+  try {
+    const res = await axios({
+      url: `${baseUrl}/course`,
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(data),
+    });
+    return res.data;
+  } catch (er) {
+    await er;
+    console.log(er);
+  }
 };
 
 export const updateCourse = async (data) => {
