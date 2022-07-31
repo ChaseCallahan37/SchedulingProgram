@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Case from "case";
 import Calendar from "./Calendar";
 import { wrapInDivAndLabel } from "../../Utils/UtilFunctions";
@@ -6,7 +6,9 @@ import LabelWithCount from "./RangeSelect";
 import { getRandomId } from "../../Utils/UtilFunctions";
 
 const Card = (props) => {
-  const { content, item, onEdit } = props;
+  const { content, item, onEdit, onRemove } = props;
+
+  const [showPopup, setShowPopup] = useState(false);
 
   const styles = {
     parentDiv: "card",
@@ -16,7 +18,13 @@ const Card = (props) => {
   };
   const fields = Object.keys(item);
 
+  const askToDelete = () => {
+    alert("Deleting now");
+    onRemove(item.id);
+  };
+
   const createElement = (field) => {
+    let subFields;
     switch (field) {
       case "info":
         return wrapInDivAndLabel(field, <span> {item[field]}</span>);
@@ -25,7 +33,7 @@ const Card = (props) => {
         return wrapInDivAndLabel(field, <label>{item[field]}</label>);
         break;
       case "constraints":
-        const subFields = Object.keys(item[field]);
+        subFields = Object.keys(item[field]);
         return subFields.map((subField) => {
           return wrapInDivAndLabel(
             subField,
@@ -40,17 +48,24 @@ const Card = (props) => {
         );
         break;
       case "resources":
+        subFields = Object.keys(item[field]);
         return wrapInDivAndLabel(
           field,
           <div>
-            {item[field].map((i) => (
+            {subFields.map((subField) => (
               <div key={getRandomId()}>
-                <label className="label">{i.name}</label>
-                <span>: {i.value}</span>
+                <label className="label">{Case.capital(subField)}</label>
+                <span>: {item[field][subField]}</span>
               </div>
             ))}
           </div>
         );
+      case "teachingStyle":
+        return wrapInDivAndLabel(
+          field,
+          <span key={item[field]}>{Case.capital(item[field])}</span>
+        );
+        break;
       default:
         return null;
         break;
@@ -68,39 +83,14 @@ const Card = (props) => {
         <button className="button" onClick={() => onEdit(item.id)}>
           Edit
         </button>
+        {onRemove && (
+          <button className="button" onClick={askToDelete}>
+            Remove
+          </button>
+        )}
       </div>
     </div>
   );
 };
 
 export default Card;
-
-// class Card extends Component {
-//   state = {
-//     styles: {
-//       parentDiv: "card",
-//       header: "card-header text-white p-3 border text-center fs-3 ",
-//       body: "card-body text-wrap",
-//       footer: "card-footer",
-//     },
-//   };
-//   render() {
-//     const { content } = this.props;
-//     const { styles } = this.state;
-//     return (
-//       <div className={styles.parentDiv}>
-//         <div key="header" className={styles.header}>
-//           {content.header && content.header.map((head) => head)}
-//         </div>
-//         <div key="body" className={styles.body}>
-//           {content.body && content.body.map((bod) => bod)}
-//         </div>
-//         <div key="footer" className={styles.footer}>
-//           {content.footer && content.footer.map((foot) => foot)}
-//         </div>
-//       </div>
-//     );
-//   }
-// }
-
-// export default Card;

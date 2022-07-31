@@ -19,23 +19,13 @@ const CourseTable = () => {
   const [newCourse, setNewCourse] = useState(new Course());
 
   useEffect(() => {
-    const pullCourses = async () => {
-      const pulledCourses = await GETCourses();
-      setCourses(pulledCourses);
-    };
-
     pullCourses();
   }, []);
 
-  useEffect(() => {
-    const pullCourses = async () => {
-      const pulledCourses = await GETCourses();
-      setCourses(pulledCourses);
-    };
-
-    pullCourses();
-  }, [courses]);
-
+  const pullCourses = async () => {
+    const pulledCourses = await GETCourses();
+    setCourses(pulledCourses);
+  };
   const checkEditCourse = (pulledCourses) => {
     return pulledCourses
       ? pulledCourses.filter((c) => c.id !== newCourse.id)
@@ -68,9 +58,15 @@ const CourseTable = () => {
 
     // const pulledCourses = await GETCourses();
     // setCourses(pulledCourses);
+    pullCourses();
   };
-  const handleDelete = (id) => {
-    deleteCourse(id);
+  const handleRemove = async (id) => {
+    try {
+      await deleteCourse(id);
+      pullCourses();
+    } catch (er) {
+      console.log(er);
+    }
   };
   const handleCloseModal = async () => {
     setNewCourse(new Course());
@@ -94,7 +90,12 @@ const CourseTable = () => {
         {courses &&
           !checkIsPromise(courses) &&
           courses.map((course) => (
-            <Card key={course.id} item={course} onEdit={handleEdit} />
+            <Card
+              key={course.id}
+              item={course}
+              onEdit={handleEdit}
+              onRemove={handleRemove}
+            />
           ))}
         {showBlank && (
           <CardPopup

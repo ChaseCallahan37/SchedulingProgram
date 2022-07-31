@@ -6,42 +6,46 @@ import getEnum from "../../Utils/Enums";
 //field. This expects an array of objects with a name field within each
 //object
 
-function LabelWithCount(props) {
-  const { items, updateField, update, name, disabled } = props;
-  const Type = getEnum("Type");
-  const typeFields = Object.keys(Type);
+const LabelWithCount = (props) => {
+  return <div>test</div>;
+};
 
-  const handleUpdate = (e) => {
-    const index = e.target.id;
-    const copyItems = [...items];
-    copyItems[index] = { name: e.target.name, value: 0 };
-    copyItems[index][updateField] = e.target.value;
-    update({
-      name,
-      value: copyItems,
-    });
-  };
+// function LabelWithCount(props) {
+//   const { items, updateField, update, name, disabled } = props;
+//   const Type = getEnum("Type");
+//   const typeFields = Object.keys(Type);
 
-  let count = 0;
-  return (
-    <div onChange={handleUpdate}>
-      {typeFields &&
-        typeFields.map((type) => {
-          const el = (
-            <div key={type}>
-              <label className="label">{type}:</label>
-              {disabled ? (
-                <input disabled name={type} id={count} type="number" />
-              ) : (
-                <input name={type} id={count} type="number" />
-              )}
-            </div>
-          );
-          count++;
-          return el;
-        })}
-    </div>
-  );
-}
+//   const handleUpdate = (e) => {
+//     const index = e.target.id;
+//     const copyItems = [...items];
+//     copyItems[index] = { name: e.target.name, value: 0 };
+//     copyItems[index][updateField] = e.target.value;
+//     update({
+//       name,
+//       value: copyItems,
+//     });
+//   };
+
+//   let count = 0;
+//   return (
+//     <div onChange={handleUpdate}>
+//       {typeFields &&
+//         typeFields.map((type) => {
+//           const el = (
+//             <div key={type}>
+//               <label className="label">{type}:</label>
+//               {disabled ? (
+//                 <input disabled name={type} id={count} type="number" />
+//               ) : (
+//                 <input name={type} id={count} type="number" />
+//               )}
+//             </div>
+//           );
+//           count++;
+//           return el;
+//         })}
+//     </div>
+//   );
+// }
 
 export default LabelWithCount;

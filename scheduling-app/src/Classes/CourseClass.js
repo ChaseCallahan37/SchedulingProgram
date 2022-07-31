@@ -9,7 +9,10 @@ class Course {
       teachingStyle: "",
       info: "",
       availability: [],
-      resources: [],
+      resources: {
+        instructors: 0,
+        tas: 0,
+      },
     }
   ) {
     const { id, name, teachingStyle, info, availability, resources } =

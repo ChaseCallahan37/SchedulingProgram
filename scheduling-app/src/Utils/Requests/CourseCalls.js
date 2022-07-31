@@ -1,7 +1,7 @@
 import Course from "../../Classes/CourseClass";
 import axios from "axios";
 
-// const baseUrl = process.env.REACT_APP_LOCAL_SCHEDULING_API;
+// const baseUrl = "https://localhost:7262/api";
 const baseUrl = "https://scheduling-api-backend.herokuapp.com/api";
 export const GETCourses = async () => {
   return await axios({
@@ -44,14 +44,17 @@ export const updateCourse = async (data) => {
   return res.data;
 };
 
-export const deleteCourse = (id) => {
-  const res = axios({
-    url: `${baseUrl}/courses/${id}`,
-    method: "DELETE",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-  });
-  return res.data;
+export const deleteCourse = async (id) => {
+  try {
+    await axios({
+      url: `${baseUrl}/course/${id}`,
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (er) {
+    throw new Error(er);
+  }
 };
