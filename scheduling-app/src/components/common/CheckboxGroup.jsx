@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Case from "case";
+import "./CheckboxGroup.css";
 
 function CheckboxGroup(props) {
   const [chosen, setChosen] = useState([]);
@@ -33,6 +34,7 @@ function CheckboxGroup(props) {
               }
               type="checkbox"
               value={itemName}
+              className="resource-checkbox"
             />
           </div>
         ))}
