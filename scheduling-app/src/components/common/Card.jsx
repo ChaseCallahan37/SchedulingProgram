@@ -4,6 +4,7 @@ import Calendar from "./Calendar";
 import { wrapInDivAndLabel } from "../../Utils/UtilFunctions";
 import LabelWithCount from "./RangeSelect";
 import { getRandomId } from "../../Utils/UtilFunctions";
+import List from "./List";
 
 const Card = (props) => {
   const { content, item, onEdit, onRemove } = props;
@@ -33,13 +34,30 @@ const Card = (props) => {
         return wrapInDivAndLabel(field, <label>{item[field]}</label>);
         break;
       case "constraints":
-        subFields = Object.keys(item[field]);
-        return subFields.map((subField) => {
-          return wrapInDivAndLabel(
-            subField,
-            <span> {item[field][subField]}</span>
-          );
-        });
+        const constraintNames = item[field].map(
+          (constraint) => Object.keys(constraint)[0]
+        );
+        return wrapInDivAndLabel(
+          field,
+          <div>
+            {constraintNames.map((constraintName) => (
+              <div key={constraintName}>
+                <label>{Case.capital(constraintName)}: </label>
+                {item[field].map((constraint) => {
+                  if (constraint[constraintName]) {
+                    return (
+                      <List
+                        key={constraintName}
+                        items={constraint[constraintName]}
+                        name={constraintName}
+                      />
+                    );
+                  }
+                })}
+              </div>
+            ))}
+          </div>
+        );
         break;
       case "availability":
         return wrapInDivAndLabel(

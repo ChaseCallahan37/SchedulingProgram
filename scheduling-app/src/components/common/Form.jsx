@@ -96,7 +96,20 @@ const Form = (props) => {
             <div key={constraintName}>
               <label className="label">{Case.capital(constraintName)}</label>
               <CheckboxGroup
-                update={() => update()}
+                update={(value) => {
+                  const newConstraint = { [constraintName]: value };
+                  const copyConstraints = [...item[field]];
+                  const index = copyConstraints.findIndex(
+                    (constraint) => constraint[constraintName]
+                  );
+                  index !== -1
+                    ? (copyConstraints[index] = newConstraint)
+                    : copyConstraints.push(newConstraint);
+                  update({ name: field, value: copyConstraints });
+                }}
+                value={item[field].find((c) =>
+                  c[constraintName] ? c[constraintName] : null
+                )}
                 name={constraintName}
                 items={constraints[constraintName]}
               />
