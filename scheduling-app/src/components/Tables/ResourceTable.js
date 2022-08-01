@@ -78,9 +78,12 @@ const ResourceTable = () => {
       <div className="row row-cols-1 row-cols-md-4 g-0">
         {resources &&
           resources.map((resource) => (
-            <Card onEdit={handleEditResource} item={resource} />
+            <Card
+              key={resource.id}
+              onEdit={handleEditResource}
+              item={resource}
+            />
           ))}
-
 
         {showBlank && (
           <CardPopup

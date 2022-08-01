@@ -1,4 +1,5 @@
 import React from "react";
+import Case from "case";
 import getEnum from "../../Utils/Enums";
 
 //Uses count variable so that each input id can increment
@@ -7,53 +8,35 @@ import getEnum from "../../Utils/Enums";
 //object
 
 function RangeSelect(props) {
-  const { items, updateField, update, name, disabled } = props;
-  const Type = getEnum("Type");
-  const typeFields = Object.keys(Type);
+  const { items, name, update } = props;
+  const itemNames = Object.keys(items);
 
-  const handleUpdate = (e) => {
-    const index = e.target.id;
-    const copyItems = [...items];
-    copyItems[index] = { name: e.target.name, value: 0 };
-    copyItems[index][updateField] = e.target.value;
-    update({
-      name,
-      value: copyItems,
-    });
+  const handleUpdate = (itemName, value) => {
+    const itemsCopy = { ...items };
+    itemsCopy[itemName] = value;
+    update({ name, value: itemsCopy });
   };
 
-  let count = 0;
   return (
-    <div onChange={handleUpdate}>
-      {typeFields &&
-        typeFields.map((type) => {
-          const el = (
-            <div key={type}>
-              <label className="label">{type}:</label>
-              {disabled ? (
-                <input
-                  disabled
-                  name={type}
-                  id={count}
-                  type="range"
-                  className="form-range"
-                  min="0"
-                  max="5"
-                />
-              ) : (
-                <input
-                  name={type}
-                  id={count}
-                  type="range"
-                  className="form-range"
-                  min="0"
-                  max="5"
-                />
-              )}
+    <div>
+      {itemNames &&
+        itemNames.map((itemName) => {
+          return (
+            <div key={itemName}>
+              <label>
+                {Case.capital(itemName)}: {items[itemName]}
+              </label>
+              <input
+                name={itemName}
+                onChange={(e) => handleUpdate(itemName, e.target.value)}
+                className="form-range"
+                value={items[itemName]}
+                min={0}
+                max={5}
+                type="range"
+              />
             </div>
           );
-          count++;
-          return el;
         })}
     </div>
   );

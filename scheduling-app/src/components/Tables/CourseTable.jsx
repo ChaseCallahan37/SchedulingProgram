@@ -55,9 +55,6 @@ const CourseTable = () => {
     setShowBlank(false);
     setIsEdit(false);
     setNewCourse(new Course());
-
-    // const pulledCourses = await GETCourses();
-    // setCourses(pulledCourses);
     pullCourses();
   };
   const handleRemove = async (id) => {
@@ -71,8 +68,6 @@ const CourseTable = () => {
   const handleCloseModal = async () => {
     setNewCourse(new Course());
     setShowBlank(false);
-    // const pulledCourses = await GETCourses();
-    // setCourses(pulledCourses);
   };
   const updateNewClass = (field, content) => {
     const newCourse = { ...newCourse };

@@ -1,14 +1,28 @@
-import React from 'react';
+import React from "react";
+import Case from "case";
 
 function CheckboxGroup(props) {
-    const {options} = props;
-    // return (
-    //     <div>
-    //         <form>
-    //         {options && options.map((option) => (<input type="checkbox" value={option} className="form-check-input"/>)}
-    //         </form>)
-    //     </div>
-    // );
+  const { items, name, update } = props;
+  const itemNames = Object.keys(items);
+
+  const handleUpdate = (e) => {
+    const { value } = e.target;
+  };
+  return (
+    <div>
+      {itemNames &&
+        itemNames.map((itemName) => (
+          <div key={itemName}>
+            <label>{Case.capital(itemName)}</label>
+            <input
+              type="checkbox"
+              value={itemName}
+              onChange={(e) => handleUpdate(e)}
+            />
+          </div>
+        ))}
+    </div>
+  );
 }
 
 export default CheckboxGroup;

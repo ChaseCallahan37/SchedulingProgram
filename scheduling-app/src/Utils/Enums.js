@@ -1,14 +1,18 @@
 const enums = {
-  ClassSize: {
-    Small: "small",
-    Medium: "medium",
-    Large: "large",
+  TaConstraints: {
+    Courses: [],
   },
-  TeachingStyle: {
-    Any: "any",
-    InPerson: "inPerson",
-    Hybrid: "hybrid",
-    Online: "online",
+  InstructorConstraints: {
+    ClassSize: {
+      Small: "small",
+      Medium: "medium",
+      Large: "large",
+    },
+    TeachingStyle: {
+      InPerson: "inPerson",
+      Hybrid: "hybrid",
+      Online: "online",
+    },
   },
   Type: {
     Instructor: "instructor",

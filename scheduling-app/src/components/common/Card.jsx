@@ -48,16 +48,16 @@ const Card = (props) => {
         );
         break;
       case "resources":
-        subFields = Object.keys(item[field]);
         return wrapInDivAndLabel(
           field,
           <div>
-            {subFields.map((subField) => (
-              <div key={getRandomId()}>
-                <label className="label">{Case.capital(subField)}</label>
-                <span>: {item[field][subField]}</span>
-              </div>
-            ))}
+            <label key="instructor">
+              Instructors: <span>{item[field].instructors}</span>
+            </label>
+            <br></br>
+            <label key="tas">
+              Ta's: <span>{item[field].tas}</span>
+            </label>
           </div>
         );
       case "teachingStyle":

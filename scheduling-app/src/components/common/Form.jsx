@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Case from "case";
 import Calendar from "./Calendar";
 import {
@@ -9,9 +9,28 @@ import SelectBox from "./SelectBox";
 import getEnum from "./../../Utils/Enums";
 import TypeSelector from "./TypeSelector";
 import RangeSelect from "./RangeSelect";
+import CheckboxGroup from "./CheckboxGroup";
+import { GETCourses } from "../../Utils/Requests/CourseCalls";
+import { getCourses } from "./../../AppInfo/CourseInfo";
 
 const Form = (props) => {
-  const [isInstructor, setIsInstructor] = useState(false);
+  const [isInstructor, setIsInstructor] = useState(true);
+  const [instructorConstraints, setInstructorConstraints] = useState(
+    getEnum("InstructorConstraints")
+  );
+  const [taConstraints, setTaConstraints] = useState({});
+
+  useEffect(() => {
+    const callCourses = async () => {
+      const courses = {};
+      const data = await GETCourses();
+      data.forEach(
+        (course) => (courses[Case.camel(course.name)] = course.name)
+      );
+      setTaConstraints({ courses });
+    };
+    callCourses();
+  }, []);
 
   const { item, update } = props;
   let fieldNames;
@@ -64,34 +83,29 @@ const Form = (props) => {
         );
         break;
       case "constraints":
-        if (isInstructor) {
-          const subFields = Object.keys(item[field]);
-          return subFields.map((subField) => {
-            const Enum = getEnum(subField);
-            if (!isInstructor) {
-              if (isInstructorField(subField)) {
-                return null;
-              }
-            }
-            return wrapInDivAndLabel(
-              subField,
-              <SelectBox
-                items={Enum}
-                update={update}
-                name={`${field}.${subField}`}
-              />,
-              <input
-                onChange={(e) =>
-                  update({ name: `${field}${subField}`, value: e.target.value })
-                }
-                value={item[field][subField]}
-              ></input>
-            );
-          });
-        }
+        const constraints = isInstructor
+          ? instructorConstraints
+          : taConstraints;
+        const constraintNames = Object.keys(constraints);
+        return wrapInDivAndLabel(
+          field,
+          constraintNames.map((constraintName) => (
+            <div key={constraintName}>
+              <label className="label">{Case.capital(constraintName)}</label>
+              <CheckboxGroup
+                update={() => update()}
+                name={constraintName}
+                items={constraints[constraintName]}
+              />
+            </div>
+          ))
+        );
         break;
       case "resources":
-        return wrapInDivAndLabel(field, <div>hi</div>);
+        return wrapInDivAndLabel(
+          field,
+          <RangeSelect items={item[field]} name={field} update={update} />
+        );
         break;
       case "teachingStyle":
         const items = Object.keys(getEnum(field));
@@ -100,9 +114,9 @@ const Form = (props) => {
           <TypeSelector update={update} name={field} items={items} />
         );
         break;
+
       default:
         return null;
-
         break;
     }
   };
