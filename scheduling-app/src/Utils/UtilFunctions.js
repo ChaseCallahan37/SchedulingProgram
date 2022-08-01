@@ -14,8 +14,9 @@ export const timeToInt = (time) => {
 export const wrapInDivAndLabel = (field, element) => {
   return (
     <div key={field}>
-      <label className="label">{Case.capital(field)}:</label>
+      <label className="label">{Case.capital(field)}</label>
       {element}
+      <hr></hr>
     </div>
   );
 };

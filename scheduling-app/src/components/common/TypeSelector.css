@@ -12,3 +12,14 @@
   padding-right: 55px;
   padding-left: 55px;
 }
+
+#type-select-buttons {
+  background-color: #8d0b2f;
+  border-color: #8d0b2f;
+  box-shadow: none;
+}
+
+#type-select-buttons:focus {
+  outline: 3px solid #b20837;
+  box-shadow: none;
+}

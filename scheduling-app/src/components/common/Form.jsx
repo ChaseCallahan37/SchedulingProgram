@@ -25,11 +25,14 @@ const Form = (props) => {
       case "info":
         return (
           <div>
-            <label className="label">{Case.capital(field)}:</label>
+            <label className="label">{Case.capital(field)}</label>
+            <br></br>
             <input
               value={item[field]}
               onChange={(e) => update({ value: e.target.value, name: field })}
+              className="global-input"
             />
+            <hr></hr>
           </div>
         );
         break;
@@ -54,8 +57,9 @@ const Form = (props) => {
       case "availability":
         return (
           <div>
-            <label>{Case.capital(field)}</label>
+            <label className="label">{Case.capital(field)}</label>
             <Calendar update={update} name={field} availability={item[field]} />
+            <hr></hr>
           </div>
         );
         break;

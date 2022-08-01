@@ -47,6 +47,15 @@ code {
   height: auto;
 }
 
+.global-input {
+  margin-bottom: 7px;
+}
+
+.global-input:focus {
+  outline: none;
+  border: 3px solid #b20837;
+  border-radius: 5px 5px 5px 5px;
+}
 .label {
   font-weight: bold;
   margin-right: 3px;

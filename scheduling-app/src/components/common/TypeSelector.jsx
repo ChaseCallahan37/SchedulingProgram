@@ -17,6 +17,7 @@ function TypeSelector(props) {
             type="button"
             style={item === "TA" ? taStyle : null}
             className="btn btn-secondary"
+            id="type-select-buttons"
           >
             {item}
           </button>
