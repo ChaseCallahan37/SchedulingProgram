@@ -9,7 +9,7 @@ class Resource {
       type: "",
       subType: "",
       availability: [],
-      constraints: { classSize: "", teachingStyle: "" },
+      constraints: [],
     }
   ) {
     const { id, type, name, availability, constraints, subType } =

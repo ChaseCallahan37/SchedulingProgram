@@ -1,21 +1,25 @@
 import Course from "../../Classes/CourseClass";
 import axios from "axios";
+import getEnum from "../Enums";
 
-// const baseUrl = "https://localhost:7262/api";
-const baseUrl = "https://scheduling-api-backend.herokuapp.com/api";
+const baseUrl = "https://localhost:7262/api";
+// const baseUrl = "https://scheduling-api-backend.herokuapp.com/api";
 export const GETCourses = async () => {
-  return await axios({
-    url: `${baseUrl}/course`,
-    method: "GET",
-  })
-    .then((res) => res.data)
-    .catch((err) => console.log(err));
+  try {
+    const response = await axios({
+      url: `${baseUrl}/course`,
+      method: "GET",
+    });
+    return response.data;
+  } catch (er) {
+    await er;
+    console.log(er);
+  }
 };
 
 export const createCourse = async (data) => {
-  delete data.resources;
   try {
-    const res = await axios({
+    const response = await axios({
       url: `${baseUrl}/course`,
       method: "POST",
       headers: {
@@ -24,7 +28,7 @@ export const createCourse = async (data) => {
       },
       data: JSON.stringify(data),
     });
-    return res.data;
+    return await response.data;
   } catch (er) {
     await er;
     console.log(er);
@@ -32,24 +36,26 @@ export const createCourse = async (data) => {
 };
 
 export const updateCourse = async (data) => {
-  const res = await axios({
-    url: `${baseUrl}/course/${data.id}`,
-    method: "PUT",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify(data),
-  }).catch(async (err) => {
-    const error = await err;
-    console.log(error);
-  });
-  return res.data;
+  try {
+    const response = await axios({
+      url: `${baseUrl}/course/${data.id}`,
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(data),
+    });
+    return await response.data;
+  } catch (er) {
+    await er;
+    console.log(er);
+  }
 };
 
 export const deleteCourse = async (id) => {
   try {
-    await axios({
+    const response = await axios({
       url: `${baseUrl}/course/${id}`,
       method: "DELETE",
       headers: {
@@ -57,7 +63,9 @@ export const deleteCourse = async (id) => {
         "Content-Type": "application/json",
       },
     });
+    return await response.data;
   } catch (er) {
-    throw new Error(er);
+    await er;
+    console.log(er);
   }
 };
