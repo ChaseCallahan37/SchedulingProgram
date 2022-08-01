@@ -18,6 +18,9 @@ const Form = (props) => {
   const [instructorConstraints, setInstructorConstraints] = useState(
     getEnum("InstructorConstraints")
   );
+  const [teachingStyles, setTeachingStyles] = useState(
+    instructorConstraints.TeachingStyle
+  );
   const [taConstraints, setTaConstraints] = useState({});
 
   useEffect(() => {
@@ -108,7 +111,7 @@ const Form = (props) => {
         );
         break;
       case "teachingStyle":
-        const items = Object.keys(getEnum(field));
+        const items = Object.keys(teachingStyles);
         return wrapInDivAndLabel(
           field,
           <TypeSelector update={update} name={field} items={items} />
