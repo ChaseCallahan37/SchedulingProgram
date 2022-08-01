@@ -16,7 +16,6 @@ function CheckboxGroup(props) {
     setChosen(copyChosen);
     update(copyChosen);
   };
-  console.log(value);
   return (
     <div onChange={handleUpdate}>
       {itemNames &&
