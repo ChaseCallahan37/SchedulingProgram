@@ -2,13 +2,17 @@ import Course from "../../Classes/CourseClass";
 import axios from "axios";
 import getEnum from "../Enums";
 
-const baseUrl = "https://localhost:7262/api";
-// const baseUrl = "https://scheduling-api-backend.herokuapp.com/api";
+// const baseUrl = "https://localhost:7262/api";
+const baseUrl = "https://scheduling-api-backend.herokuapp.com/api";
 export const GETCourses = async () => {
   try {
     const response = await axios({
       url: `${baseUrl}/course`,
       method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
     });
     return response.data;
   } catch (er) {

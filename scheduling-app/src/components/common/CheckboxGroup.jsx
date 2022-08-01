@@ -1,5 +1,6 @@
 import React from "react";
 import Case from "case";
+import "./CheckboxGroup.css";
 
 function CheckboxGroup(props) {
   const { items, name, update } = props;
@@ -18,6 +19,7 @@ function CheckboxGroup(props) {
               type="checkbox"
               value={itemName}
               onChange={(e) => handleUpdate(e)}
+              className="resource-checkbox"
             />
           </div>
         ))}
