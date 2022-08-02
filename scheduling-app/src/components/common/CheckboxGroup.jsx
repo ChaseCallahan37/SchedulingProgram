@@ -24,13 +24,6 @@ function CheckboxGroup(props) {
             <label>{Case.capital(itemName)}</label>
             <input
               onChange={() => {}}
-              checked={
-                value &&
-                value[name] &&
-                value[name].includes(Case.camel(itemName))
-                  ? true
-                  : false
-              }
               type="checkbox"
               value={itemName}
               className="resource-checkbox"
@@ -42,3 +35,11 @@ function CheckboxGroup(props) {
 }
 
 export default CheckboxGroup;
+
+// checked={
+//   value &&
+//   value[name] &&
+//   value[name].includes(Case.camel(itemName))
+//     ? true
+//     : false
+// }
