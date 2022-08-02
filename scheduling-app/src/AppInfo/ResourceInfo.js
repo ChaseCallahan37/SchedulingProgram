@@ -8,7 +8,7 @@ jeff.updateFileds({
   name: "Jeff",
   type: "Instructor",
   availability: [],
-  constraints: [{ TeachingStyle: ["inPerson", "hybrid"] }],
+  constraints: [{ TeachingStyle: ["InPerson", "Hybrid"] }],
 });
 
 resources.push(jeff);

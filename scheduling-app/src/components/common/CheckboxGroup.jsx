@@ -1,9 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Case from "case";
 import "./CheckboxGroup.css";
 
 function CheckboxGroup(props) {
   const [chosen, setChosen] = useState([]);
+
+  useEffect(() => {
+    if (value) {
+      const copyChosen = [...chosen, ...value[name]];
+      setChosen(copyChosen);
+    }
+  }, []);
 
   const { items, name, update, value } = props;
   const itemNames = Object.keys(items);
@@ -16,6 +23,12 @@ function CheckboxGroup(props) {
     setChosen(copyChosen);
     update(copyChosen);
   };
+  const checkChecked = (itemName) => {
+    if (value && value[name] && value[name].includes(Case.pascal(itemName))) {
+      return true;
+    }
+    return false;
+  };
   return (
     <div onChange={handleUpdate}>
       {itemNames &&
@@ -23,6 +36,7 @@ function CheckboxGroup(props) {
           <div key={itemName}>
             <label>{Case.capital(itemName)}</label>
             <input
+              checked={checkChecked(itemName)}
               onChange={() => {}}
               type="checkbox"
               value={itemName}
@@ -35,11 +49,3 @@ function CheckboxGroup(props) {
 }
 
 export default CheckboxGroup;
-
-// checked={
-//   value &&
-//   value[name] &&
-//   value[name].includes(Case.camel(itemName))
-//     ? true
-//     : false
-// }
