@@ -105,6 +105,7 @@ const Form = (props) => {
                   index !== -1
                     ? (copyConstraints[index] = newConstraint)
                     : copyConstraints.push(newConstraint);
+                  const data = { name: field, value: copyConstraints };
                   update({ name: field, value: copyConstraints });
                 }}
                 value={item[field].find((c) =>
